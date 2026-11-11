@@ -1039,9 +1039,21 @@ wWinMain(
     hrCom = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
 
     StringCchPrintfW(SetupData.DefaultLanguage, ARRAYSIZE(SetupData.DefaultLanguage), L"%08lX", GetUserDefaultLCID());
-    SetSetupLanguage(SetupData.DefaultLanguage);
     if (!GetKeyboardLayoutNameW(SetupData.DefaultKBLayout))
         StringCchCopyW(SetupData.DefaultKBLayout, ARRAYSIZE(SetupData.DefaultKBLayout), L"00000409");
+
+    /* MadOS: the preinstalled image ships in English; on its first boot the
+     * proposed language is French (France) with the AZERTY keyboard, like a
+     * fresh installation (see DetectLanguageDefaults). The user can still pick
+     * any other language on the first page. */
+    if (PRIMARYLANGID(LANGIDFROMLCID(GetUserDefaultLCID())) == LANG_ENGLISH)
+    {
+        StringCchCopyW(SetupData.DefaultLanguage, ARRAYSIZE(SetupData.DefaultLanguage), L"0000040C");
+        StringCchCopyW(SetupData.DefaultKBLayout, ARRAYSIZE(SetupData.DefaultKBLayout), L"0000040C");
+        if (!LoadKeyboardLayoutW(SetupData.DefaultKBLayout, KLF_ACTIVATE | KLF_SETFORPROCESS))
+            DPRINT1("LoadKeyboardLayoutW(%S) failed, error %lu\n", SetupData.DefaultKBLayout, GetLastError());
+    }
+    SetSetupLanguage(SetupData.DefaultLanguage);
     GenerateComputerName(SetupData.ComputerName);
     SetupData.TimeZoneIndex = (ULONG)-1;
     GetTimeZoneListIndex(&SetupData.TimeZoneIndex);
