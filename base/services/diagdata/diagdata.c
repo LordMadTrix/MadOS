@@ -709,17 +709,19 @@ static BOOL BuildReport(_Out_ PDIAGDATA_BUFFER Buffer, _Out_ PDIAGDATA_PROGRESS 
     return !Buffer->Failed;
 }
 
+/* MadOS: nothing is sent unless the user allowed it. A missing or invalid
+ * AllowTelemetry value means off (LiberNT treats it as "required"). */
 static DWORD DiagDataLevel(VOID)
 {
     HKEY Key;
-    DWORD Level = 1;
+    DWORD Level = DIAGDATA_OFF_LEVEL;
     DWORD Type = 0;
     DWORD Size = sizeof(Level);
 
     if (RegOpenKeyExW(HKEY_LOCAL_MACHINE, DIAGDATA_DATACOLLECTION_KEY, 0, KEY_QUERY_VALUE, &Key) != ERROR_SUCCESS)
-        return 1;
+        return DIAGDATA_OFF_LEVEL;
     if (RegQueryValueExW(Key, L"AllowTelemetry", NULL, &Type, (LPBYTE)&Level, &Size) != ERROR_SUCCESS || Type != REG_DWORD)
-        Level = 1;
+        Level = DIAGDATA_OFF_LEVEL;
     RegCloseKey(Key);
     return Level;
 }

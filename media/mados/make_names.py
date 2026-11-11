@@ -21,7 +21,7 @@ from mados_common import TREE, git_original, _upstream_ref
 OLD, NEW = "LiberNT", "MadOS"
 
 # Chaine contenant l'un de ces marqueurs : attribution, on n'y touche pas.
-KEEP_MARKERS = re.compile(r"copyright|©|\(c\)|project|team|contributors|libernt\.com|based on|basé sur|basee? sur"
+KEEP_MARKERS = re.compile(r"copyright|©|\(c\)|project|projet|team|contributors|libernt\.com|based on|basé sur|basee? sur"
                           r"|brought to you", re.I)
 # "LiberNT" colle a un separateur de chemin/identifiant : ce n'est pas du texte.
 # Un point final de phrase est permis ("... LiberNT."), une extension non ("LiberNT.chm").
@@ -50,7 +50,11 @@ C_STRINGS = [
 # (il repart de l'amont et effacerait ces modifications). Leurs textes MadOS
 # font partie du commit manuel.
 #  - bootloader/bootmgr/main.c : menu de demarrage sur demande + "MadOS Boot Manager"
-HAND_MANAGED = ["bootloader/bootmgr/main.c", "bootloader/image/CMakeLists.txt"]
+#  - base/services/diagdata, dll/cpl/sysdm/advanced.c|resource.h : telemetrie
+#    coupee par defaut (voir make_telemetry.py pour la partie textes)
+HAND_MANAGED = ["bootloader/bootmgr/main.c", "bootloader/image/CMakeLists.txt",
+                "base/services/diagdata/diagdata.c", "base/services/diagdata/CMakeLists.txt",
+                "dll/cpl/sysdm/advanced.c", "dll/cpl/sysdm/resource.h"]
 
 # Raccourcis : le nom du fichier .lnk doit etre le meme partout ou il est cite.
 SHORTCUT_NAMES = {"Install LiberNT": "Install MadOS", "LiberNT Driver Installer": "MadOS Driver Installer"}
