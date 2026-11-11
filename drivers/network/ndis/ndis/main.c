@@ -17,9 +17,11 @@
 
 /* See debug.h for debug/trace constants */
 ULONG DebugTraceLevel = MIN_TRACE;
-PDRIVER_OBJECT NdisDriverObject;
 
 #endif /* DBG */
+
+/* Used in every build (NDIS 6 IM instances), not only in debug builds */
+PDRIVER_OBJECT NdisDriverObject;
 
 LONG CancelId;
 
