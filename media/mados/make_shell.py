@@ -30,7 +30,8 @@ FILES = [
 # Textes affiches presents dans ces fichiers (traites ici, et non par
 # make_names, pour qu'un fichier ne soit regenere que par une seule etape).
 EXTRA_TEXT = {
-    "base/setup/welcome/welcome.c": [('TEXT("LiberNT")', 'TEXT("MadOS")')],
+    "base/setup/welcome/welcome.c": [('TEXT("LiberNT ") TEXT(KERNEL_VERSION_STR)', 'TEXT("MadOS ") TEXT(MADOS_VERSION_FULL_STR)'),
+                                     ('TEXT("LiberNT")', 'TEXT("MadOS")')],
 }
 
 RGB = re.compile(r"RGB\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)")

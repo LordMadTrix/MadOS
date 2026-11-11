@@ -69,7 +69,10 @@ HAND_MANAGED = ["bootloader/bootmgr/main.c", "bootloader/image/CMakeLists.txt",
                 "base/setup/libernt/upgrade.c", "dll/win32/shell32/wine/shell32_main.c",
                 "sdk/cmake/boot_images.cmake",
                 # son d'ouverture de session joue des que l'audio est pret
-                "base/system/winlogon/sas.c"]
+                "base/system/winlogon/sas.c",
+                # numero de version MadOS (A propos, panneau Systeme, invite de commandes)
+                "sdk/include/reactos/version.cmake", "sdk/include/reactos/buildno.h.cmake",
+                "dll/cpl/sysdm/general.c", "base/shell/cmd/wcmdmain.c"]
 
 # Raccourcis : le nom du fichier .lnk doit etre le meme partout ou il est cite.
 SHORTCUT_NAMES = {"Install LiberNT": "Install MadOS", "LiberNT Driver Installer": "MadOS Driver Installer"}
@@ -101,6 +104,10 @@ def decode(raw):
         return raw.decode("latin-1"), "latin-1"
 
 
+# Banniere de l'invite de commandes : "LiberNT [Version ...]" puis la ligne de
+# copyright (attribution, gardee). Le texte multiligne echappe a RC_LITERAL.
+CMD_BANNER = re.compile(r'(WCMD_BANNER,\s*")LiberNT(\s*\[)')
+
 RC_LITERAL = re.compile(r'"(?:[^"\r\n]|"")*"')
 # Blocs d'attribution, dans toutes les langues : la liste des auteurs de la
 # fenetre "A propos" presente les contributeurs de LiberNT et ReactOS.
@@ -119,7 +126,7 @@ def rename_outside_protected(text):
 
 def do_rc(rel):
     text, enc = decode(git_original(TREE / rel))
-    new = rename_outside_protected(text)
+    new = CMD_BANNER.sub(r"\1MadOS\2", rename_outside_protected(text))
     if new != text:
         (TREE / rel).write_bytes(new.encode(enc))
         stats["rc"] = stats.get("rc", 0) + 1

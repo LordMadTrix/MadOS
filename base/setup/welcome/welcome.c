@@ -1360,7 +1360,7 @@ OnPaint(HWND hWnd, WPARAM wParam, LPARAM lParam)
 
     /* Draw version information */
     StringCchCopy(szVersion, ARRAYSIZE(szVersion),
-                  TEXT("LiberNT ") TEXT(KERNEL_VERSION_STR));
+                  TEXT("MadOS ") TEXT(MADOS_VERSION_FULL_STR));
 
     /*
      * Compute the original rect (position & size) of the version info,

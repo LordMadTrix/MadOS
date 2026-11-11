@@ -5279,7 +5279,7 @@ int __cdecl wmain(int argc, WCHAR *argvW[])
 #ifdef __REACTOS__
     else
     {
-        WCHAR *banner = WCMD_format_string(WCMD_LoadMessage(WCMD_BANNER), KERNEL_VERSION_STR, KERNEL_VERSION_BUILD_STR,
+        WCHAR *banner = WCMD_format_string(WCMD_LoadMessage(WCMD_BANNER), MADOS_VERSION_FULL_STR, "(" MADOS_BASE_STR ")",
                                            COPYRIGHT_YEAR);
 
         WCMD_output_asis(banner);
