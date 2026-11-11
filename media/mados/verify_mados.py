@@ -175,6 +175,23 @@ def names():
             bad.append(rel)
     check(not bad, f"identifiants internes intacts dans {len(set(changed))} fichiers modifies"
           + (f" (differences : {bad[:3]})" if bad else ""))
+    # 2c. pas de fins de ligne melangees introduites par le kit
+    def mixed(data):
+        crlf = data.count(b"\r\n")
+        return crlf and data.count(b"\n") != crlf
+    mixed_files = []
+    for rel in sorted(set(changed)):
+        p = TREE / rel
+        if p.suffix.lower() not in (".rc", ".inf", ".in", ".c", ".cpp", ".h", ".txt", ".mc") or not p.is_file():
+            continue
+        try:
+            orig = git_original(p)
+        except subprocess.CalledProcessError:
+            continue
+        if mixed(p.read_bytes()) and not mixed(orig):
+            mixed_files.append(rel)
+    check(not mixed_files, "fins de ligne coherentes dans les fichiers modifies"
+          + (f" (melangees : {mixed_files[:3]})" if mixed_files else ""))
     # 2b. la liste des auteurs ("A propos") reste attribuee a LiberNT/ReactOS
     wrong = []
     for p in sorted((TREE / "dll/win32/shell32/lang").glob("*.rc")):
