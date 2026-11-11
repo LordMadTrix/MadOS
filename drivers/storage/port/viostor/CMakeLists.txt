@@ -24,7 +24,7 @@ add_driver_inf(viostor viostor.inf)
 
 if(NOT MSVC)
     target_compile_options(viostor PRIVATE -Wno-unused-function -Wno-pointer-sign -Wno-unknown-pragmas
-        -Wno-switch -include ${CMAKE_CURRENT_SOURCE_DIR}/viostor_compat.h)
+        -Wno-switch -Wno-unused-variable -include ${CMAKE_CURRENT_SOURCE_DIR}/viostor_compat.h)
 endif()
 if(CMAKE_C_COMPILER_ID STREQUAL "Clang")
     target_compile_options(viostor PRIVATE -Wno-pragma-pack -Wno-unused-but-set-variable -Wno-microsoft-anon-tag
