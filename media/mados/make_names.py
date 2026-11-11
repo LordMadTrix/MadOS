@@ -72,7 +72,10 @@ HAND_MANAGED = ["bootloader/bootmgr/main.c", "bootloader/image/CMakeLists.txt",
                 "base/system/winlogon/sas.c",
                 # numero de version MadOS (A propos, panneau Systeme, invite de commandes)
                 "sdk/include/reactos/version.cmake", "sdk/include/reactos/buildno.h.cmake",
-                "dll/cpl/sysdm/general.c", "base/shell/cmd/wcmdmain.c"]
+                "dll/cpl/sysdm/general.c", "base/shell/cmd/wcmdmain.c",
+                # pilotes : disque VirtIO (viostor), Mesa LLVMpipe par defaut
+                "drivers/storage/port/CMakeLists.txt", "boot/bootdata/txtsetup.sif",
+                "sdk/cmake/config.cmake"]
 
 # Raccourcis : le nom du fichier .lnk doit etre le meme partout ou il est cite.
 SHORTCUT_NAMES = {"Install LiberNT": "Install MadOS", "LiberNT Driver Installer": "MadOS Driver Installer"}

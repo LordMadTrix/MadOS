@@ -17,6 +17,7 @@ QuickLaunchShortcuts=26, Microsoft\Internet Explorer\Quick Launch
 %SystemRoot%\explorer.exe, %EXPLORER_TITLE%, %EXPLORER_DESC%, 1, %HOMEDRIVE%%HOMEPATH%
 %SystemRoot%\system32\rapps.exe, %RAPPS_TITLE%, %RAPPS_DESC%, 0
 %SystemRoot%\system32\madwelcome.exe, %MADWELCOME_TITLE%, %MADWELCOME_DESC%, 0
+%SystemRoot%\system32\dwmsettings.exe, %MADAPPEARANCE_TITLE%, %MADAPPEARANCE_DESC%, 0
 %SystemRoot%\system32\terminal.exe, %LXTERM_TITLE%, %LXTERM_DESC%, 0, %HOMEDRIVE%%HOMEPATH%, -p Ubuntu, %SystemRoot%\system32\lxterm.exe
 %16422%\Internet Explorer\iexplore.exe, %IEXPLORE_TITLE%, %IEXPLORE_DESC%, 0
 
@@ -74,6 +75,8 @@ QuickLaunchShortcuts=26, Microsoft\Internet Explorer\Quick Launch
 ;-------------------------------- STRINGS -------------------------------
 
 [Strings]
+MADAPPEARANCE_TITLE=Appearance
+MADAPPEARANCE_DESC=Light or dark mode and window effects
 MADWELCOME_TITLE=Welcome to MadOS
 MADWELCOME_DESC=Choose and install your applications
 ACCESSORIES=Accessories
@@ -683,6 +686,8 @@ SPIDER_TITLE=Spider Solitaire
 SPIDER_DESC=Spider Solitaire
 
 [Strings.040C]
+MADAPPEARANCE_TITLE=Apparence
+MADAPPEARANCE_DESC=Mode clair ou sombre et effets des fenetres
 MADWELCOME_TITLE=Bienvenue dans MadOS
 MADWELCOME_DESC=Choisir et installer vos applications
 ACCESSORIES=Accessoires

@@ -1,0 +1,39 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+ * Traduction francaise (MadOS) de lang/en-US.rc
+ */
+
+LANGUAGE LANG_FRENCH, SUBLANG_NEUTRAL
+
+IDD_SETTINGS DIALOGEX 0, 0, 282, 284
+STYLE DS_SHELLFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Apparence"
+FONT 9, "MS Shell Dlg"
+BEGIN
+    LTEXT "Personnalisez l'apparence et les effets des fenêtres. Chaque changement est enregistré immédiatement.", -1, 12, 12, 258, 26
+    GROUPBOX "Effets des fenêtres", IDC_EFFECTS_GROUP, 12, 42, 258, 110
+    AUTOCHECKBOX "&Animations des fenêtres", IDC_ANIMATIONS, 24, 58, 230, 12
+    AUTOCHECKBOX "&Ombres des fenêtres", IDC_SHADOWS, 24, 76, 230, 12
+    AUTOCHECKBOX "Effet &verre", IDC_ACRYLIC, 24, 94, 230, 12
+    AUTOCHECKBOX "&Flouter les barres de titre", IDC_BLUR, 36, 112, 218, 12
+    AUTOCHECKBOX "Flouter le co&ntenu", IDC_CONTENT_BLUR, 36, 130, 218, 12
+    GROUPBOX "Mode", IDC_SCHEME_GROUP, 12, 158, 258, 60
+    AUTORADIOBUTTON "&Clair (Lumière)", IDC_SCHEME_LIGHT, 24, 176, 110, 12, WS_GROUP
+    AUTORADIOBUTTON "&Sombre (Braise)", IDC_SCHEME_DARK, 140, 176, 110, 12
+    LTEXT "L'effet verre et le mode demandent le style visuel MadOS (Windows 8).", IDC_THEME_NOTE, 24, 194, 238, 18
+    LTEXT "", IDC_STATUS, 12, 228, 258, 28
+    DEFPUSHBUTTON "Fermer", IDCANCEL, 210, 262, 60, 14
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ACTIVE "L'accélération graphique est active. Les changements s'appliquent sans redémarrer."
+    IDS_APPLIED "Enregistré. Le changement est appliqué dès la prochaine image, sans redémarrer."
+    IDS_INACTIVE "Enregistré. Le changement est appliqué dès la prochaine image, sans redémarrer."
+    IDS_UNAVAILABLE "Enregistré. Le gestionnaire de fenêtres n'a pas confirmé : redémarrez la session si rien ne change."
+    IDS_RELOAD_FAILED "Enregistré, mais certains réglages n'ont pas pu être relus. Certains effets peuvent rester inchangés."
+    IDS_READ_FAILED "Les réglages enregistrés n'ont pas pu être lus. Erreur %lu."
+    IDS_WRITE_FAILED "Le changement n'a pas pu être enregistré. Erreur %lu."
+    IDS_MISMATCH "Enregistré, mais les réglages actifs sont différents. Choisissez à nouveau l'option."
+    IDS_DISCONNECTED "Le gestionnaire de fenêtres n'est pas relié à ce panneau. Les changements sont enregistrés ; redémarrez la session s'ils ne s'appliquent pas."
+    IDS_GPU_UNAVAILABLE "Composition logicielle active. Les changements s'appliquent sans redémarrer."
+END

@@ -19,6 +19,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from mados_common import TREE  # noqa: E402
 import make_bootui  # noqa: E402
 import make_locale  # noqa: E402
+import make_appearance  # noqa: E402
+import make_drivers  # noqa: E402
 import make_logos  # noqa: E402
 import make_names  # noqa: E402
 import make_shell  # noqa: E402
@@ -89,7 +91,9 @@ def main():
     make_names.main()
     make_telemetry.main()        # apres make_names : modifie ses fichiers
     make_locale.main()           # apres make_names : preinstall.inf, livecd.inf
+    make_drivers.main()          # apres make_locale : hivesys.inf
     make_welcome.main()          # apres make_names : shortcuts.inf
+    make_appearance.main()       # apres make_welcome : shortcuts.inf, dwmsettings.rc
     make_bootui.main()
     touch_rc()
     print("\nVerification :")
