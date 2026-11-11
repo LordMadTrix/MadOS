@@ -33,7 +33,6 @@ EXCLUDE = ("modules/rostests/", "media/themes/Win8/", "media/mados/", "submodule
 # Textes du code C/C++ (liste fermee) : (fichier, ancien, nouveau, nb attendu)
 C_STRINGS = [
     ("bootloader/gui/bmui.c", "startup option for LiberNT", "startup option for MadOS", 1),
-    ("bootloader/bootmgr/main.c", '"LiberNT Boot Manager"', '"MadOS Boot Manager"', 1),
     ("bootloader/winload/main.c", '"LiberNT OS Loader"', '"MadOS OS Loader"', 1),
     ("bootloader/winload/install.c", "Installing LiberNT", "Installing MadOS", 1),
     ("bootloader/winload/install.c", "Restoring the previous LiberNT", "Restoring the previous MadOS", 1),
@@ -46,6 +45,12 @@ C_STRINGS = [
     ("bootloader/image/bcd.inf.in", '"Element",,"LiberNT Boot Manager"', '"Element",,"MadOS Boot Manager"', 1),
     ("bootloader/image/bcd.inf.in", '\\Elements\\12000004","Element",,"LiberNT"', '\\Elements\\12000004","Element",,"MadOS"', 1),
 ]
+
+# Fichiers modifies A LA MAIN dans des commits MadOS : le kit n'y touche jamais
+# (il repart de l'amont et effacerait ces modifications). Leurs textes MadOS
+# font partie du commit manuel.
+#  - bootloader/bootmgr/main.c : menu de demarrage sur demande + "MadOS Boot Manager"
+HAND_MANAGED = ["bootloader/bootmgr/main.c", "bootloader/image/CMakeLists.txt"]
 
 # Raccourcis : le nom du fichier .lnk doit etre le meme partout ou il est cite.
 SHORTCUT_NAMES = {"Install LiberNT": "Install MadOS", "LiberNT Driver Installer": "MadOS Driver Installer"}
@@ -130,6 +135,7 @@ def main():
     # l'amont et ecraserait l'autre).
     closed = {rel for rel, *_ in C_STRINGS} | set(SHORTCUT_FILES)
     assert not closed & set(upstream_files("*.rc")) and not closed & set(upstream_files("*.mc"))
+    assert not closed & set(HAND_MANAGED), "un fichier modifie a la main est dans la liste du kit"
     for rel in upstream_files("*.rc"):
         do_rc(rel)
     for rel in upstream_files("*.mc"):
