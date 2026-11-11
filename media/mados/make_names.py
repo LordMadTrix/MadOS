@@ -58,7 +58,10 @@ HAND_MANAGED = ["bootloader/bootmgr/main.c", "bootloader/image/CMakeLists.txt",
                 # francais + AZERTY par defaut a l'installation
                 "base/setup/libernt/libernt.c", "base/setup/libernt/oobe.c",
                 # correctif de compilation Release (NdisDriverObject hors DBG)
-                "drivers/network/ndis/ndis/main.c"]
+                "drivers/network/ndis/ndis/main.c",
+                # "Bienvenue dans MadOS" : application, compilation, lancement au 1er demarrage
+                "base/applications/madwelcome/madwelcome.c", "base/applications/CMakeLists.txt",
+                "boot/bootdata/hivedef.inf"]
 
 # Raccourcis : le nom du fichier .lnk doit etre le meme partout ou il est cite.
 SHORTCUT_NAMES = {"Install LiberNT": "Install MadOS", "LiberNT Driver Installer": "MadOS Driver Installer"}
