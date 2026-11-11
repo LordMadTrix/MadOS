@@ -6,6 +6,11 @@ else()
     set(KERNEL_VERSION_BUILD "custom")
 endif()
 
+# MadOS : version affichee (A propos, panneau Systeme, invite de commandes).
+# Le numero du noyau ci-dessous reste celui de LiberNT.
+set(MADOS_VERSION "0.2.0")
+set(MADOS_CODENAME "Braise")
+
 set(KERNEL_VERSION_MAJOR "0")
 set(KERNEL_VERSION_MINOR "4")
 set(KERNEL_VERSION_PATCH_LEVEL "17")
