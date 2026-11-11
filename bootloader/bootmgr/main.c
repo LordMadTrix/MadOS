@@ -14,6 +14,9 @@
 #define BM_STORE_NAME      L"BCD"
 #define BM_DEFAULT_TITLE   L"Boot Manager"
 #define BM_BOOT_TIMEOUT    3
+/* MadOS: with a zero timeout the default entry starts at once, but a key
+ * pressed during startup (F8, Esc, Space...) still opens the boot menu. */
+#define BM_MENU_KEY_GRACE_MS 200
 #define BM_WINDOWS_MANAGER L"\\EFI\\Microsoft\\Boot\\bootmgfw.efi"
 #define BM_WINDOWS_STORE   L"\\EFI\\Microsoft\\Boot\\BCD"
 #define BM_WINDOWS_TITLE   L"Windows Boot Manager"
@@ -620,6 +623,28 @@ BmGetTimeout(VOID)
     return (LONG)min(Seconds, (ULONGLONG)MAXLONG);
 }
 
+/* Returns TRUE when the user pressed a key during startup or within a short
+ * grace period. The key is consumed so the menu does not act on it. */
+static
+BOOLEAN
+BmMenuRequested(VOID)
+{
+    ULONG Waited;
+
+    for (Waited = 0; Waited <= BM_MENU_KEY_GRACE_MS; Waited += 10)
+    {
+        if (FwKeyAvailable())
+        {
+            while (FwKeyAvailable())
+                FwReadKey();
+            return TRUE;
+        }
+        StallExecutionProcessor(10 * 1000);
+    }
+
+    return FALSE;
+}
+
 static
 VOID
 BmDebugEntries(
@@ -696,8 +721,13 @@ BlMain(VOID)
     }
     else if (Timeout == 0)
     {
-        RtlZeroMemory(&Startup, sizeof(Startup));
-        BmStartSelectedApplication(&BmEntries[Default], &Startup);
+        if (!BmMenuRequested())
+        {
+            RtlZeroMemory(&Startup, sizeof(Startup));
+            BmStartSelectedApplication(&BmEntries[Default], &Startup);
+        }
+        /* A key was pressed, or the default entry failed: show the menu
+         * without a countdown. */
         Timeout = -1;
     }
 
