@@ -2358,6 +2358,9 @@ static INT_PTR CALLBACK AboutDlgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM
 
                 // Set App-specific stuff (icon, app name, szOtherStuff string)
                 SendDlgItemMessageW(hWnd, IDC_ABOUT_ICON, STM_SETICON, (WPARAM)info->hIcon, 0);
+                /* Same icon for the window itself (taskbar, Alt+Tab) */
+                SendMessageW(hWnd, WM_SETICON, ICON_BIG, (LPARAM)info->hIcon);
+                SendMessageW(hWnd, WM_SETICON, ICON_SMALL, (LPARAM)info->hIcon);
 
                 GetWindowTextW(hWnd, szAppTitleTemplate, ARRAY_SIZE(szAppTitleTemplate));
                 swprintf(szAppTitle, _countof(szAppTitle), szAppTitleTemplate, info->szApp);

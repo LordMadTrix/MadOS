@@ -61,7 +61,13 @@ HAND_MANAGED = ["bootloader/bootmgr/main.c", "bootloader/image/CMakeLists.txt",
                 "drivers/network/ndis/ndis/main.c",
                 # "Bienvenue dans MadOS" : application, compilation, lancement au 1er demarrage
                 "base/applications/madwelcome/madwelcome.c", "base/applications/CMakeLists.txt",
-                "boot/bootdata/hivedef.inf"]
+                "boot/bootdata/hivedef.inf",
+                # son de demarrage MadOS (fichier genere par make_sounds.py)
+                "media/sounds/CMakeLists.txt",
+                # detection de mise a jour (MadOS ou LiberNT), icone "A propos",
+                # nom du disque "MadOS"
+                "base/setup/libernt/upgrade.c", "dll/win32/shell32/wine/shell32_main.c",
+                "sdk/cmake/boot_images.cmake"]
 
 # Raccourcis : le nom du fichier .lnk doit etre le meme partout ou il est cite.
 SHORTCUT_NAMES = {"Install LiberNT": "Install MadOS", "LiberNT Driver Installer": "MadOS Driver Installer"}
@@ -94,11 +100,24 @@ def decode(raw):
 
 
 RC_LITERAL = re.compile(r'"(?:[^"\r\n]|"")*"')
+# Blocs d'attribution, dans toutes les langues : la liste des auteurs de la
+# fenetre "A propos" presente les contributeurs de LiberNT et ReactOS.
+PROTECTED_BLOCKS = re.compile(r"^IDD_ABOUT_AUTHORS\s+DIALOGEX.*?^END\b", re.M | re.S)
+
+
+def rename_outside_protected(text):
+    out, pos = [], 0
+    for m in PROTECTED_BLOCKS.finditer(text):
+        out.append(RC_LITERAL.sub(lambda x: rename_text(x.group(0)), text[pos:m.start()]))
+        out.append(m.group(0))
+        pos = m.end()
+    out.append(RC_LITERAL.sub(lambda x: rename_text(x.group(0)), text[pos:]))
+    return "".join(out)
 
 
 def do_rc(rel):
     text, enc = decode(git_original(TREE / rel))
-    new = RC_LITERAL.sub(lambda m: rename_text(m.group(0)), text)
+    new = rename_outside_protected(text)
     if new != text:
         (TREE / rel).write_bytes(new.encode(enc))
         stats["rc"] = stats.get("rc", 0) + 1

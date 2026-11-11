@@ -108,6 +108,14 @@ def ui():
         bmp_ok(d + "rosbitmap.bmp", w=320, h=159, bpp=24, comp=0)
         bmp_ok(d + "rosbitmap_mask.bmp", w=320, h=159, bpp=8, comp=0)
     bmp_ok("base/shell/explorer/res/bmp/143.bmp", w=25, h=20, bpp=32, comp=0)
+    bmp_ok("dll/win32/shell32/res/bitmaps/reactos.bmp", w=413, h=72, bpp=24, comp=0)
+    bmp_ok("dll/win32/shell32/res/bitmaps/line.bmp", w=413, h=5, bpp=24, comp=0)
+    ico = Image.open(TREE / "subsystems/win/win32k/user/user32/resources/oic_reactos.ico")
+    check({(16, 16), (32, 32), (48, 48)} <= set(ico.info.get("sizes", [])), "icone systeme : 16, 32 et 48 px presents")
+    import wave
+    with wave.open(str(TREE / "media/sounds/MadOS_Startup.wav")) as w:
+        check(w.getnchannels() == 2 and w.getframerate() == 44100 and 2 < w.getnframes() / 44100 < 5,
+              "son de demarrage MadOS : WAV stereo 44,1 kHz, 2 a 5 s")
     for rel in ("base/setup/libernt/res/watermark.bmp", "base/setup/welcome/res/title.bmp"):
         o = header(git_original(TREE / rel))
         bmp_ok(rel, w=o["w"], h=o["h"], bpp=24, comp=0)
@@ -120,6 +128,8 @@ def shell():
         text = (TREE / rel).read_text(encoding="utf-8", errors="replace")
         left = [m.group(0) for m in make_shell.RGB.finditer(text) if make_shell.is_bluish(*map(int, m.groups()))]
         orig = git_original(TREE / rel).decode("utf-8", errors="replace")
+        for old, new in make_shell.EXTRA_TEXT.get(rel, []):       # textes renommes expres
+            orig = orig.replace(old, new)
         same_shape = make_shell.RGB.sub("RGB()", text) == make_shell.RGB.sub("RGB()", orig)
         check(not left and same_shape, f"{rel} : plus de bleu, seul le contenu des RGB() change"
               + (f" (restants : {left[:3]})" if left else ""))
@@ -138,6 +148,7 @@ def names():
     left = []
     for rel in mn.upstream_files("*.rc"):
         text, _ = mn.decode((TREE / rel).read_bytes())
+        text = mn.PROTECTED_BLOCKS.sub("", text)        # blocs d'attribution exclus
         for lit in mn.RC_LITERAL.findall(text):
             if mn.WORD.search(lit) and not mn.KEEP_MARKERS.search(lit):
                 left.append(f"{rel}: {lit[:60]}")
@@ -164,6 +175,15 @@ def names():
             bad.append(rel)
     check(not bad, f"identifiants internes intacts dans {len(set(changed))} fichiers modifies"
           + (f" (differences : {bad[:3]})" if bad else ""))
+    # 2b. la liste des auteurs ("A propos") reste attribuee a LiberNT/ReactOS
+    wrong = []
+    for p in sorted((TREE / "dll/win32/shell32/lang").glob("*.rc")):
+        t, _ = mn.decode(p.read_bytes())
+        for m in mn.PROTECTED_BLOCKS.finditer(t):
+            if "MadOS" in m.group(0):
+                wrong.append(p.name)
+    check(not wrong, "liste des auteurs : attribuee a LiberNT dans toutes les langues"
+          + (f" (a revoir : {wrong[:4]})" if wrong else ""))
     # 3. raccourcis coherents
     cm = (TREE / "boot/bootdata/CMakeLists.txt").read_text(errors="replace")
     pre = (TREE / "boot/bootdata/preinstall.inf").read_text(errors="replace")

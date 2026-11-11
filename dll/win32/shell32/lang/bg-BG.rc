@@ -173,7 +173,7 @@ IDD_ABOUT_AUTHORS DIALOGEX 35, 90, 235, 85
 STYLE DS_SHELLFONT | WS_CHILD
 FONT 8, "MS Shell Dlg"
 BEGIN
-    LTEXT "MadOS достигна до вас, благодарение на:", IDC_STATIC, 0, 0, 250, 10
+    LTEXT "LiberNT достигна до вас, благодарение на:", IDC_STATIC, 0, 0, 250, 10
     LISTBOX IDC_ABOUT_AUTHORS_LISTBOX, 0, 10, 165, 75
 END
 
