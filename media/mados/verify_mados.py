@@ -190,6 +190,24 @@ def bootui():
         check(len(data) == 48 * 42 * 4 and data != git_original(TREE / rel), f"{rel} : logo MadOS 48x42 RGBA")
 
 
+def telemetry():
+    print("Donnees de diagnostic")
+    hive = (TREE / "boot/bootdata/hivesft.inf").read_text(encoding="utf-8", errors="replace")
+    check(re.search(r'"AllowTelemetry",0x[0-9A-Fa-f]+,0x00000000\s*$', hive, re.M) is not None,
+          "hivesft.inf : AllowTelemetry = 0 (rien n'est envoye par defaut)")
+    langs = sorted((TREE / "dll/cpl/sysdm/lang").glob("*.rc"))
+    bad = []
+    for p in langs:
+        t = p.read_bytes().decode("utf-8", errors="replace")
+        block = t[t.find("IDD_ERRORREPORTING"):t.find("IDD_ERRORREPORTING") + 1500]
+        if "IDC_SENDREQUIRED" not in block or re.search(r"cannot be turned off|ne peut pas être désactivé", block):
+            bad.append(p.name)
+    check(not bad, f"panneau Systeme : case d'accord et texte exact dans {len(langs)} langues"
+          + (f" (a revoir : {bad[:4]})" if bad else ""))
+    cm = (TREE / "base/services/diagdata/CMakeLists.txt").read_text(errors="replace")
+    check('set(DIAGDATA_OPTIONAL_DEFAULT "")' in cm, "la compilation ne force plus l'envoi des donnees optionnelles")
+
+
 def wallpaper():
     print("Fond d'ecran")
     p = TREE / "modules/wallpapers/MadOS.png"
@@ -201,7 +219,7 @@ def wallpaper():
 
 
 def main():
-    theme(); boot(); ui(); shell(); names(); bootui(); wallpaper()
+    theme(); boot(); ui(); shell(); names(); bootui(); telemetry(); wallpaper()
     print(f"\n{'Tout est bon.' if not problems else str(len(problems)) + ' probleme(s).'}")
     return 1 if problems else 0
 
