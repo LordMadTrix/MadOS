@@ -122,9 +122,11 @@ def _upstream_ref():
 
 
 def git_original(path):
-    """Contenu d'origine (LiberNT amont) d'un fichier du depot."""
+    """Contenu d'origine (LiberNT amont) d'un fichier du depot, sous sa forme
+    d'extraction (--filters : fins de ligne CRLF des fichiers marques eol=crlf),
+    pour que les fichiers reecrits ne different de l'amont que par leur contenu."""
     rel = Path(path).resolve().relative_to(TREE).as_posix()
-    return subprocess.run(["git", "-C", str(TREE), "show", f"{_upstream_ref()}:{rel}"],
+    return subprocess.run(["git", "-C", str(TREE), "cat-file", "--filters", f"{_upstream_ref()}:{rel}"],
                           check=True, capture_output=True).stdout
 
 
