@@ -614,9 +614,11 @@ PlayLogonSoundThread(
         if (Info.dwCurrentState == SERVICE_RUNNING)
             break;
 
-        Sleep(1000);
+        /* MadOS: poll every 100 ms (same 20 s limit) so the logon sound
+         * plays as soon as audio is ready instead of up to 1 s later. */
+        Sleep(100);
 
-    } while (Index++ < 20);
+    } while (Index++ < 200);
 
     CloseServiceHandle(hService);
     CloseServiceHandle(hSCManager);

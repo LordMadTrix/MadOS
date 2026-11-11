@@ -67,7 +67,9 @@ HAND_MANAGED = ["bootloader/bootmgr/main.c", "bootloader/image/CMakeLists.txt",
                 # detection de mise a jour (MadOS ou LiberNT), icone "A propos",
                 # nom du disque "MadOS"
                 "base/setup/libernt/upgrade.c", "dll/win32/shell32/wine/shell32_main.c",
-                "sdk/cmake/boot_images.cmake"]
+                "sdk/cmake/boot_images.cmake",
+                # son d'ouverture de session joue des que l'audio est pret
+                "base/system/winlogon/sas.c"]
 
 # Raccourcis : le nom du fichier .lnk doit etre le meme partout ou il est cite.
 SHORTCUT_NAMES = {"Install LiberNT": "Install MadOS", "LiberNT Driver Installer": "MadOS Driver Installer"}
