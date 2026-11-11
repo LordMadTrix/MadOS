@@ -1,0 +1,11 @@
+#include <windef.h>
+#include <winuser.h>
+
+#define REACTOS_STR_FILE_DESCRIPTION  "Bienvenue dans MadOS"
+#define REACTOS_STR_INTERNAL_NAME     "madwelcome"
+#define REACTOS_STR_ORIGINAL_FILENAME "madwelcome.exe"
+#include <reactos/version.rc>
+
+1 ICON "madwelcome.ico"
+
+#include <reactos/manifest_exe.rc>

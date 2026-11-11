@@ -1967,6 +1967,8 @@ HKCU,"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer",,0x00000012
 HKCU,"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer","NoSimpleStartMenu",0x00010003,1
 
 HKCU,"SOFTWARE\Microsoft\Windows\CurrentVersion\Run",,0x00000012
+; MadOS : choix des applications apres l'installation (une fois par machine)
+HKCU,"SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce","MadOSWelcome",0x00020000,"%SystemRoot%\system32\madwelcome.exe /firstrun"
 HKCU,"SOFTWARE\Microsoft\Windows\CurrentVersion\Telephony",,0x00000012
 HKCU,"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",,0x00000012
 
