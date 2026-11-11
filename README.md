@@ -49,6 +49,12 @@ Téléchargez la dernière version dans
   machine « Windows 11 (64 bits) », **EFI activé**, 4 Go de mémoire, et
   utilisez ce fichier comme disque dur.
 - **`MadOS-*-amd64.iso`** : installation classique depuis un CD.
+- **`MadOS-*-amd64.img.xz`** : pour essayer MadOS sur un vrai PC depuis une
+  clé USB (démarrage UEFI ou BIOS). Écrivez-le avec
+  [Rufus](https://rufus.ie) ou [balenaEtcher](https://etcher.balena.io),
+  qui lisent directement le fichier compressé. **Cela efface toute la clé.**
+  Sur un vrai PC, la carte graphique fonctionne en affichage de base
+  (pas de pilote Nvidia, AMD ou Intel).
 
 ## Mesures (VM 4 cœurs / 4 Go)
 
