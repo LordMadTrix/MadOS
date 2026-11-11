@@ -27,6 +27,12 @@ FILES = [
     "base/setup/welcome/welcome.c",            # accueil
 ]
 
+# Textes affiches presents dans ces fichiers (traites ici, et non par
+# make_names, pour qu'un fichier ne soit regenere que par une seule etape).
+EXTRA_TEXT = {
+    "base/setup/welcome/welcome.c": [('TEXT("LiberNT")', 'TEXT("MadOS")')],
+}
+
 RGB = re.compile(r"RGB\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)")
 
 
@@ -48,7 +54,13 @@ def patch(rel):
         count += 1
         return "RGB(%d, %d, %d)" % recolor(r, g, b)
 
-    path.write_bytes(RGB.sub(fix, text).encode("utf-8", errors="surrogateescape"))
+    text = RGB.sub(fix, text)
+    # textes affiches dans ces memes fichiers (une seule passe par fichier)
+    for old, new in EXTRA_TEXT.get(rel, []):
+        if text.count(old) != 1:
+            raise SystemExit(f"make_shell : {rel} contient {text.count(old)}x {old!r} (attendu 1)")
+        text = text.replace(old, new)
+    path.write_bytes(text.encode("utf-8", errors="surrogateescape"))
     return count
 
 

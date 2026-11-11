@@ -1010,7 +1010,7 @@ RunAction(INT nTopic)
 
         if (!_tcsnicmp(Command, TEXT("<msg>"), 5))
         {
-            MessageBox(hWndMain, Command + 5, TEXT("LiberNT"), MB_OK | MB_TASKMODAL);
+            MessageBox(hWndMain, Command + 5, TEXT("MadOS"), MB_OK | MB_TASKMODAL);
             return TRUE;
         }
     }
