@@ -647,7 +647,7 @@ BlMain(VOID)
     ULONG Size, Default = 0, DefaultTool = MAXULONG, i;
     LONG Timeout;
 
-    FwDebugAnnounce("LiberNT Boot Manager", TRUE);
+    FwDebugAnnounce("MadOS Boot Manager", TRUE);
     Store = BmReadStore(BmStorePath, RTL_NUMBER_OF(BmStorePath), &Size);
 
     RtlStringCchCopyW(BmTitle, RTL_NUMBER_OF(BmTitle), BM_DEFAULT_TITLE);

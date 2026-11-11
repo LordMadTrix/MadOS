@@ -80,7 +80,7 @@ CAPTION "Ustawienia systemowe"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     GROUPBOX "Informowanie o wersji", IDC_STATIC, 6, 3, 210, 73
-    LTEXT "LiberNT jest zbudowany w oparciu o wersję serwerową. Zaznacz pole, aby LiberNT zgłaszał się aplikacjom jako stacja robocza.", IDC_STATIC, 15, 15, 183, 41
+    LTEXT "MadOS jest zbudowany w oparciu o wersję serwerową. Zaznacz pole, aby MadOS zgłaszał się aplikacjom jako stacja robocza.", IDC_STATIC, 15, 15, 183, 41
     CONTROL "Zgłaszaj jako stację roboczą", IDC_REPORTASWORKSTATION, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 16, 57, 190, 10
     PUSHBUTTON "OK", IDOK, 166, 83, 50, 14
 END
@@ -352,7 +352,7 @@ CAPTION "Efekty wizualne"
 FONT 8, "MS Shell Dlg"
 STYLE DS_SHELLFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 BEGIN
-   LTEXT "Wybierz ustawienia wyglądu i wydajności systemu LiberNT, których chcesz używać na tym komputerze.", IDC_STATIC, 7, 6, 208, 18
+   LTEXT "Wybierz ustawienia wyglądu i wydajności systemu MadOS, których chcesz używać na tym komputerze.", IDC_STATIC, 7, 6, 208, 18
    CONTROL "", IDC_TREE, "SysTreeView32", TVS_LINESATROOT | TVS_DISABLEDRAGDROP | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 7, 32, 213, 168
 END
 
@@ -366,7 +366,7 @@ BEGIN
    AUTORADIOBUTTON "&Programy", IDC_CPUCLIENT, 14, 36, 75, 12
    AUTORADIOBUTTON "&Usługi działające w tle", IDC_CPUSERVER, 96, 36, 85, 12
    GROUPBOX "Pamięć wirtualna", IDC_STATIC, 7, 60, 213, 57
-   LTEXT "Plik stronicowania to obszar twardego dysku używany przez system LiberNT tak, jakby była to pamięć RAM.", IDC_STATIC, 14, 74, 199, 16
+   LTEXT "Plik stronicowania to obszar twardego dysku używany przez system MadOS tak, jakby była to pamięć RAM.", IDC_STATIC, 14, 74, 199, 16
    PUSHBUTTON "Z&mień...", IDC_CHANGESWAP, 163, 97, 50, 14
 END
 

@@ -15,9 +15,9 @@
 #include <debug.h>
 
 #define BOOTUI_TEXT 0xF3F6F8
-#define BOOTUI_MUTED 0x9EABC3
-#define BOOTUI_ACCENT 0x7AAAF0
-#define BOOTUI_PANEL 0x101A2B
+#define BOOTUI_MUTED 0xC39B9A
+#define BOOTUI_ACCENT 0xF0716E
+#define BOOTUI_PANEL 0x2B0E0D
 #define BOOTUI_GLYPH_ARENA (512 * 1024)
 
 typedef struct
@@ -323,12 +323,12 @@ BootUiBrand(VOID)
     ULONG Scale = BootUiHeight < 600 ? 2 : 1;
     ULONG Width = 48 / Scale, Height = 42 / Scale;
     ULONG Size = BootUiHeight < 600 ? 20 : 26;
-    ULONG TextWidth = BootUiTextWidth("LiberNT", Size, MAXULONG);
+    ULONG TextWidth = BootUiTextWidth("MadOS", Size, MAXULONG);
     ULONG Left = (BootUiWidth - Width - 14 - TextWidth) / 2;
     ULONG Top = BootUiHeight < 600 ? 12 : 28;
     BootUiLogo(Left, Top, Scale);
     BootUiText(Left + Width + 14, Top + (Height - min(Height, Size)) / 2 - 1,
-               "LiberNT", Size, BOOTUI_TEXT, TextWidth, MAXULONG);
+               "MadOS", Size, BOOTUI_TEXT, TextWidth, MAXULONG);
 }
 
 static VOID
@@ -638,7 +638,7 @@ BootUiDialog(PCSTR Message, PCHAR Edit, ULONG Length)
                 Start = Cursor;
             while (BootUiTextWidth(Edit + Start, BootUiFontSize, Cursor - Start) > Width - 80)
                 ++Start;
-            BootUiRect(Left + 24, EditY, Width - 48, BootUiFontSize + 20, 6, 0x081020, 255);
+            BootUiRect(Left + 24, EditY, Width - 48, BootUiFontSize + 20, 6, 0x200606, 255);
             BootUiText(Left + 36, EditY + 8, Edit + Start, BootUiFontSize, BOOTUI_TEXT, Width - 72, MAXULONG);
             TextWidth = BootUiTextWidth(Edit + Start, BootUiFontSize, Cursor - Start);
             BootUiRect(Left + 36 + TextWidth, EditY + 8, 2, BootUiFontSize + 4, 0, BOOTUI_ACCENT, 255);
@@ -811,7 +811,7 @@ BootUiTickProgressBar(ULONG Progress)
     ULONG Top = BootUiHeight - 100;
     BootUiRect(0, Top - 20, BootUiWidth, 120, 0, 0, 255);
     BootUiCentered(Top, BootUiProgressText, max(14, BootUiFontSize - 3), BOOTUI_MUTED);
-    BootUiRect(Left, Top + 44, Width, 10, 5, 0x23314A, 255);
+    BootUiRect(Left, Top + 44, Width, 10, 5, 0x302A27, 255);
     BootUiRect(Left, Top + 44, Width * min(Progress, 10000) / 10000, 10, 5, BOOTUI_ACCENT, 255);
     BootUiPresentRegion(Top - 20, 120);
 }
