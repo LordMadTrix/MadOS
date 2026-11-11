@@ -1,0 +1,64 @@
+; viostor.inf - VirtIO block storage (disque "virtio" de QEMU/KVM/Proxmox)
+; Pilote : https://github.com/virtio-win/kvm-guest-drivers-windows (BSD-3-Clause)
+
+[Version]
+Signature  = "$Windows NT$"
+Class      = SCSIAdapter
+ClassGUID  = {4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider   = %ProviderName%
+DriverVer  = 11/11/2026,100.0.0.0
+
+[SourceDisksNames]
+1 = %VioStor.DeviceDesc%,,,
+
+[SourceDisksFiles]
+viostor.sys = 1
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[Manufacturer]
+%ManufacturerName% = VioStor,NTamd64,NTarm64
+
+[VioStor.NTamd64]
+%VioStor.DeviceDesc% = VioStor_Inst, PCI\VEN_1AF4&DEV_1001
+%VioStor.DeviceDesc% = VioStor_Inst, PCI\VEN_1AF4&DEV_1042
+
+[VioStor.NTarm64]
+%VioStor.DeviceDesc% = VioStor_Inst, PCI\VEN_1AF4&DEV_1001
+%VioStor.DeviceDesc% = VioStor_Inst, PCI\VEN_1AF4&DEV_1042
+
+[VioStor_Inst]
+CopyFiles = VioStor_CopyFiles
+
+[VioStor_Inst.HW]
+AddReg = VioStor_MsiAddReg
+
+[VioStor_CopyFiles]
+viostor.sys
+
+[VioStor_Inst.Services]
+AddService = viostor, 0x00000002, VioStor_Service
+
+[VioStor_Service]
+ServiceType    = 1
+StartType      = 0
+ErrorControl   = 1
+ServiceBinary  = %12%\viostor.sys
+LoadOrderGroup = SCSI Miniport
+AddReg         = VioStor_ParamAddReg
+
+[VioStor_ParamAddReg]
+HKR,"Parameters\PnpInterface","5",0x00010001,0x00000001
+HKR,"Parameters","BusType",0x00010001,0x00000001
+
+[VioStor_MsiAddReg]
+HKR,"Interrupt Management",,0x00000010
+HKR,"Interrupt Management\MessageSignaledInterruptProperties",,0x00000010
+HKR,"Interrupt Management\MessageSignaledInterruptProperties","MSISupported",0x00010001,1
+HKR,"Interrupt Management\MessageSignaledInterruptProperties","MessageNumberLimit",0x00010001,257
+
+[Strings]
+ProviderName       = "MadOS"
+ManufacturerName   = "VirtIO"
+VioStor.DeviceDesc = "VirtIO Block Storage Controller"
