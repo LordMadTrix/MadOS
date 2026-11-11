@@ -1053,6 +1053,16 @@ DetectLanguageDefaults(
     {
         Lcid = GetFirmwareLanguage();
         *Layout = UNICODE_NULL;
+
+        /* MadOS: French (France) with the AZERTY keyboard by default. Most PC
+         * firmwares report English whatever the user's language, so English
+         * (or no firmware language) is not taken as a choice; any other
+         * firmware language is kept. */
+        if (Lcid == 0 || PRIMARYLANGID(LANGIDFROMLCID(Lcid)) == LANG_ENGLISH)
+        {
+            Lcid = MAKELCID(MAKELANGID(LANG_FRENCH, SUBLANG_FRENCH), SORT_DEFAULT);
+            StringCchCopyW(Layout, ARRAYSIZE(Layout), L"0000040C");
+        }
     }
     if (Lcid == 0)
         return;

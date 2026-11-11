@@ -54,7 +54,11 @@ C_STRINGS = [
 #    coupee par defaut (voir make_telemetry.py pour la partie textes)
 HAND_MANAGED = ["bootloader/bootmgr/main.c", "bootloader/image/CMakeLists.txt",
                 "base/services/diagdata/diagdata.c", "base/services/diagdata/CMakeLists.txt",
-                "dll/cpl/sysdm/advanced.c", "dll/cpl/sysdm/resource.h"]
+                "dll/cpl/sysdm/advanced.c", "dll/cpl/sysdm/resource.h",
+                # francais + AZERTY par defaut a l'installation
+                "base/setup/libernt/libernt.c", "base/setup/libernt/oobe.c",
+                # correctif de compilation Release (NdisDriverObject hors DBG)
+                "drivers/network/ndis/ndis/main.c"]
 
 # Raccourcis : le nom du fichier .lnk doit etre le meme partout ou il est cite.
 SHORTCUT_NAMES = {"Install LiberNT": "Install MadOS", "LiberNT Driver Installer": "MadOS Driver Installer"}
