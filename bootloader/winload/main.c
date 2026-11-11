@@ -475,7 +475,7 @@ BlMain(VOID)
 {
     PUCHAR Stack;
 
-    FwDebugAnnounce("LiberNT OS Loader", FALSE);
+    FwDebugAnnounce("MadOS OS Loader", FALSE);
     OslArchInitialize();
 
     if (!MmInitializeMemoryManager())
