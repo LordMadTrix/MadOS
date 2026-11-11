@@ -1,0 +1,2 @@
+# UTF-16 : Git ne doit pas toucher aux fins de ligne (sinon le fichier devient illisible)
+madapps.ini -text

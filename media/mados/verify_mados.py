@@ -165,7 +165,8 @@ def names():
     for rel in sorted(set(changed)):
         p = TREE / rel
         # les noms de raccourcis .lnk sont renommes expres (controle 3 ci-dessous)
-        if p.suffix.lower() in (".bmp", ".png", ".jpg") or not p.is_file() or rel in mn.SHORTCUT_FILES:
+        # README.md est la presentation de MadOS (celle de LiberNT est dans README.LiberNT.md)
+        if p.suffix.lower() in (".bmp", ".png", ".jpg", ".md") or not p.is_file() or rel in mn.SHORTCUT_FILES:
             continue
         try:
             before = len(ident.findall(mn.decode(git_original(p))[0]))
@@ -255,8 +256,27 @@ def wallpaper():
           "hivedef.inf : MadOS.png est le fond d'ecran par defaut")
 
 
+def welcome():
+    print("Bienvenue dans MadOS")
+    import configparser
+    raw = (TREE / "base/applications/madwelcome/madapps.ini").read_bytes()
+    # UTF-16 LE : une conversion de fins de ligne par Git ajoute un octet 0D seul
+    # et decale une ligne sur deux (liste d'applications vide a l'ecran)
+    check(raw[:2] == b"\xff\xfe" and len(raw) % 2 == 0 and b"\r\n" not in raw.replace(b"\r\x00\n\x00", b""),
+          "madapps.ini : UTF-16 intact (fins de ligne non converties par Git)")
+    ini = configparser.ConfigParser(interpolation=None)
+    try:
+        ini.read_string(raw.decode("utf-16"))
+        order = [k.strip() for k in ini["Apps"]["Order"].split(",")]
+        bad = [k for k in order if not (ini.has_section(k) and ini[k].get("Name") and ini[k].get("Url")
+                                        and (ini[k].get("Signer") or ini[k].get("Sha256")))]
+    except Exception as e:
+        order, bad = [], [str(e)]
+    check(order and not bad, f"madapps.ini : {len(order)} applications completes {bad if bad else ''}")
+
+
 def main():
-    theme(); boot(); ui(); shell(); names(); bootui(); telemetry(); wallpaper()
+    theme(); boot(); ui(); shell(); names(); bootui(); telemetry(); wallpaper(); welcome()
     print(f"\n{'Tout est bon.' if not problems else str(len(problems)) + ' probleme(s).'}")
     return 1 if problems else 0
 
