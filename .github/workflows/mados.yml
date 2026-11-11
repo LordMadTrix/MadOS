@@ -1,4 +1,4 @@
-# MadOS : compilation Release amd64 (ISO d'installation + disque VHD).
+# MadOS : compilation Release amd64 (ISO d'installation, disque VHD, image USB).
 # - a chaque envoi sur main : verification du kit, compilation, fichiers
 #   telechargeables dans l'onglet Actions (14 jours) ;
 # - a chaque etiquette vX.Y.Z : idem, puis un BROUILLON de version avec
@@ -101,7 +101,7 @@ jobs:
     - name: Build images
       run: |
         . "$HOME/.local/opt/rosbe/rosbe-env.sh"
-        ninja -C output-Clang-amd64-release bootcd liberntvhd
+        ninja -C output-Clang-amd64-release bootcd liberntvhd liberntimg
 
     - name: Save ccache
       if: ${{ always() && steps.ccache_restore.outcome == 'success' }}
@@ -117,6 +117,8 @@ jobs:
         mkdir dist
         mv output-Clang-amd64-release/bootcd.iso "dist/MadOS-$V-amd64.iso"
         mv output-Clang-amd64-release/LiberNT.vhd "dist/MadOS-$V-amd64.vhd"
+        # Image pour cle USB (UEFI ou BIOS), compressee : Rufus et balenaEtcher lisent le .xz
+        xz -T0 -6 -c output-Clang-amd64-release/LiberNT.img > "dist/MadOS-$V-amd64.img.xz"
         (cd dist && sha256sum MadOS-* > SHA256SUMS.txt && cat SHA256SUMS.txt)
         echo "version=$V" >> "$GITHUB_OUTPUT"
 
