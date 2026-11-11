@@ -117,7 +117,9 @@ IsLiberNtKernel(
                                    Translation[0], Translation[1])) &&
         VerQueryValueW(Data, Key, (PVOID*)&Product, &Length) && Length)
     {
-        Found = (wcsstr(Product, L"LiberNT") != NULL);
+        /* MadOS renames the product ("MadOS Operating System"): both an
+         * existing MadOS and an existing LiberNT installation can be upgraded */
+        Found = (wcsstr(Product, L"LiberNT") != NULL || wcsstr(Product, L"MadOS") != NULL);
     }
 
     HeapFree(ProcessHeap, 0, Data);
