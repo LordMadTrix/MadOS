@@ -11,7 +11,7 @@ HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders"
 HKCU,"Control Panel\Input Method","EnableHexNumpad",0x00000000,"1"
 
 ; Default locale for the keyboard layout
-HKCU,"Keyboard Layout\Preload","1",0x00000000,"00000409"
+HKCU,"Keyboard Layout\Preload","1",0x00000000,"0000040C"
 
 ; Toggle keys (Alt+Shift etc.)
 HKCU,"Keyboard Layout\Toggle","Hotkey",0x00000000,"1"
