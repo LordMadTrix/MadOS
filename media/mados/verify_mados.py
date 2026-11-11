@@ -266,6 +266,28 @@ def locale():
     check(not bad, f"disque preinstalle et CD autonome : clavier AZERTY par defaut {bad if bad else ''}")
 
 
+def drivers():
+    print("Pilotes ajoutes")
+    hive = (TREE / "boot/bootdata/hivesys.inf").read_text(encoding="utf-8", errors="replace")
+    check(hive.count('Services\\viostor","Start",0x00010001,0x00000000') == 1,
+          "hivesys.inf : service viostor (disque VirtIO) demarre au boot, une seule fois")
+    sif = (TREE / "boot/bootdata/txtsetup.sif").read_text(encoding="utf-8", errors="replace")
+    check("PCI\\VEN_1AF4&DEV_1001 = viostor" in sif and "viostor = viostor.sys" in sif,
+          "txtsetup.sif : disque VirtIO reconnu a l'installation")
+    cfg = (TREE / "sdk/cmake/config.cmake").read_text(encoding="utf-8", errors="replace")
+    check('software ICDs." ON)' in cfg, "Mesa LLVMpipe (OpenGL, Vulkan) active par defaut")
+
+
+def appearance():
+    print("Mode clair / sombre")
+    rc = (TREE / "base/applications/dwmsettings/dwmsettings.rc").read_text(encoding="utf-8", errors="replace")
+    check('#include "lang/fr-FR.rc"' in rc and (TREE / "base/applications/dwmsettings/lang/fr-FR.rc").is_file(),
+          "panneau Apparence traduit en francais")
+    sc = (TREE / "media/inf/shortcuts.inf").read_text(encoding="utf-8-sig", errors="replace")
+    check(sc.count("dwmsettings.exe") == 1 and "MADAPPEARANCE_TITLE=Apparence" in sc,
+          "raccourci Apparence dans le menu Demarrer")
+
+
 def welcome():
     print("Bienvenue dans MadOS")
     import configparser
@@ -286,7 +308,7 @@ def welcome():
 
 
 def main():
-    theme(); boot(); ui(); shell(); names(); bootui(); telemetry(); wallpaper(); locale(); welcome()
+    theme(); boot(); ui(); shell(); names(); bootui(); telemetry(); wallpaper(); locale(); drivers(); appearance(); welcome()
     print(f"\n{'Tout est bon.' if not problems else str(len(problems)) + ' probleme(s).'}")
     return 1 if problems else 0
 
