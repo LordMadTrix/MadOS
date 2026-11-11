@@ -145,5 +145,10 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
+        # Une version deja creee a la main n'est jamais modifiee
+        if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+          echo "La version $GITHUB_REF_NAME existe deja : rien a faire."
+          exit 0
+        fi
         gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --draft --prerelease \
           --title "MadOS ${GITHUB_REF_NAME#v}" --generate-notes dist/*
