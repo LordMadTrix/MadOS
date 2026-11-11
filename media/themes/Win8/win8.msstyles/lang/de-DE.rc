@@ -2,12 +2,12 @@ LANGUAGE LANG_GERMAN, SUBLANG_NEUTRAL
 
 STRINGTABLE
 {
-1000, "Light"
+1000, "Ember"
 }
 
 STRINGTABLE
 {
-2000, "LiberNT-Standard Light"
+2000, "MadOS Ember"
 }
 
 STRINGTABLE
@@ -26,12 +26,12 @@ STRINGTABLE
 
 STRINGTABLE
 {
-5000, "LiberNT-Standard"
+5000, "MadOS"
 5001, "Visueller Stil"
 5002, "ReactOS Project"
 5003, "Foxlet, basierend auf Lautus"
 5004, "Veröffentlicht unter GNU/GPL 2.0, 2019"
 5005, "https://reactos.org/"
 5006, "1.0"
-5007, "Visueller Stil für LiberNT"
+5007, "MadOS Ember visual style (based on the LiberNT theme)"
 }

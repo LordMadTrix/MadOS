@@ -4184,14 +4184,14 @@ public:
         }
         else if (bPressed || bChecked)
         {
-            crFace = RGB(38, 42, 47);
-            crEdge = RGB(88, 95, 102);
+            crFace = RGB(41, 35, 32);
+            crEdge = RGB(94, 90, 87);
             bFill = TRUE;
         }
         else if (bHot)
         {
-            crFace = RGB(58, 64, 70);
-            crEdge = RGB(102, 110, 118);
+            crFace = RGB(63, 58, 55);
+            crEdge = RGB(109, 105, 103);
             bFill = TRUE;
         }
 

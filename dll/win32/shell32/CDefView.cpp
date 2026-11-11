@@ -1385,7 +1385,7 @@ void CDefView::DrawComputerItem(NMLVCUSTOMDRAW *pDraw)
             RECT usedRect = barRect;
             usedRect.right = usedRect.left + (INT)((usedBytes * (barRect.right - barRect.left)) / totalBytes.QuadPart);
             const BOOL lowSpace = freeBytes.QuadPart <= totalBytes.QuadPart / 10;
-            HBRUSH usedBrush = CreateSolidBrush(lowSpace ? RGB(203, 52, 52) : RGB(42, 130, 218));
+            HBRUSH usedBrush = CreateSolidBrush(lowSpace ? RGB(203, 52, 52) : RGB(218, 26, 24));
             FillRect(pDraw->nmcd.hdc, &usedRect, usedBrush);
             if (usedRect.right > barRect.left && usedRect.right < barRect.right)
             {
