@@ -5,7 +5,7 @@
 ## COPYRIGHT:   Copyright 2026 Ahmed ARIF <arif.ing@outlook.com>
 ##
 
-set(BOOTLOADER_TIMEOUT 3 CACHE STRING "Seconds the boot menu waits before starting the default entry")
+set(BOOTLOADER_TIMEOUT 0 CACHE STRING "Seconds the boot menu waits before starting the default entry (MadOS: 0, a key pressed during startup opens the menu)")
 option(BOOTLOADER_DISPLAY_MENU "Show the boot menu even with a single entry" ON)
 option(BOOTLOADER_KERNEL_DEBUG "Start the kernel with debug output on serial, screen and log file, and verbose loading; debug builds always keep the serial port" ON)
 set(BOOTLOADER_LOAD_OPTIONS "KDWATCHDOG=0" CACHE STRING "Extra kernel load options of the default entry")
