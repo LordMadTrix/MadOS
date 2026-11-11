@@ -19,18 +19,20 @@ static TCHAR DataCollectionKey[] = _T("SOFTWARE\\Microsoft\\Windows\\CurrentVers
 #define DIAGDATA_LEVEL_REQUIRED 1
 #define DIAGDATA_LEVEL_OPTIONAL 3
 
+/* MadOS: diagnostic data is off unless the user allowed it; a missing value
+ * means off, like in the DiagData service. */
 static DWORD
 ReadDiagnosticDataLevel(VOID)
 {
     HKEY hKey;
-    DWORD Level = DIAGDATA_LEVEL_REQUIRED;
+    DWORD Level = DIAGDATA_LEVEL_OFF;
     DWORD Type = 0;
     DWORD Size = sizeof(Level);
 
     if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, DataCollectionKey, 0, KEY_QUERY_VALUE, &hKey) == ERROR_SUCCESS)
     {
         if (RegQueryValueEx(hKey, _T("AllowTelemetry"), NULL, &Type, (LPBYTE)&Level, &Size) != ERROR_SUCCESS || Type != REG_DWORD)
-            Level = DIAGDATA_LEVEL_REQUIRED;
+            Level = DIAGDATA_LEVEL_OFF;
         RegCloseKey(hKey);
     }
     return Level;
@@ -56,17 +58,37 @@ ErrorReportingDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
     switch (uMsg)
     {
         case WM_INITDIALOG:
+        {
+            DWORD Level = ReadDiagnosticDataLevel();
+
+            /* MadOS: sending at all is the user's choice (IDC_SENDREQUIRED);
+             * the optional data can only be added on top of it. */
+            CheckDlgButton(hwndDlg, IDC_SENDREQUIRED,
+                           Level >= DIAGDATA_LEVEL_REQUIRED ? BST_CHECKED : BST_UNCHECKED);
             CheckDlgButton(hwndDlg, IDC_SENDOPTIONAL,
-                           ReadDiagnosticDataLevel() >= DIAGDATA_LEVEL_OPTIONAL ? BST_CHECKED : BST_UNCHECKED);
+                           Level >= DIAGDATA_LEVEL_OPTIONAL ? BST_CHECKED : BST_UNCHECKED);
+            EnableWindow(GetDlgItem(hwndDlg, IDC_SENDOPTIONAL), Level >= DIAGDATA_LEVEL_REQUIRED);
             return TRUE;
+        }
 
         case WM_COMMAND:
             switch (LOWORD(wParam))
             {
+                case IDC_SENDREQUIRED:
+                {
+                    BOOL Send = (IsDlgButtonChecked(hwndDlg, IDC_SENDREQUIRED) == BST_CHECKED);
+                    if (!Send)
+                        CheckDlgButton(hwndDlg, IDC_SENDOPTIONAL, BST_UNCHECKED);
+                    EnableWindow(GetDlgItem(hwndDlg, IDC_SENDOPTIONAL), Send);
+                    return TRUE;
+                }
+
                 case IDOK:
-                    if (IsDlgButtonChecked(hwndDlg, IDC_SENDOPTIONAL) == BST_CHECKED)
+                    if (IsDlgButtonChecked(hwndDlg, IDC_SENDREQUIRED) != BST_CHECKED)
+                        WriteDiagnosticDataLevel(DIAGDATA_LEVEL_OFF);
+                    else if (IsDlgButtonChecked(hwndDlg, IDC_SENDOPTIONAL) == BST_CHECKED)
                         WriteDiagnosticDataLevel(DIAGDATA_LEVEL_OPTIONAL);
-                    else if (ReadDiagnosticDataLevel() != DIAGDATA_LEVEL_OFF)
+                    else
                         WriteDiagnosticDataLevel(DIAGDATA_LEVEL_REQUIRED);
                     EndDialog(hwndDlg, IDOK);
                     return TRUE;
