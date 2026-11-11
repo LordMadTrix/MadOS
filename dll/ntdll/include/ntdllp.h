@@ -226,12 +226,37 @@ LdrpOwnsLoaderLock(VOID)
     return LdrpLoaderLock.OwningThread == NtCurrentTeb()->ClientId.UniqueThread;
 }
 
+/*
+ * A module is ready for the lock-free lookup paths (LdrLoadDll fast path,
+ * shared LdrGetDllHandleEx, procedure and forwarder lookups) only once its
+ * DLL_PROCESS_ATTACH has completed.
+ *
+ * LDRP_ENTRY_PROCESSED alone is not enough: LdrpRunInitializeRoutines sets it
+ * on every module of a load batch *before* calling their entry points, so a
+ * concurrent thread could obtain a DLL whose DllMain has not run yet. This was
+ * seen as a crash in apphelp (NULL private heap) when several umpnpmgr device
+ * install threads started processes at the same time. Modules that are not
+ * ready yet fall back to the paths that take the loader lock, which waits for
+ * the initialization to finish.
+ */
 FORCEINLINE
 BOOLEAN
 LdrpIsModuleReady(
     _In_ PLDR_DATA_TABLE_ENTRY LdrEntry)
 {
-    return (ReadAcquire((volatile LONG *)&LdrEntry->Flags) & LDRP_ENTRY_PROCESSED) != 0;
+    ULONG Flags = (ULONG)ReadAcquire((volatile LONG *)&LdrEntry->Flags);
+
+    if (!(Flags & LDRP_ENTRY_PROCESSED))
+        return FALSE;
+
+    /* DLLs with an entry point are ready once DLL_PROCESS_ATTACH returned */
+    if ((Flags & LDRP_IMAGE_DLL) && LdrEntry->EntryPoint &&
+        !(Flags & LDRP_PROCESS_ATTACH_CALLED))
+    {
+        return FALSE;
+    }
+
+    return TRUE;
 }
 
 NTSTATUS NTAPI

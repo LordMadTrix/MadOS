@@ -1081,9 +1081,11 @@ LdrpRunInitializeRoutines(IN PCONTEXT Context OPTIONAL)
             /* Save the Current DLL Initializer */
             LdrpCurrentDllInitializer = OldInitializer;
 
-            /* Mark the entry as processed */
+            /* Mark the entry as processed. Interlocked (full barrier): the
+             * lock-free lookup paths read this flag (LdrpIsModuleReady) and
+             * must also see everything DllMain initialized. */
             if (DllInitCompleted)
-                LdrEntry->Flags |= LDRP_PROCESS_ATTACH_CALLED;
+                InterlockedOr((PLONG)&LdrEntry->Flags, LDRP_PROCESS_ATTACH_CALLED);
 
             /* Fail if DLL init failed */
             if (!DllStatus)
