@@ -27,8 +27,8 @@ extern "C" {
 #define LOGONUI_MAX_USERS       6
 #define LOGONUI_MAX_OPTIONS     4
 #define LOGONUI_TEXT            256
-#define LOGONUI_ACCENT          RGB(0, 103, 192)
-#define LOGONUI_ACCENT_HOT      RGB(0, 120, 215)
+#define LOGONUI_ACCENT          RGB(192, 1, 0)
+#define LOGONUI_ACCENT_HOT      RGB(215, 0, 0)
 #define LOGONUI_PASSWORD_CHAR   0x2022
 #define LOGONUI_CUE_PROP        L"LiberNTLogonCue"
 #define LOGONUI_COVER_CLASS     L"LiberNTLogonCover"

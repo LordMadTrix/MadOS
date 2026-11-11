@@ -209,7 +209,7 @@ CDrvDefExt::PaintStaticControls(HWND hwndDlg, LPDRAWITEMSTRUCT pDrawItem)
 
     if (pDrawItem->CtlID == 14013)
     {
-        hBrush = CreateSolidBrush(RGB(38, 160, 218));
+        hBrush = CreateSolidBrush(RGB(218, 20, 23));
         if (hBrush)
         {
             FillRect(pDrawItem->hDC, &pDrawItem->rcItem, hBrush);
@@ -227,7 +227,7 @@ CDrvDefExt::PaintStaticControls(HWND hwndDlg, LPDRAWITEMSTRUCT pDrawItem)
     }
     else if (pDrawItem->CtlID == 14015)
     {
-        const COLORREF crUsed = RGB(38, 160, 218), crFree = RGB(176, 176, 176);
+        const COLORREF crUsed = RGB(218, 20, 23), crFree = RGB(176, 176, 176);
         const INT nScale = 4, nDepth = 10;
         RECT rc = pDrawItem->rcItem;
         INT cx = rc.right - rc.left, cy = rc.bottom - rc.top;
