@@ -256,6 +256,16 @@ def wallpaper():
           "hivedef.inf : MadOS.png est le fond d'ecran par defaut")
 
 
+def locale():
+    print("Francais des le premier ecran")
+    hive = (TREE / "boot/bootdata/hivesys.inf").read_text(encoding="utf-8", errors="replace")
+    check('Language","Default",0x00000000,"040C"' in hive and 'Language","InstallLanguage",0x00000000,"040C"' in hive,
+          "hivesys.inf : langue du systeme = francais (040C)")
+    bad = [rel for rel in ("boot/bootdata/preinstall.inf", "boot/bootdata/livecd.inf")
+           if '"Keyboard Layout\\Preload","1",0x00000000,"0000040C"' not in (TREE / rel).read_text(encoding="utf-8", errors="replace")]
+    check(not bad, f"disque preinstalle et CD autonome : clavier AZERTY par defaut {bad if bad else ''}")
+
+
 def welcome():
     print("Bienvenue dans MadOS")
     import configparser
@@ -276,7 +286,7 @@ def welcome():
 
 
 def main():
-    theme(); boot(); ui(); shell(); names(); bootui(); telemetry(); wallpaper(); welcome()
+    theme(); boot(); ui(); shell(); names(); bootui(); telemetry(); wallpaper(); locale(); welcome()
     print(f"\n{'Tout est bon.' if not problems else str(len(problems)) + ' probleme(s).'}")
     return 1 if problems else 0
 
