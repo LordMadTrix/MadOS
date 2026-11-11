@@ -1490,7 +1490,7 @@ OslUndoInstall(
 
     FwPrint(L"INSTALL: the update did not finish; restoring the %lu files it changed.\r\n", Install->Backups.Count);
     Install->Stage = "rollback";
-    Install->Activity = L"Restoring the previous LiberNT";
+    Install->Activity = L"Restoring the previous MadOS";
     Install->TotalBytes = Install->Backups.Count;
     OslRestoreFiles(Install);
 
@@ -1695,7 +1695,7 @@ OslVerifyImage(
         if (Percent != Shown)
         {
             Shown = Percent;
-            FwPrint(L"\rChecking the LiberNT update... %lu%%", Percent);
+            FwPrint(L"\rChecking the MadOS update... %lu%%", Percent);
         }
     }
     BlSha256Final(&Context, Digest);
@@ -1907,7 +1907,7 @@ OslInstallImage(
     if (Name)
         RtlStringCbCopyNA(Install->StageRoot, sizeof(Install->StageRoot), ImagePath, Name + 1 - ImagePath);
     Install->Percent = MAXULONG;
-    Install->Activity = L"Installing LiberNT";
+    Install->Activity = L"Installing MadOS";
     Install->Buffer = FwAllocatePages(OSL_INSTALL_CHUNK);
 
     Status = NtfsBlMount(OsDevice);

@@ -230,19 +230,19 @@ Severity=Warning
 Facility=System
 SymbolicName=EVENT_EventLogProductInfo
 Language=English
-LiberNT %1 %2 %3 %4.
+MadOS %1 %2 %3 %4.
 .
 Language=Russian
-LiberNT %1 %2 %3 %4.
+MadOS %1 %2 %3 %4.
 .
 Language=French
-LiberNT %1 %2 %3 %4.
+MadOS %1 %2 %3 %4.
 .
 Language=Polish
-LiberNT %1 %2 %3 %4.
+MadOS %1 %2 %3 %4.
 .
 Language=Romanian
-LiberNT %1 %2 %3 %4.
+MadOS %1 %2 %3 %4.
 .
 
 MessageId=6010
@@ -860,19 +860,19 @@ Severity=Error
 Facility=System
 SymbolicName=EVENT_RUNNING_LASTKNOWNGOOD
 Language=English
-LiberNT could not be started as configured.  A previous working configuration was used instead.
+MadOS could not be started as configured.  A previous working configuration was used instead.
 .
 Language=Russian
-LiberNT could not be started as configured.  A previous working configuration was used instead.
+MadOS could not be started as configured.  A previous working configuration was used instead.
 .
 Language=French
-LiberNT n'a pas pu démarrer tel que configuré. Une précédente configuration fonctionnelle a été utilisé à la place.
+MadOS n'a pas pu démarrer tel que configuré. Une précédente configuration fonctionnelle a été utilisé à la place.
 .
 Language=Polish
-Nie można uruchomić systemu LiberNT zgodnie z aktualną konfiguracją. Zamiast niej użyto poprzedniej działającej konfiguracji.
+Nie można uruchomić systemu MadOS zgodnie z aktualną konfiguracją. Zamiast niej użyto poprzedniej działającej konfiguracji.
 .
 Language=Romanian
-LiberNT nu a putut fi pornit după configurație. În locul ei, a fost folosită o configurație funcțională anterioară.
+MadOS nu a putut fi pornit după configurație. În locul ei, a fost folosită o configurație funcțională anterioară.
 .
 
 MessageId=7028
