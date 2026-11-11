@@ -56,6 +56,23 @@ def touch_rc():
             print(f"  (absent) {rel}")
 
 
+def report_divergence():
+    """Signale les fichiers que le kit a fait diverger du dernier commit.
+    Sur une branche a jour, la liste doit etre vide ; sinon, soit le kit a
+    change (normal, a commiter), soit le fichier contenait des modifications
+    manuelles que le kit vient d'ecraser (a restaurer, et a declarer dans
+    make_names.HAND_MANAGED)."""
+    import subprocess
+    out = subprocess.run(["git", "-C", str(TREE), "status", "--porcelain", "--untracked-files=no"],
+                         capture_output=True, text=True).stdout.splitlines()
+    changed = [l[3:] for l in out if not l[3:].startswith("media/mados/")]
+    if changed:
+        print(f"\nAttention : {len(changed)} fichier(s) different(s) du dernier commit apres le kit :")
+        for rel in changed[:10]:
+            print(f"  {rel}")
+        print("  -> kit modifie (a commiter) ou modifications manuelles ecrasees (git checkout -- <fichier>).")
+
+
 def main():
     make_theme.main()
     make_wallpaper.main()
@@ -68,6 +85,7 @@ def main():
     print("\nVerification :")
     if verify_mados.main() != 0:
         sys.exit(1)
+    report_divergence()
     print("MadOS applique. Recompiler : cd output-Clang-amd64-debug && ninja liberntvhd")
 
 
