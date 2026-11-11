@@ -1,9 +1,9 @@
-set(DIAGDATA_CHANNEL "dev" CACHE STRING "Channel recorded in the diagnostic data reports, empty for the builds published to users")
-if(DIAGDATA_CHANNEL)
-    set(DIAGDATA_OPTIONAL_DEFAULT "HKLM,\"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection\",\"AllowTelemetry\",0x00010001,0x00000003")
-else()
-    set(DIAGDATA_OPTIONAL_DEFAULT "")
-endif()
+# MadOS: reports are labelled "mados" so the LiberNT project can tell them
+# apart, and the build never turns the optional data on: diagnostic data stays
+# off until the user allows it (AllowTelemetry = 0 in hivesft.inf, changed
+# from the System control panel).
+set(DIAGDATA_CHANNEL "mados" CACHE STRING "Channel recorded in the diagnostic data reports, empty for the builds published to users")
+set(DIAGDATA_OPTIONAL_DEFAULT "")
 configure_file(diagdata_channel.inf.in ${CMAKE_CURRENT_BINARY_DIR}/diagdata_channel.inf @ONLY)
 
 add_executable(diagdata diagdata.c diagdata.rc)

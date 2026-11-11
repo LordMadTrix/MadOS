@@ -21,6 +21,7 @@ import make_bootui  # noqa: E402
 import make_logos  # noqa: E402
 import make_names  # noqa: E402
 import make_shell  # noqa: E402
+import make_telemetry  # noqa: E402
 import make_theme  # noqa: E402
 import make_wallpaper  # noqa: E402
 import verify_mados  # noqa: E402
@@ -80,6 +81,7 @@ def main():
     make_logos.main()
     make_shell.main()
     make_names.main()
+    make_telemetry.main()        # apres make_names : modifie ses fichiers
     make_bootui.main()
     touch_rc()
     print("\nVerification :")

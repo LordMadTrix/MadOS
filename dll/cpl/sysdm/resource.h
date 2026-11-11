@@ -105,6 +105,7 @@
 #define IDD_ERRORREPORTING   1600
 #define IDC_SENDOPTIONAL     1601
 #define IDC_OPTIONALINFO     1602
+#define IDC_SENDREQUIRED     1603
 
 /* System settings */
 #define IDD_SYSSETTINGS         800
