@@ -128,6 +128,29 @@ def main():
                             font=font(10, bold=False), fill=MUTED + (255,))
     save_bmp24(tt, R("base/setup/welcome/res/title.bmp"))
 
+    # Fenetre "A propos" (ShellAbout) : banniere 413x72 + trait 413x5 (shell32)
+    W, H = 413, 72
+    ban = Image.new("RGBA", (W, H), DESKTOP + (255,))
+    g = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    ImageDraw.Draw(g).ellipse([W * 0.55, -H * 0.8, W * 1.5, H * 1.6], fill=(185, 28, 28, 90))
+    ban.alpha_composite(g.filter(ImageFilter.GaussianBlur(28)))
+    lk = lockup_h(44, WHITE)
+    ban.alpha_composite(lk, ((W - lk.width) // 2, 6))
+    ImageDraw.Draw(ban).text((6, H - 13), "© 2026 MadOS · basé sur LiberNT · ReactOS © 1996-2026 ReactOS Team & Contributors",
+                             font=font(9, bold=False), fill=MUTED + (255,))
+    save_bmp24(ban, R("dll/win32/shell32/res/bitmaps/reactos.bmp"))
+    line = Image.new("RGB", (W, 5))
+    for x in range(W):
+        t = x / (W - 1)
+        c = tuple(int(a + (b - a) * t) for a, b in zip((127, 29, 29), (249, 115, 22)))
+        for y in range(5):
+            line.putpixel((x, y), c)
+    save_bmp24(line, R("dll/win32/shell32/res/bitmaps/line.bmp"))
+
+    # Icone systeme IDI_WINLOGO (user32) : fenetre "A propos", barre des taches...
+    mark(256, glow=False).save(R("subsystems/win/win32k/user/user32/resources/oic_reactos.ico"), format="ICO",
+                              sizes=[(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (256, 256)])
+
     # Apercus
     boot.convert("RGB").save(out / "preview_boot_vga.png")
     prev = Image.new("RGBA", (652, 120), (0, 0, 0, 255)); prev.alpha_composite(gop)

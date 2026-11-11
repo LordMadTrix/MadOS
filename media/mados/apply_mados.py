@@ -21,6 +21,7 @@ import make_bootui  # noqa: E402
 import make_logos  # noqa: E402
 import make_names  # noqa: E402
 import make_shell  # noqa: E402
+import make_sounds  # noqa: E402
 import make_telemetry  # noqa: E402
 import make_welcome  # noqa: E402
 import make_theme  # noqa: E402
@@ -35,6 +36,8 @@ RC_TO_TOUCH = [
     "base/shell/explorer/explorer.rc",
     "base/setup/libernt/libernt.rc",
     "base/setup/welcome/welcome.rc",
+    "dll/win32/shell32/shell32.rc",
+    "subsystems/win/win32k/user/user32/user32.rc",
 ]
 
 
@@ -80,6 +83,7 @@ def main():
     make_wallpaper.main()
     set_default_wallpaper()
     make_logos.main()
+    make_sounds.main()
     make_shell.main()
     make_names.main()
     make_telemetry.main()        # apres make_names : modifie ses fichiers

@@ -918,7 +918,7 @@ add_custom_target(preinstall_partition
         ${_preinstall_system_partition_sectors}
         ${_preinstall_system_partition_start}
         ${_preinstall_ntfs_sectors_per_cluster}
-        LiberNT
+        MadOS
     COMMAND native-ntfsimg
         --addfiles
         ${_preinstall_system_partition_file}
@@ -968,7 +968,7 @@ add_custom_target(liberntramimg
         -DHIDDEN_SECTORS=${_preinstall_system_partition_start}
         -DSECTORS_PER_CLUSTER=${_preinstall_ntfs_sectors_per_cluster}
         -DFREE_MB=${LIBERNT_RAM_IMAGE_FREE_MB}
-        -DLABEL=LiberNT
+        -DLABEL=MadOS
         -P ${REACTOS_SOURCE_DIR}/sdk/cmake/format_ram_partition.cmake
     COMMAND native-ntfsimg
         --addfiles
@@ -1055,7 +1055,7 @@ add_custom_target(liberntvhd
         ${_preinstall_vhd_partition_sectors}
         ${_preinstall_system_partition_start}
         ${_preinstall_ntfs_sectors_per_cluster}
-        LiberNT
+        MadOS
     COMMAND native-ntfsimg
         --addfiles
         ${_preinstall_vhd_partition_file}
