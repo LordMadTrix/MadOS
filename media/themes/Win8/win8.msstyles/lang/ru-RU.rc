@@ -2,12 +2,12 @@ LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
 
 STRINGTABLE
 {
-1000, "Light"
+1000, "Ember"
 }
 
 STRINGTABLE
 {
-2000, "LiberNT по умолчанию Light"
+2000, "MadOS Ember"
 }
 
 STRINGTABLE
@@ -26,12 +26,12 @@ STRINGTABLE
 
 STRINGTABLE
 {
-5000, "LiberNT по умолчанию"
+5000, "MadOS"
 5001, "Визуальный Стиль"
 5002, "Команда ReactOS"
 5003, "Foxlet, основан на Lautus"
 5004, "Выпущен под GNU/GPL 2.0, 2019"
 5005, "https://reactos.org/"
 5006, "1.0"
-5007, "Визуальный стиль для LiberNT"
+5007, "MadOS Ember visual style (based on the LiberNT theme)"
 }
