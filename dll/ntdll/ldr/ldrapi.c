@@ -645,16 +645,20 @@ LdrFindEntryForAddress(
 }
 
 /*
- * @implemented
+ * AllowShared: TRUE lets an unchanged-refcount lookup use the shared (lock-free
+ * with respect to the loader lock) path. That path returns STATUS_RETRY when
+ * it finds a module whose initialization has not completed yet; the caller
+ * then retries with the loader lock, which waits for that initialization.
  */
+static
 NTSTATUS
-NTAPI
-LdrGetDllHandleEx(
+LdrpGetDllHandleEx(
     _In_ ULONG Flags,
     _In_opt_ PWSTR DllPath,
     _In_opt_ PULONG DllCharacteristics,
     _In_ PUNICODE_STRING DllName,
-    _Out_opt_ PVOID *DllHandle)
+    _Out_opt_ PVOID *DllHandle,
+    _In_ BOOLEAN AllowShared)
 {
     NTSTATUS Status;
     PLDR_DATA_TABLE_ENTRY LdrEntry;
@@ -690,7 +694,7 @@ LdrGetDllHandleEx(
         goto Quickie;
     }
 
-    Shared = !LdrpInLdrInit && (Flags & LDR_GET_DLL_HANDLE_EX_UNCHANGED_REFCOUNT) &&
+    Shared = AllowShared && !LdrpInLdrInit && (Flags & LDR_GET_DLL_HANDLE_EX_UNCHANGED_REFCOUNT) &&
              !ShowSnaps && !LdrpOwnsLoaderLock();
 
     /* If not initializing */
@@ -866,8 +870,9 @@ DontCompare:
 Quickie:
     if (SharedHeld && LdrEntry && !LdrpIsModuleReady(LdrEntry))
     {
+        /* Still initializing in another thread: retry under the loader lock */
         LdrEntry = NULL;
-        Status = STATUS_DLL_NOT_FOUND;
+        Status = STATUS_RETRY;
     }
 
     /* The success path must have a valid loader entry */
@@ -926,6 +931,27 @@ Quickie:
     }
 
     /* Return */
+    return Status;
+}
+
+/*
+ * @implemented
+ */
+NTSTATUS
+NTAPI
+LdrGetDllHandleEx(
+    _In_ ULONG Flags,
+    _In_opt_ PWSTR DllPath,
+    _In_opt_ PULONG DllCharacteristics,
+    _In_ PUNICODE_STRING DllName,
+    _Out_opt_ PVOID *DllHandle)
+{
+    NTSTATUS Status;
+
+    Status = LdrpGetDllHandleEx(Flags, DllPath, DllCharacteristics, DllName, DllHandle, TRUE);
+    if (Status == STATUS_RETRY)
+        Status = LdrpGetDllHandleEx(Flags, DllPath, DllCharacteristics, DllName, DllHandle, FALSE);
+
     return Status;
 }
 
