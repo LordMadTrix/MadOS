@@ -577,7 +577,7 @@ static VOID GetSystemVersion(HWND hwnd)
 {
     HWND hRosVersion;
     SIZE_T lenStr, lenVersion;
-    PCWSTR pwszVersion = L" " TEXT(KERNEL_VERSION_RC);
+    PCWSTR pwszVersion = L" " TEXT(MADOS_VERSION_FULL_STR) L" (LiberNT " TEXT(KERNEL_VERSION_STR) L")";
     PWSTR pwszStr;
 
     lenVersion = wcslen(pwszVersion);
