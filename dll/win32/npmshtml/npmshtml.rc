@@ -31,7 +31,7 @@ BEGIN
             VALUE "InternalName",       "npmshtml"
             VALUE "MIMEType",           "application/x-oleobject"
             VALUE "OriginalFilename",   "npmshtml.dll"
-            VALUE "ProductName",        "LiberNT Operating System"
+            VALUE "ProductName",        "MadOS Operating System"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

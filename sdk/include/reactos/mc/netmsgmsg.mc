@@ -663,7 +663,7 @@ Language=English
 An internal error occurred.
 .
 Language=Polish
-Wystąpił wewnętrzny błąd systemu LiberNT.
+Wystąpił wewnętrzny błąd systemu MadOS.
 .
 Language=Romanian
 An internal error occurred.
@@ -8841,7 +8841,7 @@ Language=English
 This version of the operating system cannot be joined to a domain.
 .
 Language=Polish
-Tej wersji systemu LiberNT nie można przyłączyć do domeny.
+Tej wersji systemu MadOS nie można przyłączyć do domeny.
 .
 Language=Romanian
 This version of the operating system cannot be joined to a domain.
@@ -13856,7 +13856,7 @@ administrator.
 .
 Language=Polish
 Nie powiodło się uwierzytelnienie tego komputera przez %2 - kontroler domeny\n
-LiberNT dla domeny %1, i dlatego ten komputer może odmawiać żądaniom logowania.\n
+MadOS dla domeny %1, i dlatego ten komputer może odmawiać żądaniom logowania.\n
 Ta niezdolność do uwierzytelnienia może być spowodowana używaniem tej samej\n
 nazwy przez inny komputer znajdujący się w tej samej sieci lub nierozpoznaniem\n
 hasła dla konta tego komputera. Jeśli ten komunikat będzie się powtarzał\n
@@ -16141,7 +16141,7 @@ Language=English
 More data is available than can be returned by the operating\nsystem.
 .
 Language=Polish
-Dostępnych jest więcej danych niż może zwrócić system LiberNT.
+Dostępnych jest więcej danych niż może zwrócić system MadOS.
 .
 Language=Romanian
 More data is available than can be returned by the operating\nsystem.
@@ -16199,7 +16199,7 @@ Language=English
 The command can be used only on a Domain Controller.
 .
 Language=Polish
-Tego polecenia można używać tylko na kontrolerze domeny systemu LiberNT.
+Tego polecenia można używać tylko na kontrolerze domeny systemu MadOS.
 .
 Language=Romanian
 The command can be used only on a Domain Controller.
@@ -16228,7 +16228,7 @@ Language=English
 This command cannot be used on a Domain Controller.
 .
 Language=Polish
-Tego polecenia nie można używać na kontrolerze domeny systemu LiberNT.
+Tego polecenia nie można używać na kontrolerze domeny systemu MadOS.
 .
 Language=Romanian
 This command cannot be used on a Domain Controller.
@@ -17360,7 +17360,7 @@ Language=English
 The Workstation service is already running. The operating system will ignore command options for the workstation.
 .
 Language=Polish
-Usługa Stacja robocza jest już uruchomiona.  System LiberNT będzie ignorował opcje poleceń dla stacji roboczej.
+Usługa Stacja robocza jest już uruchomiona.  System MadOS będzie ignorował opcje poleceń dla stacji roboczej.
 .
 Language=Romanian
 The Workstation service is already running. The operating system will ignore command options for the workstation.
@@ -19821,7 +19821,7 @@ Language=English
 %1 is not a valid Windows network message number.
 .
 Language=Polish
-%1 nie jest prawidłowym numerem komunikatu sieciowego systemu LiberNT.
+%1 nie jest prawidłowym numerem komunikatu sieciowego systemu MadOS.
 .
 Language=Romanian
 %1 is not a valid Windows network message number.
@@ -24941,28 +24941,28 @@ Severity=Success
 Facility=System
 SymbolicName=APPERR2_4454
 Language=English
-LiberNT root directory%0
+MadOS root directory%0
 .
 Language=Polish
-Katalog główny systemu LiberNT%0
+Katalog główny systemu MadOS%0
 .
 Language=Romanian
-LiberNT root directory%0
+MadOS root directory%0
 .
 Language=Russian
-LiberNT root directory%0
+MadOS root directory%0
 .
 Language=Spanish
-LiberNT root directory%0
+MadOS root directory%0
 .
 Language=Turkish
-LiberNT root directory%0
+MadOS root directory%0
 .
 Language=Chinese
-LiberNT root directory%0
+MadOS root directory%0
 .
 Language=Taiwanese
-LiberNT root directory%0
+MadOS root directory%0
 .
 
 MessageId=4455
@@ -25405,28 +25405,28 @@ Severity=Success
 Facility=System
 SymbolicName=APPERR2_4470
 Language=English
-LiberNT%0
+MadOS%0
 .
 Language=Polish
-LiberNT%0
+MadOS%0
 .
 Language=Romanian
-LiberNT%0
+MadOS%0
 .
 Language=Russian
-LiberNT%0
+MadOS%0
 .
 Language=Spanish
-LiberNT%0
+MadOS%0
 .
 Language=Turkish
-LiberNT%0
+MadOS%0
 .
 Language=Chinese
-LiberNT%0
+MadOS%0
 .
 Language=Taiwanese
-LiberNT%0
+MadOS%0
 .
 
 MessageId=4481
@@ -25579,28 +25579,28 @@ Severity=Success
 Facility=System
 SymbolicName=APPERR2_4486
 Language=English
-LiberNT%0
+MadOS%0
 .
 Language=Polish
-LiberNT%0
+MadOS%0
 .
 Language=Romanian
-LiberNT%0
+MadOS%0
 .
 Language=Russian
-LiberNT%0
+MadOS%0
 .
 Language=Spanish
-LiberNT%0
+MadOS%0
 .
 Language=Turkish
-LiberNT%0
+MadOS%0
 .
 Language=Chinese
-LiberNT%0
+MadOS%0
 .
 Language=Taiwanese
-LiberNT%0
+MadOS%0
 .
 
 MessageId=4487
@@ -25637,28 +25637,28 @@ Severity=Success
 Facility=System
 SymbolicName=APPERR2_4488
 Language=English
-LiberNT Server%0
+MadOS Server%0
 .
 Language=Polish
-Serwer LiberNT%0
+Serwer MadOS%0
 .
 Language=Romanian
-LiberNT Server%0
+MadOS Server%0
 .
 Language=Russian
-LiberNT Server%0
+MadOS Server%0
 .
 Language=Spanish
-LiberNT Server%0
+MadOS Server%0
 .
 Language=Turkish
-LiberNT Server%0
+MadOS Server%0
 .
 Language=Chinese
-LiberNT Server%0
+MadOS Server%0
 .
 Language=Taiwanese
-LiberNT Server%0
+MadOS Server%0
 .
 
 MessageId=4489
@@ -28226,28 +28226,28 @@ Severity=Success
 Facility=System
 SymbolicName=APPERR2_4696
 Language=English
-LiberNT Server
+MadOS Server
 .
 Language=Polish
-LiberNT Server
+MadOS Server
 .
 Language=Romanian
-LiberNT Server
+MadOS Server
 .
 Language=Russian
-LiberNT Server
+MadOS Server
 .
 Language=Spanish
-LiberNT Server
+MadOS Server
 .
 Language=Turkish
-LiberNT Server
+MadOS Server
 .
 Language=Chinese
-LiberNT Server
+MadOS Server
 .
 Language=Taiwanese
-LiberNT Server
+MadOS Server
 .
 
 MessageId=4697
@@ -28255,28 +28255,28 @@ Severity=Success
 Facility=System
 SymbolicName=APPERR2_4697
 Language=English
-LiberNT Workstation
+MadOS Workstation
 .
 Language=Polish
-LiberNT Workstation
+MadOS Workstation
 .
 Language=Romanian
-LiberNT Workstation
+MadOS Workstation
 .
 Language=Russian
-LiberNT Workstation
+MadOS Workstation
 .
 Language=Spanish
-LiberNT Workstation
+MadOS Workstation
 .
 Language=Turkish
-LiberNT Workstation
+MadOS Workstation
 .
 Language=Chinese
-LiberNT Workstation
+MadOS Workstation
 .
 Language=Taiwanese
-LiberNT Workstation
+MadOS Workstation
 .
 
 MessageId=4698
@@ -38789,7 +38789,7 @@ The operating system could not be started as configured.\n
 A previous working configuration was used instead.
 .
 Language=Polish
-Nie można uruchomić systemu LiberNT zgodnie z aktualną konfiguracją.\n
+Nie można uruchomić systemu MadOS zgodnie z aktualną konfiguracją.\n
 Zamiast niej użyto poprzedniej działającej konfiguracji.
 .
 Language=Romanian
@@ -42254,7 +42254,7 @@ have caused this failure, run DCDiag.exe. You can find this program on the Liber
 Server installation CD in Support\\Tools\\support.cab. To learn more about\n
 DCDiag.exe, see Help and Support Center. To initiate registration of the DNS records by\n
 this domain controller, run 'nltest.exe /dsregdns' from the command prompt on the domain\n
-controller or restart Net Logon service. Nltest.exe is available in the LiberNT Server\n
+controller or restart Net Logon service. Nltest.exe is available in the MadOS Server\n
 Resource Kit CD. %n  Or, you can manually add this record to DNS, but it is not\n
 recommended.\n\n
 %n%nADDITIONAL DATA\n
@@ -42270,12 +42270,12 @@ mogli lokalizować ten kontroler domeny.\n\n
 %n%nAKCJA UŻYTKOWNIKA\n\n
 %nOkreśl przyczynę tego błędu, rozwiąż problem i zainicjuj rejestrację rekordów DNS\n
 przez kontroler domeny. Aby określić przyczynę tego błędu, uruchom program\n
-DCDiag.exe. Można go znaleźć na dysku instalacyjnym CD systemu LiberNT Server\n
+DCDiag.exe. Można go znaleźć na dysku instalacyjnym CD systemu MadOS Server\n
 w pliku Support\\Tools\\support.cab. Aby dowiedzieć się więcej o programie\n
 DCDiag.exe, zajrzyj do Centrum pomocy i obsługi technicznej. Aby zainicjować\n
 rejestrację rekordów DNS przez ten kontroler domeny, uruchom polecenie\n
 'nltest.exe /dsregdns' z wiersza polecenia na kontrolerze domeny lub uruchom ponownie\n
-usługę Net Logon. Program Nltest.exe jest dostępny na dysku CD Microsoft LiberNT Server\n
+usługę Net Logon. Program Nltest.exe jest dostępny na dysku CD Microsoft MadOS Server\n
 Resource Kit. %n  Lub można ręcznie dodać ten rekord do systemu DNS, choć nie jest to\n
 zalecane.\n\n
 %n%nDANE DODATKOWE\n
@@ -42295,7 +42295,7 @@ have caused this failure, run DCDiag.exe. You can find this program on the Liber
 Server installation CD in Support\\Tools\\support.cab. To learn more about\n
 DCDiag.exe, see Help and Support Center. To initiate registration of the DNS records by\n
 this domain controller, run 'nltest.exe /dsregdns' from the command prompt on the domain\n
-controller or restart Net Logon service. Nltest.exe is available in the LiberNT Server\n
+controller or restart Net Logon service. Nltest.exe is available in the MadOS Server\n
 Resource Kit CD. %n  Or, you can manually add this record to DNS, but it is not\n
 recommended.\n\n
 %n%nADDITIONAL DATA\n
@@ -42315,7 +42315,7 @@ have caused this failure, run DCDiag.exe. You can find this program on the Liber
 Server installation CD in Support\\Tools\\support.cab. To learn more about\n
 DCDiag.exe, see Help and Support Center. To initiate registration of the DNS records by\n
 this domain controller, run 'nltest.exe /dsregdns' from the command prompt on the domain\n
-controller or restart Net Logon service. Nltest.exe is available in the LiberNT Server\n
+controller or restart Net Logon service. Nltest.exe is available in the MadOS Server\n
 Resource Kit CD. %n  Or, you can manually add this record to DNS, but it is not\n
 recommended.\n\n
 %n%nADDITIONAL DATA\n
@@ -42335,7 +42335,7 @@ have caused this failure, run DCDiag.exe. You can find this program on the Liber
 Server installation CD in Support\\Tools\\support.cab. To learn more about\n
 DCDiag.exe, see Help and Support Center. To initiate registration of the DNS records by\n
 this domain controller, run 'nltest.exe /dsregdns' from the command prompt on the domain\n
-controller or restart Net Logon service. Nltest.exe is available in the LiberNT Server\n
+controller or restart Net Logon service. Nltest.exe is available in the MadOS Server\n
 Resource Kit CD. %n  Or, you can manually add this record to DNS, but it is not\n
 recommended.\n\n
 %n%nADDITIONAL DATA\n
@@ -42355,7 +42355,7 @@ have caused this failure, run DCDiag.exe. You can find this program on the Liber
 Server installation CD in Support\\Tools\\support.cab. To learn more about\n
 DCDiag.exe, see Help and Support Center. To initiate registration of the DNS records by\n
 this domain controller, run 'nltest.exe /dsregdns' from the command prompt on the domain\n
-controller or restart Net Logon service. Nltest.exe is available in the LiberNT Server\n
+controller or restart Net Logon service. Nltest.exe is available in the MadOS Server\n
 Resource Kit CD. %n  Or, you can manually add this record to DNS, but it is not\n
 recommended.\n\n
 %n%nADDITIONAL DATA\n
@@ -42375,7 +42375,7 @@ have caused this failure, run DCDiag.exe. You can find this program on the Liber
 Server installation CD in Support\\Tools\\support.cab. To learn more about\n
 DCDiag.exe, see Help and Support Center. To initiate registration of the DNS records by\n
 this domain controller, run 'nltest.exe /dsregdns' from the command prompt on the domain\n
-controller or restart Net Logon service. Nltest.exe is available in the LiberNT Server\n
+controller or restart Net Logon service. Nltest.exe is available in the MadOS Server\n
 Resource Kit CD. %n  Or, you can manually add this record to DNS, but it is not\n
 recommended.\n\n
 %n%nADDITIONAL DATA\n
@@ -42395,7 +42395,7 @@ have caused this failure, run DCDiag.exe. You can find this program on the Liber
 Server installation CD in Support\\Tools\\support.cab. To learn more about\n
 DCDiag.exe, see Help and Support Center. To initiate registration of the DNS records by\n
 this domain controller, run 'nltest.exe /dsregdns' from the command prompt on the domain\n
-controller or restart Net Logon service. Nltest.exe is available in the LiberNT Server\n
+controller or restart Net Logon service. Nltest.exe is available in the MadOS Server\n
 Resource Kit CD. %n  Or, you can manually add this record to DNS, but it is not\n
 recommended.\n\n
 %n%nADDITIONAL DATA\n
@@ -42730,7 +42730,7 @@ domain) or as an LDAP server (if the specified domain is an application partitio
 %n%nUSER ACTION\n\n
 %nFix possible misconfiguration(s) specified above and initiate registration or deletion of\n
 the DNS records by running 'nltest.exe /dsregdns' from the command prompt or by restarting\n
-Net Logon service. Nltest.exe is available in the LiberNT Server Resource Kit CD.
+Net Logon service. Nltest.exe is available in the MadOS Server Resource Kit CD.
 .
 Language=Polish
 Nie można dynamicznie zarejestrować lub usunąć co najmniej jednego rekordu DNS\n
@@ -42746,7 +42746,7 @@ serwera jako kontrolera domeny (jeżeli określona domena jest domeną usługi A
 %n%nAKCJA UŻYTKOWNIKA\n\n
 %nPopraw możliwe błędy konfiguracji określone powyżej i zainicjuj rejestrację lub usuwanie\n
 rekordów DNS, uruchamiając polecenie 'nltest.exe /dsregdns' z wiersza polecenia lub uruchamiając ponownie\n
-usługę Net Logon. Program Nltest.exe jest dostępny na dysku CD LiberNT Server Resource Kit.
+usługę Net Logon. Program Nltest.exe jest dostępny na dysku CD MadOS Server Resource Kit.
 .
 Language=Romanian
 Dynamic registration or deletion of one or more DNS records associated with DNS\n
@@ -42762,7 +42762,7 @@ domain) or as an LDAP server (if the specified domain is an application partitio
 %n%nUSER ACTION\n\n
 %nFix possible misconfiguration(s) specified above and initiate registration or deletion of\n
 the DNS records by running 'nltest.exe /dsregdns' from the command prompt or by restarting\n
-Net Logon service. Nltest.exe is available in the LiberNT Server Resource Kit CD.
+Net Logon service. Nltest.exe is available in the MadOS Server Resource Kit CD.
 .
 Language=Russian
 Dynamic registration or deletion of one or more DNS records associated with DNS\n
@@ -42778,7 +42778,7 @@ domain) or as an LDAP server (if the specified domain is an application partitio
 %n%nUSER ACTION\n\n
 %nFix possible misconfiguration(s) specified above and initiate registration or deletion of\n
 the DNS records by running 'nltest.exe /dsregdns' from the command prompt or by restarting\n
-Net Logon service. Nltest.exe is available in the LiberNT Server Resource Kit CD.
+Net Logon service. Nltest.exe is available in the MadOS Server Resource Kit CD.
 .
 Language=Spanish
 Dynamic registration or deletion of one or more DNS records associated with DNS\n
@@ -42794,7 +42794,7 @@ domain) or as an LDAP server (if the specified domain is an application partitio
 %n%nUSER ACTION\n\n
 %nFix possible misconfiguration(s) specified above and initiate registration or deletion of\n
 the DNS records by running 'nltest.exe /dsregdns' from the command prompt or by restarting\n
-Net Logon service. Nltest.exe is available in the LiberNT Server Resource Kit CD.
+Net Logon service. Nltest.exe is available in the MadOS Server Resource Kit CD.
 .
 Language=Turkish
 Dynamic registration or deletion of one or more DNS records associated with DNS\n
@@ -42810,7 +42810,7 @@ domain) or as an LDAP server (if the specified domain is an application partitio
 %n%nUSER ACTION\n\n
 %nFix possible misconfiguration(s) specified above and initiate registration or deletion of\n
 the DNS records by running 'nltest.exe /dsregdns' from the command prompt or by restarting\n
-Net Logon service. Nltest.exe is available in the LiberNT Server Resource Kit CD.
+Net Logon service. Nltest.exe is available in the MadOS Server Resource Kit CD.
 .
 Language=Chinese
 Dynamic registration or deletion of one or more DNS records associated with DNS\n
@@ -42826,7 +42826,7 @@ domain) or as an LDAP server (if the specified domain is an application partitio
 %n%nUSER ACTION\n\n
 %nFix possible misconfiguration(s) specified above and initiate registration or deletion of\n
 the DNS records by running 'nltest.exe /dsregdns' from the command prompt or by restarting\n
-Net Logon service. Nltest.exe is available in the LiberNT Server Resource Kit CD.
+Net Logon service. Nltest.exe is available in the MadOS Server Resource Kit CD.
 .
 Language=Taiwanese
 Dynamic registration or deletion of one or more DNS records associated with DNS\n
@@ -42842,7 +42842,7 @@ domain) or as an LDAP server (if the specified domain is an application partitio
 %n%nUSER ACTION\n\n
 %nFix possible misconfiguration(s) specified above and initiate registration or deletion of\n
 the DNS records by running 'nltest.exe /dsregdns' from the command prompt or by restarting\n
-Net Logon service. Nltest.exe is available in the LiberNT Server Resource Kit CD.
+Net Logon service. Nltest.exe is available in the MadOS Server Resource Kit CD.
 .
 
 MessageId=5782

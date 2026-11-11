@@ -344,8 +344,8 @@ END
 
 STRINGTABLE
 BEGIN
-    IDS_PARSE_ADDR_ERR_TITLE "LiberNT エクスプローラー"
-    IDS_PARSE_ADDR_ERR_TEXT "LiberNT エクスプローラーは '%1' を見つけられませんでした。スペルを確認してやり直して下さい。"
+    IDS_PARSE_ADDR_ERR_TITLE "MadOS エクスプローラー"
+    IDS_PARSE_ADDR_ERR_TEXT "MadOS エクスプローラーは '%1' を見つけられませんでした。スペルを確認してやり直して下さい。"
 END
 
 STRINGTABLE

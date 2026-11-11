@@ -129,6 +129,67 @@ def shell():
         check(im.size == (640, 640) and im.mode == "RGBA", f"bouton Demarrer {name} : 640x640 RGBA")
 
 
+def names():
+    print("Nom MadOS dans les textes affiches")
+    import subprocess
+    import make_names as mn
+    from mados_common import _upstream_ref
+    # 1. plus aucun texte affiche "LiberNT" hors attribution
+    left = []
+    for rel in mn.upstream_files("*.rc"):
+        text, _ = mn.decode((TREE / rel).read_bytes())
+        for lit in mn.RC_LITERAL.findall(text):
+            if mn.WORD.search(lit) and not mn.KEEP_MARKERS.search(lit):
+                left.append(f"{rel}: {lit[:60]}")
+    check(not left, f"ressources .rc : plus de texte affiche 'LiberNT' hors attribution ({len(left)} restants)"
+          + (f" ex. {left[0]}" if left else ""))
+    # 2. les identifiants internes ne bougent pas : dans chaque fichier texte
+    #    modifie, le nombre de LiberNT colles a un separateur reste identique
+    ident = re.compile(r"[\w\\/.:]LiberNT|LiberNT[\w\\/:]")
+    changed = subprocess.run(["git", "-C", str(TREE), "diff", "--name-only", _upstream_ref()],
+                             capture_output=True, text=True).stdout.split()
+    changed += [l[3:] for l in subprocess.run(["git", "-C", str(TREE), "status", "--porcelain"],
+                                              capture_output=True, text=True).stdout.splitlines()]
+    bad = []
+    for rel in sorted(set(changed)):
+        p = TREE / rel
+        # les noms de raccourcis .lnk sont renommes expres (controle 3 ci-dessous)
+        if p.suffix.lower() in (".bmp", ".png", ".jpg") or not p.is_file() or rel in mn.SHORTCUT_FILES:
+            continue
+        try:
+            before = len(ident.findall(mn.decode(git_original(p))[0]))
+        except subprocess.CalledProcessError:
+            continue                                  # fichier nouveau
+        if len(ident.findall(mn.decode(p.read_bytes())[0])) != before:
+            bad.append(rel)
+    check(not bad, f"identifiants internes intacts dans {len(set(changed))} fichiers modifies"
+          + (f" (differences : {bad[:3]})" if bad else ""))
+    # 3. raccourcis coherents
+    cm = (TREE / "boot/bootdata/CMakeLists.txt").read_text(errors="replace")
+    pre = (TREE / "boot/bootdata/preinstall.inf").read_text(errors="replace")
+    check('add_livecd_shortcut("Install MadOS"' in cm and '"Install MadOS.lnk"' in pre,
+          "raccourci 'Install MadOS' : meme nom a la creation et dans le menu Demarrer")
+    hive = (TREE / "boot/bootdata/hivesft.inf").read_text(errors="replace")
+    check('"ProductName",2,"MadOS"' in hive, "registre : ProductName = MadOS")
+
+
+def bootui():
+    print("Gestionnaires de demarrage")
+    import make_bootui as mb
+    from make_shell import is_bluish
+    for rel in mb.UIS:
+        text = (TREE / rel).read_text(encoding="utf-8", errors="replace")
+        left = [m.group(0) for line in text.splitlines()
+                if "0x" in line and ("BOOTUI_" in line or "BootUi" in line or "?" in line)
+                for m in mb.HEX.finditer(line)
+                if is_bluish(int(m.group(1), 16) >> 16, (int(m.group(1), 16) >> 8) & 255, int(m.group(1), 16) & 255)]
+        check(text.count('"MadOS"') == 2 and '"LiberNT"' not in text and not left,
+              f"{rel} : nom MadOS, plus de couleur bleue" + (f" (restants {left})" if left else ""))
+    for rel in mb.LOGOS:
+        data = (TREE / rel).read_bytes()
+        check(len(data) == 48 * 42 * 4 and data != git_original(TREE / rel), f"{rel} : logo MadOS 48x42 RGBA")
+
+
 def wallpaper():
     print("Fond d'ecran")
     p = TREE / "modules/wallpapers/MadOS.png"
@@ -140,7 +201,7 @@ def wallpaper():
 
 
 def main():
-    theme(); boot(); ui(); shell(); wallpaper()
+    theme(); boot(); ui(); shell(); names(); bootui(); wallpaper()
     print(f"\n{'Tout est bon.' if not problems else str(len(problems)) + ' probleme(s).'}")
     return 1 if problems else 0
 

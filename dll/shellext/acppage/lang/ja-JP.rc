@@ -38,5 +38,5 @@ STRINGTABLE
 BEGIN
     IDS_COMPAT_TITLE "互換性"
     IDS_FAILED_NETWORK "このプログラムはネットワークドライブにあるので互換性モードは設定できません。"
-    IDS_FAILED_PROTECTED "このプログラムは LiberNT の一部なので互換性モードは設定できません。"
+    IDS_FAILED_PROTECTED "このプログラムは MadOS の一部なので互換性モードは設定できません。"
 END

@@ -17,7 +17,9 @@ import time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from mados_common import TREE  # noqa: E402
+import make_bootui  # noqa: E402
 import make_logos  # noqa: E402
+import make_names  # noqa: E402
 import make_shell  # noqa: E402
 import make_theme  # noqa: E402
 import make_wallpaper  # noqa: E402
@@ -60,6 +62,8 @@ def main():
     set_default_wallpaper()
     make_logos.main()
     make_shell.main()
+    make_names.main()
+    make_bootui.main()
     touch_rc()
     print("\nVerification :")
     if verify_mados.main() != 0:
