@@ -1,0 +1,149 @@
+# MadOS : compilation Release amd64 (ISO d'installation + disque VHD).
+# - a chaque envoi sur main : verification du kit, compilation, fichiers
+#   telechargeables dans l'onglet Actions (14 jours) ;
+# - a chaque etiquette vX.Y.Z : idem, puis un BROUILLON de version avec
+#   l'ISO, le VHD et SHA256SUMS.txt, a relire et publier a la main.
+# Les tests de demarrage (VirtualBox) restent a faire sur un PC :
+# media/mados/tests/mados-test.ps1.
+name: MadOS
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # Commit de LiberNT (main-nt10) sur lequel MadOS est base : le verificateur
+  # compare les fichiers avec cette version. A mettre a jour apres chaque
+  # rebase sur une version plus recente de LiberNT.
+  MADOS_BASE: 903ecc0c7e80f738008dfea81aca788e1313f038
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    steps:
+    - name: Free disk space
+      run: |
+        sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL /usr/share/swift /usr/lib/jvm /usr/local/share/powershell /usr/local/share/chromium
+        sudo docker system prune --all --force
+        df -h /
+
+    - name: Source checkout
+      uses: actions/checkout@v6
+
+    - name: Install host build tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake ninja-build flex bison ccache wget xz-utils tar python3-mako python3-yaml python3-packaging python3-pil glslang-tools msitools
+
+    - name: Verify the MadOS kit
+      run: |
+        git fetch --depth=1 origin "$MADOS_BASE"
+        MADOS_UPSTREAM="$MADOS_BASE" python3 media/mados/verify_mados.py
+
+    - name: Compute RosBE bootstrap SHA
+      id: rosbe_spec
+      run: |
+        curl -fsSL https://raw.githubusercontent.com/LiberNT/libernt-build-toolchain/main/rosbe-unix-bootstrap.sh -o /tmp/rosbe-bootstrap.sh
+        echo "sha=$(sha1sum /tmp/rosbe-bootstrap.sh | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
+    - name: Cache RosBE
+      id: cache_rosbe
+      uses: actions/cache@v5
+      with:
+        path: ~/.local/opt/rosbe
+        key: rosbe-${{runner.os}}-${{steps.rosbe_spec.outputs.sha}}
+
+    - name: Install RosBE
+      if: ${{ steps.cache_rosbe.outputs.cache-hit != 'true' }}
+      run: sh /tmp/rosbe-bootstrap.sh
+
+    - name: Restore ccache
+      id: ccache_restore
+      uses: actions/cache/restore@v5
+      with:
+        path: ccache
+        key: ccache-mados-amd64-release-${{github.run_id}}-${{github.run_attempt}}
+        restore-keys: |
+          ccache-mados-amd64-release-
+
+    - name: Set ccache settings
+      run: |
+        echo "CCACHE_BASEDIR=${{github.workspace}}" >> $GITHUB_ENV
+        echo "CCACHE_DIR=${{github.workspace}}/ccache" >> $GITHUB_ENV
+        echo "CCACHE_MAXSIZE=2G" >> $GITHUB_ENV
+        echo "CCACHE_SLOPPINESS=time_macros" >> $GITHUB_ENV
+
+    - name: Configure
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: |
+        . "$HOME/.local/opt/rosbe/rosbe-env.sh"
+        ./configure.sh --clang --release -a amd64 \
+          -DREACTOS_TARGET_NT=0xA00 \
+          -DBOOTLOADER_TIMEOUT=0 \
+          -DDIAGDATA_CHANNEL=mados \
+          -DENABLE_CCACHE=1
+
+    - name: Build submodules
+      run: |
+        . "$HOME/.local/opt/rosbe/rosbe-env.sh"
+        ninja -C output-Clang-amd64-release submodules
+
+    - name: Build images
+      run: |
+        . "$HOME/.local/opt/rosbe/rosbe-env.sh"
+        ninja -C output-Clang-amd64-release bootcd liberntvhd
+
+    - name: Save ccache
+      if: ${{ always() && steps.ccache_restore.outcome == 'success' }}
+      uses: actions/cache/save@v5
+      with:
+        path: ccache
+        key: ${{ steps.ccache_restore.outputs.cache-primary-key }}
+
+    - name: Name the files
+      id: files
+      run: |
+        if [ "${GITHUB_REF_TYPE}" = "tag" ]; then V="${GITHUB_REF_NAME#v}"; else V="dev-${GITHUB_SHA::8}"; fi
+        mkdir dist
+        mv output-Clang-amd64-release/bootcd.iso "dist/MadOS-$V-amd64.iso"
+        mv output-Clang-amd64-release/LiberNT.vhd "dist/MadOS-$V-amd64.vhd"
+        (cd dist && sha256sum MadOS-* > SHA256SUMS.txt && cat SHA256SUMS.txt)
+        echo "version=$V" >> "$GITHUB_OUTPUT"
+
+    - name: Upload files
+      uses: actions/upload-artifact@v7
+      with:
+        name: MadOS-${{steps.files.outputs.version}}-amd64
+        path: dist/
+        retention-days: 14
+        compression-level: 0
+
+  release:
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+    - name: Download files
+      uses: actions/download-artifact@v7
+      with:
+        path: dist
+        merge-multiple: true
+
+    - name: Draft the release
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --draft --prerelease \
+          --title "MadOS ${GITHUB_REF_NAME#v}" --generate-notes dist/*
