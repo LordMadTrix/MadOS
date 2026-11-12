@@ -208,8 +208,14 @@ set(GENERATE_DEPENDENCY_GRAPH FALSE CACHE BOOL
 cmake_dependent_option(ENABLE_ROSTESTS "Whether to build the ReactOS test suite." OFF
                        "CMAKE_BUILD_TYPE STREQUAL Debug" OFF)
 
-# MadOS : OpenGL et Vulkan logiciels (LLVMpipe, Lavapipe) actives par defaut
-option(ENABLE_MESA_LLVMPIPE "Package the LLVMpipe OpenGL and Lavapipe Vulkan software ICDs." ON)
+# MadOS : OpenGL et Vulkan logiciels (LLVMpipe, Lavapipe) actives par defaut,
+# seulement la ou le paquet existe (pas pour la sous-compilation WoW64 i386).
+if(ARCH MATCHES "^(amd64|arm64|riscv64)$")
+    set(_mados_llvmpipe_default ON)
+else()
+    set(_mados_llvmpipe_default OFF)
+endif()
+option(ENABLE_MESA_LLVMPIPE "Package the LLVMpipe OpenGL and Lavapipe Vulkan software ICDs." ${_mados_llvmpipe_default})
 cmake_dependent_option(MESA_LLVMPIPE_FROM_SOURCE
                        "Build LLVM and LLVMpipe into mesa_gallium.dll instead of using the LiberNT release payload." OFF
                        "ENABLE_MESA_LLVMPIPE" OFF)
