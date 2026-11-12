@@ -21,13 +21,18 @@ Windows en 64 bits) et y ajoute sa propre expérience :
   un rapport de diagnostic (matériel, identifiants des périphériques…).
   Dans MadOS, c'est coupé par défaut ; vous pouvez l'activer dans le panneau
   Système, avec un texte qui dit exactement ce qui part et où.
-- **En français par défaut**, avec le clavier AZERTY (une autre langue reste
-  au choix à l'installation).
+- **En français dès le premier écran**, avec le clavier AZERTY : bureau,
+  menu Démarrer, applications. Une autre langue reste au choix à
+  l'installation.
+- **Mode sombre « Braise » ou clair « Lumière »**, au choix dans
+  *Apparence* (menu Démarrer), appliqué instantanément.
 - **« Bienvenue dans MadOS »** : au premier démarrage, cochez les applications
-  que vous voulez (Firefox, VLC, 7-Zip, Notepad++, LibreOffice, Steam). Elles
-  sont téléchargées depuis le site officiel de chaque éditeur et **vérifiées
-  avant l'installation** (signature numérique de l'éditeur, ou empreinte
-  SHA-256). Rien n'est préinstallé de force.
+  que vous voulez (Firefox, VLC, 7-Zip, Notepad++, LibreOffice, Steam, .NET).
+  Elles sont téléchargées depuis le site officiel de chaque éditeur et
+  **vérifiées avant l'installation** (signature numérique de l'éditeur, ou
+  empreinte SHA-256). Rien n'est préinstallé de force.
+- **Prêt pour les machines virtuelles** : disque VirtIO (QEMU, KVM, Proxmox),
+  OpenGL et Vulkan logiciels (Mesa) installables au premier démarrage.
 - **Plus rapide à démarrer** : le menu de démarrage ne fait plus attendre
   3 secondes ; appuyez sur une touche (F8…) pendant le démarrage pour l'ouvrir.
 - **Plus stable** : correction d'une condition de course dans le chargeur de
@@ -39,6 +44,8 @@ Windows en 64 bits) et y ajoute sa propre expérience :
 | Installation en français | Choix des applications |
 | <img src="media/mados/screenshots/menu-demarrer.png" alt="Menu Démarrer" width="380"> | <img src="media/mados/screenshots/menu-demarrage.png" alt="Menu de démarrage" width="380"> |
 | Menu Démarrer | Menu de démarrage (sur demande) |
+| <img src="media/mados/screenshots/mode-clair.png" alt="Mode clair Lumière" width="380"> | <img src="media/mados/screenshots/a-propos.png" alt="À propos de MadOS" width="380"> |
+| Mode clair « Lumière » | À propos de MadOS |
 
 ## Essayer MadOS
 
@@ -65,8 +72,9 @@ Téléchargez la dernière version dans
 | Taille installée | ~510 Mo |
 
 Applications testées (installation et lancement) : Firefox, VLC, 7-Zip,
-Notepad++, LibreOffice, Steam. Discord ne s'installe pas encore (il exige le
-.NET Framework 4.5).
+Notepad++, LibreOffice, Steam. Discord exige le .NET Framework 4.5 : il est
+maintenant proposé dans « Bienvenue » (Wine Mono), mais pas encore testé avec
+Discord.
 
 ## Construire MadOS
 
@@ -95,8 +103,21 @@ commits séparés, pour pouvoir être repris par LiberNT.
 
 ---
 
-**English.** MadOS is a free NT operating system based on LiberNT and ReactOS,
-with its own "Ember" look, diagnostic data off by default, French by default,
-a first-run app picker that downloads and verifies applications from their
-publishers, and a few fixes (loader race, release build). Experimental: try it
-in a virtual machine. GPL-3.0.
+## English
+
+MadOS is a free NT operating system based on [LiberNT](https://github.com/LiberNT/LiberNT)
+and [ReactOS](https://reactos.org). **Experimental: try it in a virtual machine.**
+
+- Its own "Ember" look (dark) and a "Light" mode, switchable in *Apparence*.
+- **Nothing is sent without your consent**: LiberNT's boot-time diagnostic
+  report is off by default and can be turned on in System properties.
+- French and AZERTY by default (other languages can be picked during setup).
+- "Welcome to MadOS": a first-run app picker that downloads applications from
+  each publisher and **verifies them before installing** (publisher signature
+  or SHA-256).
+- VirtIO disk driver, software OpenGL/Vulkan (Mesa), faster boot menu, and a
+  DLL loader race fix.
+
+Downloads: [Releases](../../releases) — `.vhd` (ready-made VirtualBox disk,
+EFI, 4 GB RAM), `.iso` (installer), `.img.xz` (USB stick, written with Rufus or
+balenaEtcher). GPL-3.0.
