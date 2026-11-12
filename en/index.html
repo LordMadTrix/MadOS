@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MadOS</title>
+<meta name="description" content="MadOS, a free, lean and respectful NT operating system based on LiberNT and ReactOS.">
+<link rel="icon" href="../img/mados_mark.png">
+<style>
+  :root {
+    --bg: #1c1917; --bg2: #292524; --line: #44403c;
+    --text: #fafaf9; --muted: #a8a29e; --accent: #ef4444; --accent2: #f97316;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.6 "Segoe UI", system-ui, -apple-system, "Source Sans Pro", sans-serif;
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+  header {
+    background: radial-gradient(1200px 500px at 85% 110%, rgba(239,68,68,.28), transparent 60%), var(--bg);
+    padding: 56px 0 40px; text-align: center; border-bottom: 1px solid var(--line);
+  }
+  header img.logo { width: min(420px, 80vw); }
+  header p.tag { font-size: 1.3rem; margin: 18px 0 6px; }
+  header p.base { color: var(--muted); margin: 0 0 28px; }
+  .btn {
+    display: inline-block; padding: 12px 26px; border-radius: 8px; font-weight: 600;
+    text-decoration: none; margin: 6px;
+  }
+  .btn.primary { background: var(--accent); color: #fff; }
+  .btn.ghost { border: 1px solid var(--line); color: var(--text); }
+  .note { color: var(--muted); font-size: .92rem; margin-top: 14px; }
+  .hero-shot { margin: 40px auto 0; max-width: 900px; }
+  .hero-shot img { width: 100%; border-radius: 10px; border: 1px solid var(--line); box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  h2 { font-size: 1.7rem; margin: 0 0 24px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+  .card { background: var(--bg2); border: 1px solid var(--line); border-radius: 10px; padding: 20px; }
+  .card h3 { margin: 0 0 8px; font-size: 1.1rem; }
+  .card h3::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px;
+                     background: linear-gradient(135deg, var(--accent2), var(--accent)); margin-right: 10px; }
+  .card p { margin: 0; color: var(--muted); }
+  .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+  figure { margin: 0; }
+  figure img { width: 100%; border-radius: 8px; border: 1px solid var(--line); }
+  figcaption { color: var(--muted); font-size: .92rem; margin-top: 6px; }
+  table { border-collapse: collapse; width: 100%; max-width: 640px; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  td:last-child { text-align: right; font-weight: 600; }
+  ol li { margin-bottom: 8px; }
+  footer { padding: 36px 0 48px; color: var(--muted); font-size: .92rem; text-align: center; }
+  @media (max-width: 600px) { body { font-size: 16px; } header { padding-top: 36px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img class="logo" src="../img/mados_logo_dark.png" alt="MadOS">
+    <p class="tag">A free, lean and respectful NT operating system.</p>
+    <p class="base">Based on <a href="https://github.com/LiberNT/LiberNT">LiberNT</a> and <a href="https://reactos.org">ReactOS</a>.</p>
+    <a class="btn primary" href="https://github.com/LordMadTrix/MadOS/releases/latest">Download MadOS</a>
+    <a class="btn ghost" href="https://github.com/LordMadTrix/MadOS">Source code</a>
+    <p class="note">Experimental: try it in a virtual machine. · <a href="../">Français</a></p>
+    <div class="hero-shot"><img src="../img/bureau.png" alt="The MadOS desktop"></div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>Why MadOS</h2>
+    <div class="grid">
+      <div class="card"><h3>Nothing leaves without you</h3><p>No diagnostic data is sent by default. If you turn it on, System properties says exactly what and to whom.</p></div>
+      <div class="card"><h3>Your apps, verified</h3><p>Tick Firefox, VLC, LibreOffice, .NET…: MadOS downloads them from each publisher and checks their signature before installing.</p></div>
+      <div class="card"><h3>French first</h3><p>French and AZERTY from the very first screen. Other languages can be picked during setup.</p></div>
+      <div class="card"><h3>Light</h3><p>About 270 MB of memory at idle and 510 MB on disk. A desktop about 7 seconds after the boot logo.</p></div>
+      <div class="card"><h3>Ember or Light</h3><p>A warm dark theme by default, or a light mode, switchable in Appearance.</p></div>
+      <div class="card"><h3>Free</h3><p>GPL-3.0 licensed. All the code is public and every change is documented.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Screenshots</h2>
+    <div class="shots">
+      <figure><img src="../img/installation.png" alt="Setup"><figcaption>Setup</figcaption></figure>
+      <figure><img src="../img/bienvenue.png" alt="Welcome to MadOS"><figcaption>Choosing applications</figcaption></figure>
+      <figure><img src="../img/menu-demarrer.png" alt="Start menu"><figcaption>Start menu</figcaption></figure>
+      <figure><img src="../img/mode-clair.png" alt="Light mode"><figcaption>Light mode</figcaption></figure>
+      <figure><img src="../img/a-propos.png" alt="About MadOS"><figcaption>About MadOS</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Try MadOS</h2>
+    <ol>
+      <li>Install <a href="https://www.virtualbox.org">VirtualBox</a>.</li>
+      <li>Download the <b>.vhd</b> file from the <a href="https://github.com/LordMadTrix/MadOS/releases/latest">latest release</a>.</li>
+      <li>Create a "Windows 11 (64-bit)" machine, enable <b>EFI</b>, give it 4 GB of memory and use this file as its hard disk.</li>
+      <li>Start it: the setup assistant greets you (in French by default; pick your language).</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    MadOS is distributed under the GPL-3.0 license. It builds on the work of the
+    <a href="https://github.com/LiberNT/LiberNT">LiberNT</a> team and of the
+    <a href="https://reactos.org">ReactOS</a> contributors (© 1996-2026 ReactOS Team &amp; Contributors).<br>
+    This page loads no external resources and contains no trackers.
+  </div>
+</footer>
+
+</body>
+</html>
