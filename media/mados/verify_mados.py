@@ -203,10 +203,21 @@ def names():
     check(not wrong, "liste des auteurs : attribuee a LiberNT dans toutes les langues"
           + (f" (a revoir : {wrong[:4]})" if wrong else ""))
     # 3. raccourcis coherents
-    cm = (TREE / "boot/bootdata/CMakeLists.txt").read_text(errors="replace")
-    pre = (TREE / "boot/bootdata/preinstall.inf").read_text(errors="replace")
-    check('add_livecd_shortcut("Install MadOS"' in cm and '"Install MadOS.lnk"' in pre,
-          "raccourci 'Install MadOS' : meme nom a la creation et dans le menu Demarrer")
+    cm = (TREE / "boot/bootdata/CMakeLists.txt").read_text(encoding="utf-8", errors="replace")
+    cm += (TREE / "subsystems/linux/lxterm/CMakeLists.txt").read_text(encoding="utf-8", errors="replace")
+    made = set(re.findall(r'add_livecd_shortcut\("([^"]+)"', cm)) | set(re.findall(r'/([^/"]+)\.lnk"', cm))
+    missing = []
+    for rel in ("boot/bootdata/preinstall.inf", "boot/bootdata/livecd.inf"):
+        t = (TREE / rel).read_text(encoding="utf-8", errors="replace")
+        line = next((l for l in t.splitlines() if '"RecentlyAdded"' in l), "")
+        for lnk in re.findall(r'"(?:[^"\\]*\\)*([^"\\]+)\.lnk"', line):
+            if lnk not in made:
+                missing.append(f"{rel.split('/')[-1]}:{lnk}")
+    accents = sorted(n for n in made if not n.isascii())
+    check(not accents, "raccourcis : noms sans accents (mkisofs refuse les noms non ASCII)"
+          + (f" {accents}" if accents else ""))
+    check(not missing and "Installer MadOS" in made,
+          "raccourcis : les noms du menu Demarrer (Recemment ajoutes) existent tous" + (f" {missing}" if missing else ""))
     hive = (TREE / "boot/bootdata/hivesft.inf").read_text(errors="replace")
     check('"ProductName",2,"MadOS"' in hive, "registre : ProductName = MadOS")
 
@@ -275,7 +286,8 @@ def drivers():
     check("PCI\\VEN_1AF4&DEV_1001 = viostor" in sif and "viostor = viostor.sys" in sif,
           "txtsetup.sif : disque VirtIO reconnu a l'installation")
     cfg = (TREE / "sdk/cmake/config.cmake").read_text(encoding="utf-8", errors="replace")
-    check('software ICDs." ON)' in cfg, "Mesa LLVMpipe (OpenGL, Vulkan) active par defaut")
+    check('software ICDs." ${_mados_llvmpipe_default})' in cfg and 'ARCH MATCHES "^(amd64|arm64|riscv64)$"' in cfg,
+          "Mesa LLVMpipe (OpenGL, Vulkan) active par defaut, sauf en i386 (WoW64)")
 
 
 def appearance():

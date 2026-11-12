@@ -139,22 +139,22 @@ set(dir_quicklaunch             "reactos/system32/config/systemprofile/AppData/R
 
 cmdenvvar(envvar_systemdrive "SystemDrive" TRUE)
 cmdenvvar(envvar_archdir     "PROCESSOR_ARCHITECTURE:x86=I386" TRUE)
-add_livecd_shortcut("Install MadOS"
+add_livecd_shortcut("Installer MadOS"
     "shell:system\\cmd.exe"
     CMDLINE_ARGS "/D /E:ON /C \"start ${envvar_systemdrive}\\${envvar_archdir}\\libernt.exe\""
     ICON "${envvar_systemdrive}\\${ARCH}\\libernt.exe"
     MINIMIZE
     DESTINATION "${dir_allusers_desktop}")
-add_cd_file(FILE "${CMAKE_CURRENT_BINARY_DIR}/Install MadOS.lnk"
+add_cd_file(FILE "${CMAKE_CURRENT_BINARY_DIR}/Installer MadOS.lnk"
             TARGET livecd_links
             DESTINATION "${dir_startmenu_programs}"
             FOR preinstall)
 
-add_livecd_shortcut("Read Me"
+add_livecd_shortcut("Lisez-moi"
     "shell:windows\\readme.txt"
     ICON "${envvar_systemroot}\\system32\\shell32.dll" ICON_INDEX -152
     DESTINATION "${dir_allusers_desktop}")
-add_livecd_shortcut("LiberNT Explorer"
+add_livecd_shortcut("Explorateur de fichiers"
     "shell:windows\\explorer.exe" ICON_INDEX 1
     WORKDIR "${envvar_homedrive}${envvar_homepath}"
     DESTINATION "${dir_startmenu_programs}" "${dir_quicklaunch}")
@@ -162,77 +162,77 @@ add_livecd_shortcut("Terminal"
     "shell:system\\terminal.exe" ICON_INDEX 0
     WORKDIR "${envvar_homedrive}${envvar_homepath}"
     DESTINATION "${dir_startmenu_accessories}" "${dir_quicklaunch}")
-add_livecd_shortcut("Command Prompt"
+add_livecd_shortcut("Invite de commandes"
     "shell:system\\cmd.exe" ICON_INDEX 0
     WORKDIR "${envvar_homedrive}${envvar_homepath}"
     DESTINATION "${dir_startmenu_accessories}")
-add_livecd_shortcut("Applications Manager"
+add_livecd_shortcut("Gestionnaire d'applications"
     "shell:system\\rapps.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_programs}")
-add_livecd_shortcut("Device Manager"
+add_livecd_shortcut("Gestionnaire d'appareils"
     "shell:system\\devmgmt.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_admintools}")
-add_livecd_shortcut("Disk Management"
+add_livecd_shortcut("Gestion des disques"
     "shell:system\\diskmgmt.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_admintools}")
-add_livecd_shortcut("Event Viewer"
+add_livecd_shortcut("Visionneuse de journaux"
     "shell:system\\eventvwr.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_admintools}")
-add_livecd_shortcut("Service Manager"
+add_livecd_shortcut("Gestionnaire de services"
     "shell:system\\servman.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_admintools}")
-add_livecd_shortcut("System Configuration"
+add_livecd_shortcut("Configuration (MSConfig)"
     "shell:system\\msconfig.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_admintools}")
-add_livecd_shortcut("Magnify"
+add_livecd_shortcut("Loupe"
     "shell:system\\magnify.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_accessibility}")
-add_livecd_shortcut("On-Screen Keyboard"
+add_livecd_shortcut("Clavier visuel"
     "shell:system\\osk.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_accessibility}")
-add_livecd_shortcut("Remote Desktop Connection"
+add_livecd_shortcut("Bureau distant"
     "shell:system\\mstsc.exe" ICON_INDEX 0
     WORKDIR "${envvar_homedrive}${envvar_homepath}"
     DESTINATION "${dir_startmenu_comms}")
-add_livecd_shortcut("Multimedia Player"
+add_livecd_shortcut("Lecteur de films et musique"
     "shell:system\\mplay32.exe" ICON_INDEX 0
     WORKDIR "${envvar_homedrive}${envvar_homepath}"
     DESTINATION "${dir_startmenu_entertainment}")
-add_livecd_shortcut("Sound Recorder"
+add_livecd_shortcut("Enregistreur de sons"
     "shell:system\\sndrec32.exe" ICON_INDEX 0
     WORKDIR "${envvar_homedrive}${envvar_homepath}"
     DESTINATION "${dir_startmenu_entertainment}")
-add_livecd_shortcut("Character Map"
+add_livecd_shortcut("Table de symboles"
     "shell:system\\charmap.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_systemtools}")
-add_livecd_shortcut("Clipboard Viewer"
+add_livecd_shortcut("Visionneuse du Presse-papiers"
     "shell:system\\clipbrd.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_systemtools}")
-add_livecd_shortcut("Keyboard Layout Switcher"
+add_livecd_shortcut("Changement de clavier"
     "shell:system\\kbswitch.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_systemtools}")
-add_livecd_shortcut("ReactX Diagnostic"
+add_livecd_shortcut("Diagnostic ReactX"
     "shell:system\\dxdiag.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_systemtools}")
-add_livecd_shortcut("Registry Editor"
+add_livecd_shortcut("Base de registre"
     "shell:windows\\regedit.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_systemtools}")
-add_livecd_shortcut("Task Manager"
+add_livecd_shortcut("Programmes en cours"
     "shell:system\\taskmgr.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_systemtools}")
-add_livecd_shortcut("Task Manager 11"
+add_livecd_shortcut("Programmes en cours (nouveau)"
     "shell:system\\taskmgr11.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_systemtools}")
 add_livecd_shortcut("LntGet"
     "shell:system\\lntget.exe" ICON_INDEX 0 CMDLINE_ARGS "gui"
     DESTINATION "${dir_startmenu_systemtools}")
-add_livecd_shortcut("MadOS Driver Installer"
+add_livecd_shortcut("Installateur de pilotes MadOS"
     "shell:system\\lntdrv.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_systemtools}")
-add_livecd_shortcut("Optional Components"
+add_livecd_shortcut("Composants optionnels"
     "shell:system\\oobe\\oobe.exe" ICON_INDEX 0 CMDLINE_ARGS "/components"
     DESTINATION "${dir_startmenu_systemtools}")
-add_livecd_shortcut("Calculator"
+add_livecd_shortcut("Calculatrice"
     "shell:system\\calc.exe" ICON_INDEX 0
     WORKDIR "${envvar_homedrive}${envvar_homepath}"
     DESTINATION "${dir_startmenu_accessories}")
@@ -240,7 +240,7 @@ add_livecd_shortcut("Paint"
     "shell:system\\mspaint.exe" ICON_INDEX 0
     WORKDIR "${envvar_homedrive}${envvar_homepath}"
     DESTINATION "${dir_startmenu_accessories}")
-add_livecd_shortcut("Notepad"
+add_livecd_shortcut("Bloc-notes"
     "shell:system\\notepad.exe" ICON_INDEX 0
     WORKDIR "${envvar_homedrive}${envvar_homepath}"
     DESTINATION "${dir_startmenu_accessories}")
@@ -251,7 +251,7 @@ add_livecd_shortcut("WordPad"
 add_livecd_shortcut("Solitaire"
     "shell:system\\sol.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_games}")
-add_livecd_shortcut("Spider Solitaire"
+add_livecd_shortcut("Solitaire Spider"
     "shell:system\\spider.exe" ICON_INDEX 0
     DESTINATION "${dir_startmenu_games}")
 add_livecd_shortcut("WineMine"
