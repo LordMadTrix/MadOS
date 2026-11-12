@@ -10,7 +10,6 @@ MadOS - logo et toutes ses declinaisons dans LiberNT.
   dll/cpl/sysdm/resources/rosbitmap*.bmp    panneau Systeme
   base/shell/explorer/res/bmp/143.bmp       icone du bouton Demarrer
   base/setup/libernt/res/watermark.bmp      bandeau de l'installateur
-  base/setup/welcome/res/title.bmp          titre de l'accueil
 """
 from PIL import Image, ImageDraw, ImageFilter
 
@@ -116,17 +115,6 @@ def main():
     wmk.alpha_composite(wm, ((164 - wm.width) // 2, 236))
     save_bmp24(wmk, R("base/setup/libernt/res/watermark.bmp"))
 
-    # Accueil : titre 558x79 sur fond sombre + mention
-    W, H = 558, 79
-    tt = Image.new("RGBA", (W, H), DESKTOP + (255,))
-    g = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    ImageDraw.Draw(g).ellipse([W * 0.55, -H, W * 1.5, H * 1.8], fill=(185, 28, 28, 90))
-    tt.alpha_composite(g.filter(ImageFilter.GaussianBlur(30)))
-    lk = lockup_h(46, WHITE)
-    tt.alpha_composite(lk, ((W - lk.width) // 2, 6))
-    ImageDraw.Draw(tt).text((8, H - 14), "© 2026 MadOS · basé sur LiberNT · ReactOS © 1996–2026 ReactOS Team & Contributors",
-                            font=font(10, bold=False), fill=MUTED + (255,))
-    save_bmp24(tt, R("base/setup/welcome/res/title.bmp"))
 
     # Fenetre "A propos" (ShellAbout) : banniere 413x72 + trait 413x5 (shell32)
     W, H = 413, 72

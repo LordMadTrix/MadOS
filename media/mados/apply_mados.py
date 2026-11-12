@@ -38,7 +38,6 @@ RC_TO_TOUCH = [
     "dll/cpl/sysdm/sysdm.rc",
     "base/shell/explorer/explorer.rc",
     "base/setup/libernt/libernt.rc",
-    "base/setup/welcome/welcome.rc",
     "dll/win32/shell32/shell32.rc",
     "subsystems/win/win32k/user/user32/user32.rc",
 ]

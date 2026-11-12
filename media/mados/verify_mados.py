@@ -116,7 +116,7 @@ def ui():
     with wave.open(str(TREE / "media/sounds/MadOS_Startup.wav")) as w:
         check(w.getnchannels() == 2 and w.getframerate() == 44100 and 2 < w.getnframes() / 44100 < 5,
               "son de demarrage MadOS : WAV stereo 44,1 kHz, 2 a 5 s")
-    for rel in ("base/setup/libernt/res/watermark.bmp", "base/setup/welcome/res/title.bmp"):
+    for rel in ("base/setup/libernt/res/watermark.bmp",):
         o = header(git_original(TREE / rel))
         bmp_ok(rel, w=o["w"], h=o["h"], bpp=24, comp=0)
 
