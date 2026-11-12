@@ -374,9 +374,10 @@ IoGetDriverDirectory(
     IO_STATUS_BLOCK IoStatusBlock;
     UNICODE_STRING Directory;
 
-    PAGED_CODE();
+    PLDR_DATA_TABLE_ENTRY Image;
+    USHORT Length;
 
-    UNREFERENCED_PARAMETER(DriverObject);
+    PAGED_CODE();
 
     static const UNICODE_STRING DriverStore =
         RTL_CONSTANT_STRING(L"\\SystemRoot\\System32\\Drivers");
@@ -388,7 +389,25 @@ IoGetDriverDirectory(
         return STATUS_NOT_SUPPORTED;
     }
 
+    /* The directory the driver image was loaded from: a driver installed
+     * from the driver store runs from its package folder and keeps the
+     * files it reads at run time (firmware...) next to its image. */
     Directory = DriverStore;
+    Image = (DriverObject != NULL) ? DriverObject->DriverSection : NULL;
+    if (Image != NULL && Image->FullDllName.Buffer != NULL)
+    {
+        Length = Image->FullDllName.Length / sizeof(WCHAR);
+        while (Length > 0 && Image->FullDllName.Buffer[Length - 1] != L'\\')
+            Length--;
+
+        /* Keep the path without its final backslash; a bare name keeps the default */
+        if (Length > 1)
+        {
+            Directory.Buffer = Image->FullDllName.Buffer;
+            Directory.Length = (USHORT)((Length - 1) * sizeof(WCHAR));
+            Directory.MaximumLength = Directory.Length;
+        }
+    }
 
     InitializeObjectAttributes(&ObjectAttributes,
                                &Directory,
