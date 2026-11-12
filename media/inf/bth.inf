@@ -53,6 +53,31 @@ ServiceBinary  = %12%\bthusb.sys
 [BthUsb.Files]
 bthusb.sys
 
+; Sections que les INF des constructeurs reprennent (Include=bth.inf,
+; Needs=...), comme le pilote Bluetooth Intel (ibtusb) : il se place en
+; filtre inferieur sous BTHUSB, charge le firmware de la puce, et BTHUSB
+; reste le pilote de fonction.
+[BthUsb.NT]
+CopyFiles=BthUsb.Files
+
+[BthUsb.NT.HW]
+AddReg=BthUsb.Compat.AddReg
+
+[BthUsb.NT.Services]
+AddService = BTHUSB, 0x00000002, BthUsb.AddService
+
+[BthLEExtendedAdvertisingOptIn.HW]
+AddReg=BthUsb.Compat.AddReg
+
+[BthMsftHciExtensionsTelemetryOptIn.HW]
+AddReg=BthUsb.Compat.AddReg
+
+[BthLEConnectedIsochronousStreamsOptIn.HW]
+AddReg=BthUsb.Compat.AddReg
+
+[BthUsb.Compat.AddReg]
+HKR,,"BthUsbCompat",0x00010001,1
+
 [BthMini.Dev.NT]
 CopyFiles=BthMini.Files
 
