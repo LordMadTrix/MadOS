@@ -3,6 +3,39 @@
 #include <windowsx.h>
 #include <powrprof.h>
 
+/* MadOS : textes du menu Demarrer en francais quand l'interface est en francais. */
+static LPCWSTR SM2T(LPCWSTR pszEn)
+{
+    static const struct { LPCWSTR En; LPCWSTR Fr; } c_Fr[] =
+    {
+        { L"Shut down", L"Arr\u00EAter" },
+        { L"Restart", L"Red\u00E9marrer" },
+        { L"Log off", L"Fermer la session" },
+        { L"Lock", L"Verrouiller" },
+        { L"Sleep", L"Mettre en veille" },
+        { L"Hibernate", L"Veille prolong\u00E9e" },
+        { L"All Programs", L"Tous les programmes" },
+        { L"Back", L"Pr\u00E9c\u00E9dent" },
+        { L"Documents", L"Documents" },
+        { L"Pictures", L"Images" },
+        { L"Music", L"Musique" },
+        { L"Games", L"Jeux" },
+        { L"Computer", L"Ordinateur" },
+        { L"Settings", L"Param\u00E8tres" },
+        { L"Devices", L"P\u00E9riph\u00E9riques" },
+        { L"Network Assistance", L"Assistance r\u00E9seau" },
+        { L"Rename", L"Renommer" },
+        { L"Remove from this list", L"Retirer de cette liste" },
+        { L"Search programs and files", L"Rechercher programmes et fichiers" },
+    };
+    if (!pszEn || PRIMARYLANGID(GetUserDefaultUILanguage()) != LANG_FRENCH)
+        return pszEn;
+    for (SIZE_T i = 0; i < _countof(c_Fr); i++)
+        if (!wcscmp(pszEn, c_Fr[i].En))
+            return c_Fr[i].Fr;
+    return pszEn;
+}
+
 #define SM2_KEY             L"Software\\ReactOS\\StartMenu2"
 #define SM2_RECENT_LINK_KEY L"Software\\ReactOS\\StartMenu2\\RecentApps\\Links"
 #define SM2_RECENT_EXE_KEY  L"Software\\ReactOS\\StartMenu2\\RecentApps\\Executables"
@@ -664,7 +697,7 @@ SM2DoShutdownCmd(HWND hwndOwner, int nCmd)
         WCHAR szError[512];
         if (!FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, dwError, 0, szError, _countof(szError), NULL))
             StringCchPrintfW(szError, _countof(szError), L"The operation could not be completed (error %lu).", dwError);
-        ::MessageBoxW(hwndOwner, szError, pszAction, MB_OK | MB_ICONERROR);
+        ::MessageBoxW(hwndOwner, szError, SM2T(pszAction), MB_OK | MB_ICONERROR);
     }
     bInProgress = FALSE;
 }
@@ -973,7 +1006,7 @@ public:
             RECT rcText = rcItem;
             rcText.left += Sc(12);
             SetTextColor(hdcMem, (int)i == m_iHot ? SM2_CLR_RIGHT_HOT_TEXT : SM2_CLR_RIGHT_TEXT);
-            DrawTextW(hdcMem, c_Items[m_Visible[i]].pszLabel, -1, &rcText,
+            DrawTextW(hdcMem, SM2T(c_Items[m_Visible[i]].pszLabel), -1, &rcText,
                       DT_SINGLELINE | DT_VCENTER | DT_NOPREFIX | DT_END_ELLIPSIS);
         }
 
@@ -1814,7 +1847,7 @@ public:
                             row.nType == SM2R_ALLPROGRAMS ? 0 : 1, SM2_CLR_TRI);
                     RECT rcText = { rc.left + Sc(28), rc.top, rc.right - Sc(4), rc.bottom };
                     DrawItemText(hdc,
-                                 row.nType == SM2R_ALLPROGRAMS ? L"All Programs" : L"Back",
+                                 row.nType == SM2R_ALLPROGRAMS ? SM2T(L"All Programs") : SM2T(L"Back"),
                                  rcText, SM2Mix(SM2_CLR_LEFT_TEXT, SM2_CLR_LEFT_HOT_TEXT, alpha));
                     break;
                 }
@@ -1892,7 +1925,7 @@ public:
                         {
                             if (g_SM2RightDefs[j].nCmd == row.nData)
                             {
-                                psz = g_SM2RightDefs[j].pszLabel;
+                                psz = SM2T(g_SM2RightDefs[j].pszLabel);
                                 break;
                             }
                         }
@@ -1908,7 +1941,7 @@ public:
                     DeleteObject(hbr);
                     RECT rcText = rc;
                     SetTextColor(hdc, SM2_CLR_RIGHT_TEXT);
-                    DrawTextW(hdc, L"Shut down", -1, &rcText,
+                    DrawTextW(hdc, SM2T(L"Shut down"), -1, &rcText,
                               DT_SINGLELINE | DT_VCENTER | DT_CENTER | DT_NOPREFIX);
                     break;
                 }
@@ -2497,7 +2530,7 @@ public:
             WCHAR szError[512];
             if (!FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, HRESULT_CODE(hr), 0, szError, _countof(szError), NULL))
                 StringCchCopyW(szError, _countof(szError), L"The item could not be renamed.");
-            MessageBoxW(szError, L"Rename", MB_OK | MB_ICONERROR);
+            MessageBoxW(szError, SM2T(L"Rename"), MB_OK | MB_ICONERROR);
         }
         return hr;
     }
@@ -2557,7 +2590,7 @@ public:
             if (GetMenuItemCount(hMenu) > 0)
                 AppendMenuW(hMenu, MF_SEPARATOR, 0, NULL);
             AppendMenuW(hMenu, MF_STRING, SM2_CONTEXT_REMOVE_RECENT,
-                        L"Remove from this list");
+                        SM2T(L"Remove from this list"));
         }
 
         if (SUCCEEDED(hr) && GetMenuItemCount(hMenu) > 0)
@@ -2781,7 +2814,7 @@ public:
                         SetBkMode(hdc, TRANSPARENT);
                         SetTextColor(hdc, SM2_CLR_CUE);
                         HGDIOBJ hOld = SelectObject(hdc, pThis->m_hFontCue);
-                        DrawTextW(hdc, L"Search programs and files", -1, &rc,
+                        DrawTextW(hdc, SM2T(L"Search programs and files"), -1, &rc,
                                   DT_SINGLELINE | DT_VCENTER | DT_NOPREFIX);
                         SelectObject(hdc, hOld);
                         ::ReleaseDC(hWnd, hdc);
