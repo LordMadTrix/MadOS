@@ -23,7 +23,7 @@ env:
   # Commit de LiberNT (main-nt10) sur lequel MadOS est base : le verificateur
   # compare les fichiers avec cette version. A mettre a jour apres chaque
   # rebase sur une version plus recente de LiberNT.
-  MADOS_BASE: 2acfa362f95e589bb599783b3a920de90fc2ec6d
+  MADOS_BASE: 075e14554bd66596f796a09371f7a79d6b8d389d
 
 jobs:
   build:

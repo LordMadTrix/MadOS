@@ -502,7 +502,7 @@ BlMain(VOID)
 {
     PUCHAR Stack;
 
-    FwDebugAnnounce("LiberNT OS Loader", FALSE);
+    FwDebugAnnounce("MadOS OS Loader", FALSE);
     OslTrace("OS loader: describing the platform");
     OslArchInitialize();
 

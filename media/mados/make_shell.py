@@ -24,7 +24,6 @@ FILES = [
     "dll/win32/uxtheme/nonclient.c",           # barre de titre sombre
     "dll/win32/shell32/CDefView.cpp",          # jauge d'espace disque
     "dll/win32/shell32/dialogs/drvdefext.cpp", # camembert d'espace disque
-    "base/setup/welcome/welcome.c",            # accueil
 ]
 
 # Textes affiches presents dans ces fichiers (traites ici, et non par
@@ -61,8 +60,6 @@ SM2T_FUNC = (
 )
 
 EXTRA_TEXT = {
-    "base/setup/welcome/welcome.c": [('TEXT("LiberNT ") TEXT(KERNEL_VERSION_STR)', 'TEXT("MadOS ") TEXT(MADOS_VERSION_FULL_STR)'),
-                                     ('TEXT("LiberNT")', 'TEXT("MadOS")')],
     "base/shell/explorer/startmnu2.cpp": [
         ("#include <powrprof.h>\n", SM2T_FUNC),
         ("::MessageBoxW(hwndOwner, szError, pszAction, MB_OK", "::MessageBoxW(hwndOwner, szError, SM2T(pszAction), MB_OK"),

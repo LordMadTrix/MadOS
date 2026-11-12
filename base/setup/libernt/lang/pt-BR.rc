@@ -4,7 +4,7 @@ LANGUAGE LANG_PORTUGUESE, SUBLANG_PORTUGUESE_BRAZILIAN
 
 IDD_SETUPFRAME DIALOGEX 0, 0, 420, 240
 STYLE DS_SHELLFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
-CAPTION "Instalação do LiberNT"
+CAPTION "Instalação do MadOS"
 FONT 8, "MS Shell Dlg"
 BEGIN
     LTEXT "", IDC_FRAME_TITLE, 120, 10, 290, 14, SS_NOPREFIX
@@ -91,7 +91,7 @@ BEGIN
     LTEXT "&Fuso horário:", IDC_STATIC, 0, 96, 95, 9
     COMBOBOX IDC_TIMEZONELIST, 100, 94, 190, 120, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     AUTOCHECKBOX "Ajustar automaticamente o &horário de verão", IDC_AUTODAYLIGHT, 100, 111, 190, 10, WS_TABSTOP
-    LTEXT "Esta conta é membro do grupo Administradores. Se você deixar a senha em branco, o LiberNT entra nela automaticamente.", IDC_STATIC, 0, 130, 290, 26
+    LTEXT "Esta conta é membro do grupo Administradores. Se você deixar a senha em branco, o MadOS entra nela automaticamente.", IDC_STATIC, 0, 130, 290, 26
 END
 
 IDD_READYPAGE DIALOGEX 0, 0, 290, 160
@@ -99,7 +99,7 @@ STYLE DS_SHELLFONT | DS_CONTROL | WS_CHILD
 FONT 8, "MS Shell Dlg"
 BEGIN
     EDITTEXT IDC_READY_SUMMARY, 0, 0, 290, 90, ES_MULTILINE | ES_READONLY | WS_VSCROLL | NOT WS_TABSTOP
-    LTEXT "O LiberNT está em desenvolvimento ativo. Use-o para avaliação e testes, não como seu sistema operacional principal. Ele pode corromper seus dados ou danificar seu hardware.", IDC_READY_WARNING, 0, 97, 290, 28
+    LTEXT "O MadOS está em desenvolvimento ativo. Use-o para avaliação e testes, não como seu sistema operacional principal. Ele pode corromper seus dados ou danificar seu hardware.", IDC_READY_WARNING, 0, 97, 290, 28
     AUTOCHECKBOX "Eu &entendo e fiz backup dos dados que quero manter.", IDC_CONFIRM_INSTALL, 0, 132, 290, 20, BS_MULTILINE | BS_TOP | WS_TABSTOP
 END
 
@@ -159,14 +159,14 @@ BEGIN
     IDS_EXTEND_BUTTON "Es&tender"
     IDS_RESIZE_PENDING "Há alterações de partição aguardando aplicação. Reduzir e estender têm efeito imediato, então faça isso antes de criar, excluir ou formatar partições."
     IDS_RESIZE_FAILED "Não foi possível redimensionar a partição."
-    IDS_CAPTION "Instalação do LiberNT"
-    IDS_DRIVETITLE "Onde você deseja instalar o LiberNT?"
-    IDS_PROCESSTITLE "Instalando o LiberNT"
-    IDS_PROCESSSUBTITLE "A instalação prepara o disco, copia os arquivos, configura o LiberNT e instala o carregador de inicialização. Isso pode levar alguns minutos."
-    IDS_ABORTSETUP "O LiberNT não está completamente instalado no seu computador. Se você sair agora, precisará executar a instalação novamente para instalar o LiberNT. Deseja mesmo sair?"
+    IDS_CAPTION "Instalação do MadOS"
+    IDS_DRIVETITLE "Onde você deseja instalar o MadOS?"
+    IDS_PROCESSTITLE "Instalando o MadOS"
+    IDS_PROCESSSUBTITLE "A instalação prepara o disco, copia os arquivos, configura o MadOS e instala o carregador de inicialização. Isso pode levar alguns minutos."
+    IDS_ABORTSETUP "O MadOS não está completamente instalado no seu computador. Se você sair agora, precisará executar a instalação novamente para instalar o MadOS. Deseja mesmo sair?"
     IDS_ABORTSETUP2 "Cancelar a instalação?"
     IDS_NO_TXTSETUP_SIF "Não foi possível encontrar 'txtsetup.sif'.\nA instalação não pode continuar."
-    IDS_FINISH_NO_REBOOT "Reinicie o computador para iniciar o LiberNT. Não inicie novamente a partir da mídia de instalação.\n\nClique em Reiniciar para reiniciar o computador agora.\nClique em Adiar para sair da instalação e reiniciar o computador mais tarde."
+    IDS_FINISH_NO_REBOOT "Reinicie o computador para iniciar o MadOS. Não inicie novamente a partir da mídia de instalação.\n\nClique em Reiniciar para reiniciar o computador agora.\nClique em Adiar para sair da instalação e reiniciar o computador mais tarde."
     IDS_ABORT_NO_REBOOT "Clique em Reiniciar para reiniciar o computador agora.\nClique em Fechar para sair da instalação."
     IDS_INSTALLBTN "&Instalar"
     IDS_RESTARTBTN "&Reiniciar"
@@ -178,12 +178,12 @@ END
 STRINGTABLE
 BEGIN
     IDS_DISKSUBTITLE "Selecione uma partição ou espaço não alocado. Exceto Reduzir e Estender, os discos só são alterados depois que você clica em Instalar."
-    IDS_ACCOUNTZONESUBTITLE "Você entra no LiberNT com esta conta. O LiberNT mostra a hora do fuso selecionado."
+    IDS_ACCOUNTZONESUBTITLE "Você entra no MadOS com esta conta. O MadOS mostra a hora do fuso selecionado."
     IDS_READYTITLE "Pronto para instalar"
     IDS_READYSUBTITLE "Revise suas escolhas. A instalação começa a alterar seus discos quando você clica em Instalar."
-    IDS_DONETITLE "O LiberNT está instalado"
-    IDS_ABORTTITLE "O LiberNT não foi instalado"
-    IDS_DONE_REBOOT "Seu computador reiniciará em alguns segundos para iniciar o LiberNT. Não inicie novamente a partir da mídia de instalação.\n\nClique em Reiniciar para reiniciar agora."
+    IDS_DONETITLE "O MadOS está instalado"
+    IDS_ABORTTITLE "O MadOS não foi instalado"
+    IDS_DONE_REBOOT "Seu computador reiniciará em alguns segundos para iniciar o MadOS. Não inicie novamente a partir da mídia de instalação.\n\nClique em Reiniciar para reiniciar agora."
     IDS_ABORT_REBOOT "A instalação não foi concluída. Seu computador reiniciará em alguns segundos.\n\nClique em Reiniciar para reiniciar agora."
     IDS_BACKBTN "&Voltar"
     IDS_NEXTBTN "&Avançar"
@@ -214,24 +214,24 @@ END
 
 STRINGTABLE
 BEGIN
-    IDS_DISK_SELECT "Selecione onde instalar o LiberNT."
+    IDS_DISK_SELECT "Selecione onde instalar o MadOS."
     IDS_DISK_NO_REGION "Este espaço é pequeno demais para uma nova partição."
-    IDS_DISK_NOT_BASIC "Não é possível instalar o LiberNT nesta partição. Selecione uma partição primária ou espaço não alocado."
-    IDS_DISK_TOO_SMALL "Esta partição é pequena demais para instalar o LiberNT."
-    IDS_DISK_MBR_ON_UEFI "Não é possível instalar o LiberNT nesta unidade. A unidade selecionada tem uma tabela de partição MBR. Em sistemas EFI, o LiberNT só pode ser instalado em unidades GPT."
-    IDS_DISK_GPT_ON_BIOS "Não é possível instalar o LiberNT nesta unidade. A unidade selecionada usa o estilo de partição GPT."
-    IDS_DISK_NOT_FIRMWARE "O firmware deste computador não vê a unidade selecionada, então o LiberNT pode não iniciar a partir dela.\n\nClique em OK para usá-la mesmo assim."
-    IDS_DISK_NEW_SYSTEM "Para garantir que todos os recursos do LiberNT funcionem corretamente, a instalação também cria partições para os arquivos do sistema."
+    IDS_DISK_NOT_BASIC "Não é possível instalar o MadOS nesta partição. Selecione uma partição primária ou espaço não alocado."
+    IDS_DISK_TOO_SMALL "Esta partição é pequena demais para instalar o MadOS."
+    IDS_DISK_MBR_ON_UEFI "Não é possível instalar o MadOS nesta unidade. A unidade selecionada tem uma tabela de partição MBR. Em sistemas EFI, o MadOS só pode ser instalado em unidades GPT."
+    IDS_DISK_GPT_ON_BIOS "Não é possível instalar o MadOS nesta unidade. A unidade selecionada usa o estilo de partição GPT."
+    IDS_DISK_NOT_FIRMWARE "O firmware deste computador não vê a unidade selecionada, então o MadOS pode não iniciar a partir dela.\n\nClique em OK para usá-la mesmo assim."
+    IDS_DISK_NEW_SYSTEM "Para garantir que todos os recursos do MadOS funcionem corretamente, a instalação também cria partições para os arquivos do sistema."
     IDS_DISK_FORMAT_WARN "Se você formatar esta partição, todos os dados nela serão perdidos. Faça backup antes dos arquivos que deseja manter."
-    IDS_DISK_FORMAT_NTFS "O LiberNT é instalado em NTFS. A instalação formata esta partição e todos os dados nela serão perdidos."
-    IDS_DISK_FORMAT_EXISTING "Esta partição já contém uma instalação do Windows ou do LiberNT. A instalação a formata e todos os dados nela serão perdidos. Selecione outra partição para mantê-la."
+    IDS_DISK_FORMAT_NTFS "O MadOS é instalado em NTFS. A instalação formata esta partição e todos os dados nela serão perdidos."
+    IDS_DISK_FORMAT_EXISTING "Esta partição já contém uma instalação do Windows ou do MadOS. A instalação a formata e todos os dados nela serão perdidos. Selecione outra partição para mantê-la."
     IDS_DISK_ERASE_WARN "Todas as partições da unidade %lu, e todos os dados nelas, são excluídas quando a instalação começa."
     IDS_NEWPART_RANGE "&Tamanho em MB (até %I64u):"
 END
 
 STRINGTABLE
 BEGIN
-    IDS_READY_TARGET "O LiberNT é instalado em %s (%s)."
+    IDS_READY_TARGET "O MadOS é instalado em %s (%s)."
     IDS_READY_ERASE "A unidade %lu é limpa."
     IDS_READY_DELETE "%s é excluída."
     IDS_READY_CREATE "%s (%s) é criada e formatada como %s."
@@ -243,12 +243,12 @@ BEGIN
     IDS_READY_LANGUAGE "Idioma e região: %s"
     IDS_READY_KEYBOARD "Teclado: %s"
     IDS_LANGUAGETITLE "Escolha seu idioma e teclado"
-    IDS_LANGUAGESUBTITLE "A instalação e o LiberNT usam este idioma e seu formato para datas, horas, números e moeda."
+    IDS_LANGUAGESUBTITLE "A instalação e o MadOS usam este idioma e seu formato para datas, horas, números e moeda."
 END
 
 STRINGTABLE
 BEGIN
-    IDS_INSTALL_FAILED "Não foi possível instalar o LiberNT"
+    IDS_INSTALL_FAILED "Não foi possível instalar o MadOS"
     IDS_INSTALL_STEP_FAILED "%s\nA etapa falhou com o status 0x%08lx."
     IDS_FORMAT_FAILED "A instalação não conseguiu formatar %s como %s.\n%s"
     IDS_CHECK_FAILED "A instalação encontrou erros em %s que não conseguiu reparar (status 0x%08lx). A instalação continua."
@@ -258,13 +258,13 @@ END
 STRINGTABLE
 BEGIN
     IDS_OOBE_REGIONTITLE "Escolha seu idioma e teclado"
-    IDS_OOBE_REGIONSUBTITLE "O LiberNT usa este idioma, seu formato para datas, horas, números e moeda, e este teclado para digitação."
+    IDS_OOBE_REGIONSUBTITLE "O MadOS usa este idioma, seu formato para datas, horas, números e moeda, e este teclado para digitação."
     IDS_APPSTITLE "Componentes de que a maioria dos programas precisa"
-    IDS_APPSSUBTITLE "O LiberNT os baixa dos fornecedores e os instala para todas as contas."
+    IDS_APPSSUBTITLE "O MadOS os baixa dos fornecedores e os instala para todas as contas."
     IDS_APPS_COL_NAME "Componente"
     IDS_APPS_COL_SOURCE "Baixado de"
     IDS_APPS_INSTALLED "%s (instalado)"
-    IDS_OOBE_FINISHTITLE "Preparando o LiberNT"
+    IDS_OOBE_FINISHTITLE "Preparando o MadOS"
     IDS_OOBE_FINISHSUBTITLE "Isso pode levar alguns minutos. Mantenha o computador ligado."
     IDS_OOBE_APPLY_REGION "Aplicando seu idioma e teclado..."
     IDS_OOBE_APPLY_TIMEZONE "Definindo o fuso horário..."
@@ -274,12 +274,12 @@ BEGIN
     IDS_OOBE_INSTALLING "Instalando %s..."
     IDS_OOBE_APP_FAILED "%s: %s (%s)"
     IDS_OOBE_APPS_FAILED "Alguns componentes não foram instalados"
-    IDS_OOBE_ACCOUNT_FAILED "O LiberNT não conseguiu criar sua conta (erro %lu). Em vez disso, o LiberNT entra na conta interna Usuário."
+    IDS_OOBE_ACCOUNT_FAILED "O MadOS não conseguiu criar sua conta (erro %lu). Em vez disso, o MadOS entra na conta interna Usuário."
     IDS_OOBE_UNKNOWN_ERROR "Erro desconhecido"
     IDS_OOBE_STORAGETITLE "Use todo o seu armazenamento"
-    IDS_OOBE_STORAGESUBTITLE "O LiberNT pode aumentar a unidade C: para ocupar o dispositivo de armazenamento de onde é executado."
+    IDS_OOBE_STORAGESUBTITLE "O MadOS pode aumentar a unidade C: para ocupar o dispositivo de armazenamento de onde é executado."
     IDS_OOBE_STORAGE_INFO "A unidade C: tem %I64u MB com %I64u MB livres. O restante do dispositivo de armazenamento ainda não é usado."
-    IDS_OOBE_EXPAND_FAILED "O LiberNT não conseguiu expandir a unidade C: (código de saída do lntexpandstorage: %lu). A configuração continua; você pode tentar novamente depois com lntexpandstorage no Prompt de Comando."
+    IDS_OOBE_EXPAND_FAILED "O MadOS não conseguiu expandir a unidade C: (código de saída do lntexpandstorage: %lu). A configuração continua; você pode tentar novamente depois com lntexpandstorage no Prompt de Comando."
     IDS_OOBE_APPS_SPACE "Os componentes selecionados precisam de cerca de %lu MB. A unidade C: tem %I64u MB livres."
     IDS_OOBE_APPS_NOSPACE "Espaço livre insuficiente para os componentes selecionados"
     IDS_OOBE_APPS_NOSPACE_TEXT "Eles precisam de cerca de %lu MB, e a unidade C: tem %I64u MB livres. Desmarque algumas caixas para continuar. Para instalá-los depois, expanda a unidade C: com lntexpandstorage no Prompt de Comando e execute %%SystemRoot%%\\system32\\oobe\\oobe.exe /components."
@@ -328,7 +328,7 @@ END
 STRINGTABLE
 BEGIN
     IDS_ACCOUNTTITLE "Dê um nome ao computador e crie sua conta"
-    IDS_CONFIGURE_SYSTEM "Configurando o LiberNT..."
+    IDS_CONFIGURE_SYSTEM "Configurando o MadOS..."
     IDS_CONFIG_FOLDERS "Criando as pastas do sistema e do perfil"
     IDS_CONFIG_DEVICES "Instalando as classes de dispositivos"
     IDS_CONFIG_NETWORK "Instalando os protocolos de rede"
@@ -369,7 +369,7 @@ BEGIN
     LTEXT "", IDC_TYPE_WINSIZE, 12, 57, 136, 9, SS_NOPREFIX
     RTEXT "", IDC_TYPE_LNTSIZE, 148, 57, 136, 9, SS_NOPREFIX
     LTEXT "Iniciar por padrão:", IDC_TYPE_DEFAULT_LABEL, 12, 73, 62, 9
-    AUTORADIOBUTTON "&LiberNT", IDC_TYPE_DEFAULT_LIBERNT, 76, 72, 70, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "&MadOS", IDC_TYPE_DEFAULT_LIBERNT, 76, 72, 70, 10, WS_GROUP | WS_TABSTOP
     AUTORADIOBUTTON "", IDC_TYPE_DEFAULT_WINDOWS, 150, 72, 120, 10
     ICON "", IDC_TYPE_WARNICON, 12, 87, 10, 10, SS_ICON | SS_REALSIZEIMAGE
     LTEXT "", IDC_TYPE_WARNING, 28, 87, 262, 36, SS_NOPREFIX
@@ -379,23 +379,23 @@ END
 STRINGTABLE
 BEGIN
     IDS_TYPETITLE "Tipo de instalação"
-    IDS_TYPESUBTITLE "Escolha como o LiberNT compartilha este computador."
+    IDS_TYPESUBTITLE "Escolha como o MadOS compartilha este computador."
     IDS_TYPE_FOUND "Este computador tem %s em %s."
-    IDS_TYPE_ALONGSIDE "Instalar o LiberNT &junto com %s"
+    IDS_TYPE_ALONGSIDE "Instalar o MadOS &junto com %s"
     IDS_TYPE_SPLITSIZE "%s: %s"
     IDS_TYPE_SHRINKNOTE "Arraste o controle deslizante para dividir o espaço. %s mantém seus programas e arquivos. A partição dele é reduzida assim que você seleciona Avançar."
     IDS_TYPE_HIBERNATED "%s está hibernado ou foi desligado com a Inicialização rápida, então sua partição não pode ser redimensionada com segurança. Inicie o %s, escolha Reiniciar no menu Iniciar e depois inicie a instalação novamente. Você também pode desativar a Inicialização rápida em Painel de Controle > Opções de Energia."
-    IDS_TYPE_NOSPACE "%s não tem espaço livre suficiente para abrir espaço para o LiberNT, que precisa de pelo menos %I64u GB. Libere espaço nele ou escolha Outra opção."
-    IDS_TYPE_NORESIZE "A partição do %s não pode ser redimensionada. Escolha Outra opção para escolher outro local para o LiberNT."
-    IDS_TYPE_PLANNED "%s foi redimensionado para %s. O LiberNT será instalado na nova partição de %s."
-    IDS_TYPE_WARNING "%s inicia por padrão. Para iniciar o LiberNT, abra o menu de inicialização do computador enquanto ele liga, geralmente com F12, F11, F9 ou Esc, e escolha LiberNT Boot Manager. No Windows, você também pode usar Configurações > Sistema > Recuperação > Inicialização avançada > Usar um dispositivo."
+    IDS_TYPE_NOSPACE "%s não tem espaço livre suficiente para abrir espaço para o MadOS, que precisa de pelo menos %I64u GB. Libere espaço nele ou escolha Outra opção."
+    IDS_TYPE_NORESIZE "A partição do %s não pode ser redimensionada. Escolha Outra opção para escolher outro local para o MadOS."
+    IDS_TYPE_PLANNED "%s foi redimensionado para %s. O MadOS será instalado na nova partição de %s."
+    IDS_TYPE_WARNING "%s inicia por padrão. Para iniciar o MadOS, abra o menu de inicialização do computador enquanto ele liga, geralmente com F12, F11, F9 ou Esc, e escolha MadOS Boot Manager. No Windows, você também pode usar Configurações > Sistema > Recuperação > Inicialização avançada > Usar um dispositivo."
     IDS_TYPE_CONFIRM_TITLE "Redimensionar %s agora?"
-    IDS_TYPE_CONFIRM "%s é reduzido de %s para %s imediatamente, antes do restante da instalação, e o LiberNT recebe %s. Verifique se os arquivos que você deseja manter têm backup."
+    IDS_TYPE_CONFIRM "%s é reduzido de %s para %s imediatamente, antes do restante da instalação, e o MadOS recebe %s. Verifique se os arquivos que você deseja manter têm backup."
     IDS_TYPE_WINDOWS11 "Windows 11"
     IDS_TYPE_WINDOWS10 "Windows 10"
     IDS_TYPE_WINDOWS "Windows"
     IDS_READY_DEFAULTOS "Inicia por padrão: %s"
-    IDS_TYPE_LIBERNT "LiberNT"
+    IDS_TYPE_LIBERNT "MadOS"
 END
 
 IDD_UPGRADEPAGE DIALOGEX 0, 0, 290, 160
@@ -407,29 +407,29 @@ BEGIN
     AUTORADIOBUTTON "", IDC_UPGRADE_NEW, 0, 36, 290, 10, WS_GROUP | WS_TABSTOP
     LTEXT "", IDC_UPGRADE_NOTE, 0, 56, 290, 44, SS_NOPREFIX
     LTEXT "Iniciar por padrão:", IDC_UPGRADE_DEFAULT_LABEL, 0, 105, 74, 9
-    AUTORADIOBUTTON "&LiberNT", IDC_UPGRADE_DEFAULT_LIBERNT, 76, 104, 70, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "&MadOS", IDC_UPGRADE_DEFAULT_LIBERNT, 76, 104, 70, 10, WS_GROUP | WS_TABSTOP
     AUTORADIOBUTTON "", IDC_UPGRADE_DEFAULT_WINDOWS, 150, 104, 140, 10
     LTEXT "", IDC_UPGRADE_WARNING, 0, 118, 290, 40, SS_NOPREFIX
 END
 
 STRINGTABLE
 BEGIN
-    IDS_UPGRADETITLE "Upgrade LiberNT"
-    IDS_UPGRADESUBTITLE "LiberNT is already installed on this computer."
-    IDS_UPGRADE_NEW_INSTALL "&Custom: install a new copy of LiberNT (advanced)"
-    IDS_UPGRADE_NEW_COPY "&Don't upgrade: set up this copy of LiberNT instead"
+    IDS_UPGRADETITLE "Upgrade MadOS"
+    IDS_UPGRADESUBTITLE "MadOS is already installed on this computer."
+    IDS_UPGRADE_NEW_INSTALL "&Custom: install a new copy of MadOS (advanced)"
+    IDS_UPGRADE_NEW_COPY "&Don't upgrade: set up this copy of MadOS instead"
     IDS_UPGRADE_ENTRY "%s - %s"
-    IDS_UPGRADE_EARLIER "an earlier LiberNT build"
-    IDS_UPGRADE_NOTE "Upgrade replaces the LiberNT system files with this version and keeps your files, the apps you installed, the user accounts and the settings.\n\nThis version: %s"
-    IDS_UPGRADE_HIBERNATED "LiberNT on %s is hibernated, so it cannot be upgraded safely. Start it, shut it down fully, then start Setup again."
+    IDS_UPGRADE_EARLIER "an earlier MadOS build"
+    IDS_UPGRADE_NOTE "Upgrade replaces the MadOS system files with this version and keeps your files, the apps you installed, the user accounts and the settings.\n\nThis version: %s"
+    IDS_UPGRADE_HIBERNATED "MadOS on %s is hibernated, so it cannot be upgraded safely. Start it, shut it down fully, then start Setup again."
     IDS_UPGRADE_READYTITLE "Ready to upgrade"
-    IDS_UPGRADE_READYSUBTITLE "Review your choice. Setup starts upgrading LiberNT when you click Upgrade."
+    IDS_UPGRADE_READYSUBTITLE "Review your choice. Setup starts upgrading MadOS when you click Upgrade."
     IDS_UPGRADEBTN "&Upgrade"
-    IDS_READY_UPGRADE "LiberNT on %s is upgraded from %s to %s."
-    IDS_READY_UPGRADE_KEEP "Your files, apps, user accounts and settings are kept. The LiberNT system files, the registry entries of the system and the bootloader are replaced. No partition is created, deleted or formatted."
-    IDS_UPGRADE_PROCESSTITLE "Upgrading LiberNT"
+    IDS_READY_UPGRADE "MadOS on %s is upgraded from %s to %s."
+    IDS_READY_UPGRADE_KEEP "Your files, apps, user accounts and settings are kept. The MadOS system files, the registry entries of the system and the bootloader are replaced. No partition is created, deleted or formatted."
+    IDS_UPGRADE_PROCESSTITLE "Upgrading MadOS"
     IDS_UPGRADE_PROCESSSUBTITLE "Setup replaces the system files, updates the registry and installs the bootloader. Your files, apps and settings are kept. This can take a few minutes."
-    IDS_UPGRADE_DONETITLE "LiberNT is upgraded"
+    IDS_UPGRADE_DONETITLE "MadOS is upgraded"
 END
 
 IDD_UPDATECHECKPAGE DIALOGEX 0, 0, 290, 160
@@ -459,18 +459,18 @@ END
 
 STRINGTABLE
 BEGIN
-    IDS_UPDATE_CHECKTITLE "LiberNT Update"
-    IDS_UPDATE_CHECKSUBTITLE "LiberNT looks for a newer version."
+    IDS_UPDATE_CHECKTITLE "MadOS Update"
+    IDS_UPDATE_CHECKSUBTITLE "MadOS looks for a newer version."
     IDS_UPDATE_CHECKING "Checking for updates..."
-    IDS_UPDATE_UPTODATE "LiberNT is up to date (build %lu)."
-    IDS_UPDATE_CHECKFAILED "LiberNT could not check for updates (error 0x%08lx). Check the network connection and try again later."
-    IDS_UPDATE_TITLE "A LiberNT update is available"
+    IDS_UPDATE_UPTODATE "MadOS is up to date (build %lu)."
+    IDS_UPDATE_CHECKFAILED "MadOS could not check for updates (error 0x%08lx). Check the network connection and try again later."
+    IDS_UPDATE_TITLE "A MadOS update is available"
     IDS_UPDATE_SUBTITLE "%s (update %lu)"
     IDS_UPDATE_SIZE "Download size: %s"
     IDS_UPDATE_DOWNLOADBTN "&Download"
     IDS_UPDATE_LATERBTN "Restart &later"
     IDS_UPDATE_DOWNLOADTITLE "Getting the update ready"
-    IDS_UPDATE_DOWNLOADSUBTITLE "You can keep using your computer while LiberNT downloads and prepares the update."
+    IDS_UPDATE_DOWNLOADSUBTITLE "You can keep using your computer while MadOS downloads and prepares the update."
     IDS_UPDATE_DOWNLOADING "Downloading %s"
     IDS_UPDATE_DOWNLOADED "%s of %s"
     IDS_UPDATE_VERIFYING "Checking the download of %s"
@@ -478,75 +478,75 @@ BEGIN
     IDS_UPDATE_PREPARING "Preparing the restart into Setup for %s"
     IDS_UPDATE_STAGEFAILED "The update could not be prepared (error 0x%08lx)."
     IDS_UPDATE_READYTITLE "Restart to install the update"
-    IDS_UPDATE_READYSUBTITLE "LiberNT installs the update while it restarts."
-    IDS_UPDATE_READYTEXT "%s is ready. When your computer restarts, LiberNT installs it before it starts, keeps your files, apps and settings, and restarts once more to finish. This takes a few minutes.\n\nSave your work before you restart."
-    IDS_UPDATE_NOTIFYTITLE "LiberNT update available"
+    IDS_UPDATE_READYSUBTITLE "MadOS installs the update while it restarts."
+    IDS_UPDATE_READYTEXT "%s is ready. When your computer restarts, MadOS installs it before it starts, keeps your files, apps and settings, and restarts once more to finish. This takes a few minutes.\n\nSave your work before you restart."
+    IDS_UPDATE_NOTIFYTITLE "MadOS update available"
     IDS_UPDATE_NOTIFYTEXT "%s is available. Select this notification to see what is new and download it."
     IDS_UPDATE_NOTIFYSTAGED "%s is ready to install. Restart your computer to install it."
-    IDS_UPDATE_COMPLETETITLE "Finishing the LiberNT update"
+    IDS_UPDATE_COMPLETETITLE "Finishing the MadOS update"
     IDS_UPDATE_COMPLETESUBTITLE "Your files, apps and settings are kept. Your computer restarts when this is done."
     IDS_UPDATE_COMPLETE_REGISTRY "Updating system settings"
     IDS_UPDATE_COMPLETE_COMPONENTS "Configuring system components"
     IDS_UPDATE_COMPLETE_CLEANUP "Cleaning up"
-    IDS_UPDATE_COMPLETE_FAILED "%s could not be installed. LiberNT keeps the version you had."
-    IDS_UPDATE_COMPLETE_RETRYBOOT "LiberNT could not finish installing %s. It tries again when you restart your computer."
-    IDS_UPDATE_COMPLETE_RETRYLOGON "LiberNT could not finish setting up %s. It tries again the next time an administrator signs in."
-    IDS_UPDATE_COMPLETE_NOSPACE "%s could not be installed because the system drive does not have enough free space. LiberNT keeps the version you had and offers the update again."
-    IDS_UPDATE_COMPLETE_DAMAGED "%s could not be installed because the downloaded copy is damaged. LiberNT keeps the version you had and downloads the update again."
+    IDS_UPDATE_COMPLETE_FAILED "%s could not be installed. MadOS keeps the version you had."
+    IDS_UPDATE_COMPLETE_RETRYBOOT "MadOS could not finish installing %s. It tries again when you restart your computer."
+    IDS_UPDATE_COMPLETE_RETRYLOGON "MadOS could not finish setting up %s. It tries again the next time an administrator signs in."
+    IDS_UPDATE_COMPLETE_NOSPACE "%s could not be installed because the system drive does not have enough free space. MadOS keeps the version you had and offers the update again."
+    IDS_UPDATE_COMPLETE_DAMAGED "%s could not be installed because the downloaded copy is damaged. MadOS keeps the version you had and downloads the update again."
 END
 
 STRINGTABLE
 BEGIN
-    IDS_HOST_STARTTITLE "Install or upgrade LiberNT"
-    IDS_HOST_STARTSUBTITLE "LiberNT is already installed on this computer."
-    IDS_HOST_INSTALLNEW "&Install a new copy of LiberNT alongside %s"
-    IDS_HOST_UPGRADENOTE "Upgrade replaces the LiberNT system files with this version and keeps your files, the apps you installed, the user accounts and the settings. The computer restarts, and LiberNT installs the upgrade while it starts.\n\nThis version: %s"
-    IDS_HOST_INSTALLNOTE "%s gives part of its space to a new partition, and the computer restarts into LiberNT Setup, which installs LiberNT there.\n\nThis version: %s"
+    IDS_HOST_STARTTITLE "Install or upgrade MadOS"
+    IDS_HOST_STARTSUBTITLE "MadOS is already installed on this computer."
+    IDS_HOST_INSTALLNEW "&Install a new copy of MadOS alongside %s"
+    IDS_HOST_UPGRADENOTE "Upgrade replaces the MadOS system files with this version and keeps your files, the apps you installed, the user accounts and the settings. The computer restarts, and MadOS installs the upgrade while it starts.\n\nThis version: %s"
+    IDS_HOST_INSTALLNOTE "%s gives part of its space to a new partition, and the computer restarts into MadOS Setup, which installs MadOS there.\n\nThis version: %s"
     IDS_HOST_SHRINKNOTE "Drag the slider to share the space. %s keeps its programs and files. Windows shrinks its partition when you start the installation."
-    IDS_HOST_NOSPACE "%s does not have enough free space to make room for LiberNT, which needs at least %I64u GB. Free some space in %s, then start Setup again."
-    IDS_HOST_NORESIZE "Windows cannot tell how far the %s partition can shrink (error 0x%08lx), so Setup cannot make room for LiberNT."
+    IDS_HOST_NOSPACE "%s does not have enough free space to make room for MadOS, which needs at least %I64u GB. Free some space in %s, then start Setup again."
+    IDS_HOST_NORESIZE "Windows cannot tell how far the %s partition can shrink (error 0x%08lx), so Setup cannot make room for MadOS."
     IDS_HOST_READYSUBTITLE "Review your choices. Setup starts changing your disk when you click Install."
     IDS_HOST_READY_SHRINK "%s (%s) shrinks from %s to %s."
-    IDS_HOST_READY_CREATE "A new %s partition is created for LiberNT after it."
-    IDS_HOST_READY_PREPARED "LiberNT is installed in the %s partition that Setup prepared earlier."
-    IDS_HOST_READY_RESTART "Setup copies the LiberNT image (%s) to that partition, then restarts the computer into LiberNT Setup, which installs LiberNT there. Until then, nothing else changes."
-    IDS_HOST_READY_UPGRADE "Setup copies the LiberNT image (%s) to the LiberNT partition and restarts the computer. LiberNT installs the upgrade while it starts, and finishes it when an administrator signs in."
-    IDS_HOST_PROCESSTITLE "Preparing LiberNT Setup"
+    IDS_HOST_READY_CREATE "A new %s partition is created for MadOS after it."
+    IDS_HOST_READY_PREPARED "MadOS is installed in the %s partition that Setup prepared earlier."
+    IDS_HOST_READY_RESTART "Setup copies the MadOS image (%s) to that partition, then restarts the computer into MadOS Setup, which installs MadOS there. Until then, nothing else changes."
+    IDS_HOST_READY_UPGRADE "Setup copies the MadOS image (%s) to the MadOS partition and restarts the computer. MadOS installs the upgrade while it starts, and finishes it when an administrator signs in."
+    IDS_HOST_PROCESSTITLE "Preparing MadOS Setup"
     IDS_HOST_PROCESSSUBTITLE "Setup prepares the disk and the boot menu. The computer restarts when this is done."
     IDS_HOST_STEP_SHRINK "Shrinking %s..."
-    IDS_HOST_STEP_CREATE "Creating the LiberNT partition..."
-    IDS_HOST_STEP_FORMAT "Formatting the LiberNT partition..."
-    IDS_HOST_STEP_COPY "Copying the LiberNT image..."
+    IDS_HOST_STEP_CREATE "Creating the MadOS partition..."
+    IDS_HOST_STEP_FORMAT "Formatting the MadOS partition..."
+    IDS_HOST_STEP_COPY "Copying the MadOS image..."
     IDS_HOST_STEP_CHECK "Checking the copied image..."
-    IDS_HOST_STEP_BOOT "Adding LiberNT Setup to the boot menu..."
+    IDS_HOST_STEP_BOOT "Adding MadOS Setup to the boot menu..."
     IDS_HOST_STEP_STAGE "Preparing the upgrade..."
     IDS_HOST_PROGRESS "%I64u MB of %I64u MB"
-    IDS_HOST_DONETITLE "LiberNT Setup is ready"
-    IDS_HOST_DONE "Setup prepared the installation. The computer restarts into LiberNT Setup in a few seconds. Save your work in other apps first, or select Postpone: LiberNT Setup then starts the next time the computer restarts."
+    IDS_HOST_DONETITLE "MadOS Setup is ready"
+    IDS_HOST_DONE "Setup prepared the installation. The computer restarts into MadOS Setup in a few seconds. Save your work in other apps first, or select Postpone: MadOS Setup then starts the next time the computer restarts."
     IDS_HOST_UPGRADEDONETITLE "The upgrade is ready"
-    IDS_HOST_UPGRADEDONE "Setup prepared the upgrade. The computer restarts in a few seconds, and LiberNT installs the upgrade while it starts. Save your work in other apps first, or select Postpone: the upgrade then starts the next time the computer restarts."
-    IDS_HOST_FAILEDTITLE "Setup could not prepare LiberNT"
+    IDS_HOST_UPGRADEDONE "Setup prepared the upgrade. The computer restarts in a few seconds, and MadOS installs the upgrade while it starts. Save your work in other apps first, or select Postpone: the upgrade then starts the next time the computer restarts."
+    IDS_HOST_FAILEDTITLE "Setup could not prepare MadOS"
     IDS_HOST_FAILED "Setup stopped at this step: %s\n\nError %lu (0x%08lx)."
-    IDS_HOST_CANNOTTITLE "LiberNT cannot be installed from Windows"
-    IDS_HOST_NOTMEDIA "Start Setup from the LiberNT image: open the LiberNT .iso file in File Explorer, then run setup.exe from the drive that opens."
-    IDS_HOST_WRONGARCH "This LiberNT image is made for another processor architecture than this computer. Download the LiberNT image made for this computer."
-    IDS_HOST_NOUEFI "Windows started this computer in legacy BIOS mode. Setup can install LiberNT from Windows only on computers that start in UEFI mode. Start the computer from the LiberNT image instead."
-    IDS_HOST_NOGPT "Windows is on a disk that does not use the GPT partition style. Setup can install LiberNT from Windows only on GPT disks. Start the computer from the LiberNT image instead."
+    IDS_HOST_CANNOTTITLE "MadOS cannot be installed from Windows"
+    IDS_HOST_NOTMEDIA "Start Setup from the MadOS image: open the MadOS .iso file in File Explorer, then run setup.exe from the drive that opens."
+    IDS_HOST_WRONGARCH "This MadOS image is made for another processor architecture than this computer. Download the MadOS image made for this computer."
+    IDS_HOST_NOUEFI "Windows started this computer in legacy BIOS mode. Setup can install MadOS from Windows only on computers that start in UEFI mode. Start the computer from the MadOS image instead."
+    IDS_HOST_NOGPT "Windows is on a disk that does not use the GPT partition style. Setup can install MadOS from Windows only on GPT disks. Start the computer from the MadOS image instead."
     IDS_HOST_NOESP "Setup cannot find the EFI system partition that starts Windows (error %lu)."
-    IDS_HOST_ESPFULL "The EFI system partition needs %s of free space for the LiberNT Setup boot files."
+    IDS_HOST_ESPFULL "The EFI system partition needs %s of free space for the MadOS Setup boot files."
     IDS_HOST_SECUREBOOT_TITLE "Turn off Secure Boot first"
-    IDS_HOST_SECUREBOOT "Secure Boot is on. The LiberNT boot loader is not signed for Secure Boot, so this computer would refuse to start it. Turn off Secure Boot in the firmware settings, start Windows, then start Setup again."
+    IDS_HOST_SECUREBOOT "Secure Boot is on. The MadOS boot loader is not signed for Secure Boot, so this computer would refuse to start it. Turn off Secure Boot in the firmware settings, start Windows, then start Setup again."
     IDS_HOST_FIRMWAREBTN "Restart to the firmware settings"
-    IDS_HOST_PENDING_TITLE "LiberNT Setup is ready to continue"
-    IDS_HOST_PENDING "Setup already prepared a %s partition for LiberNT on this computer. Continue to copy the image again and restart into LiberNT Setup, or undo the preparation to give the space back to %s."
+    IDS_HOST_PENDING_TITLE "MadOS Setup is ready to continue"
+    IDS_HOST_PENDING "Setup already prepared a %s partition for MadOS on this computer. Continue to copy the image again and restart into MadOS Setup, or undo the preparation to give the space back to %s."
     IDS_HOST_CONTINUEBTN "Continue the installation"
     IDS_HOST_UNDOBTN "Undo the preparation"
     IDS_HOST_UNDONE "The preparation was undone, and %s has its space back."
-    IDS_HOST_UNDOFAILED "The preparation could not be undone completely (error %lu, 0x%08lx). Use Disk Management to delete the LiberNT partition and to extend %s."
-    IDS_HOST_INUSE "An upgrade of LiberNT on %s is not finished. Start LiberNT to finish it or to roll it back, then start Setup again."
-    IDS_HOST_NOSTORE "Setup cannot find the boot configuration of the LiberNT installation on %s, so it cannot upgrade it from Windows. Start LiberNT and upgrade it with LiberNT Update, or start the computer from the LiberNT image."
+    IDS_HOST_UNDOFAILED "The preparation could not be undone completely (error %lu, 0x%08lx). Use Disk Management to delete the MadOS partition and to extend %s."
+    IDS_HOST_INUSE "An upgrade of MadOS on %s is not finished. Start MadOS to finish it or to roll it back, then start Setup again."
+    IDS_HOST_NOSTORE "Setup cannot find the boot configuration of the MadOS installation on %s, so it cannot upgrade it from Windows. Start MadOS and upgrade it with MadOS Update, or start the computer from the MadOS image."
     IDS_HOST_NOTADMIN "Setup needs administrator rights. Start it again and accept the administrator prompt."
-    IDS_HOST_LOWSPACE "The LiberNT partition on %s needs %s of free space for the upgrade image."
+    IDS_HOST_LOWSPACE "The MadOS partition on %s needs %s of free space for the upgrade image."
     IDS_HOST_VOLUMEERRORS "%s has file system errors, so Windows cannot shrink it. Run ""chkdsk %s /f"" as an administrator, restart the computer so that Windows repairs the drive, then start Setup again."
-    IDS_HOST_CHECKINGSIZE "Windows is checking how much space %s can give to LiberNT..."
+    IDS_HOST_CHECKINGSIZE "Windows is checking how much space %s can give to MadOS..."
 END
