@@ -2843,6 +2843,13 @@ Return Value:
         FatSetVcbCondition( Vcb, VcbBad);
         SetFlag( Vcb->VcbState, VCB_STATE_FLAG_VPB_MUST_BE_FREED );
 
+#ifdef __REACTOS__
+        //  The I/O manager frees an unmounted VPB that is no longer the device's
+        //  once its last reference goes; this one is freed by FatDeleteVcb, so
+        //  keep the I/O manager from freeing it a second time.
+        SetFlag( OldVpb->Flags, VPB_PERSISTENT );
+#endif
+
         Result = TRUE;
     }
 

@@ -1592,6 +1592,19 @@ Return Value:
 
             NT_ASSERT( Vcb->Vpb == Vpb );
 
+#ifdef __REACTOS__
+            {
+                KIRQL SavedIrql;
+
+                //  The I/O manager frees an unmounted VPB that is no longer the device's
+                //  once its last reference goes; this one is freed by FatDeleteVcb, so
+                //  keep the I/O manager from freeing it a second time.
+                IoAcquireVpbSpinLock( &SavedIrql );
+                SetFlag( Vpb->Flags, VPB_PERSISTENT );
+                IoReleaseVpbSpinLock( SavedIrql );
+            }
+#endif
+
             Vpb = NULL;
             SetFlag( Vcb->VcbState, VCB_STATE_FLAG_VPB_MUST_BE_FREED );
             FatSetVcbCondition( Vcb, VcbBad );
@@ -4491,6 +4504,12 @@ Return Value:
                     NewVpb = ExistingVcb->SwapVpb;
                     ExistingVcb->SwapVpb = NULL;
                     SetFlag( ExistingVcb->VcbState, VCB_STATE_FLAG_VPB_MUST_BE_FREED );
+#ifdef __REACTOS__
+                    //  The I/O manager frees an unmounted VPB that is no longer the device's
+                    //  once its last reference goes; this one is freed by FatDeleteVcb, so
+                    //  keep the I/O manager from freeing it a second time.
+                    SetFlag( ExistingVcb->Vpb->Flags, VPB_PERSISTENT );
+#endif
 
                     RtlZeroMemory( NewVpb, sizeof( VPB ) );
                     NewVpb->Type = IO_TYPE_VPB;
