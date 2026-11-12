@@ -28,6 +28,27 @@ VOID
 PopListenToButton(
     _Inout_ PPOP_BUTTON Button);
 
+static IO_COMPLETION_ROUTINE PopButtonCapsComplete;
+
+static
+NTSTATUS
+NTAPI
+PopButtonCapsComplete(
+    _In_ PDEVICE_OBJECT DeviceObject,
+    _In_ PIRP Irp,
+    _In_opt_ PVOID Context)
+{
+    UNREFERENCED_PARAMETER(DeviceObject);
+    UNREFERENCED_PARAMETER(Irp);
+
+    KeSetEvent((PKEVENT)Context, IO_NO_INCREMENT, FALSE);
+    return STATUS_MORE_PROCESSING_REQUIRED;
+}
+
+/* The request is ours from start to end: its completion routine signals the
+ * caller, who always waits, then reads the result and frees it. No completion
+ * APC is queued, so nothing can write to this stack frame once it is gone,
+ * even when the caller's thread cannot take APCs at the time. */
 static
 NTSTATUS
 PopQueryButtonCaps(
@@ -35,9 +56,9 @@ PopQueryButtonCaps(
     _In_ PFILE_OBJECT FileObject,
     _Out_ PULONG Caps)
 {
-    IO_STATUS_BLOCK IoStatus;
     PIO_STACK_LOCATION Stack;
     KEVENT Done;
+    ULONG Buffer = 0;
     PIRP Irp;
     NTSTATUS Status;
 
@@ -46,30 +67,33 @@ PopQueryButtonCaps(
     *Caps = 0;
     KeInitializeEvent(&Done, NotificationEvent, FALSE);
 
-    Irp = IoBuildDeviceIoControlRequest(IOCTL_GET_SYS_BUTTON_CAPS,
-                                        DeviceObject,
-                                        NULL,
-                                        0,
-                                        Caps,
-                                        sizeof(*Caps),
-                                        FALSE,
-                                        &Done,
-                                        &IoStatus);
+    Irp = IoAllocateIrp(DeviceObject->StackSize, FALSE);
     if (Irp == NULL)
         return STATUS_INSUFFICIENT_RESOURCES;
 
+    Irp->RequestorMode = KernelMode;
+    Irp->IoStatus.Status = STATUS_NOT_SUPPORTED;
+    Irp->IoStatus.Information = 0;
+    Irp->AssociatedIrp.SystemBuffer = &Buffer;
+
     Stack = IoGetNextIrpStackLocation(Irp);
+    Stack->MajorFunction = IRP_MJ_DEVICE_CONTROL;
     Stack->FileObject = FileObject;
+    Stack->Parameters.DeviceIoControl.IoControlCode = IOCTL_GET_SYS_BUTTON_CAPS;
+    Stack->Parameters.DeviceIoControl.InputBufferLength = 0;
+    Stack->Parameters.DeviceIoControl.OutputBufferLength = sizeof(Buffer);
 
-    Status = IoCallDriver(DeviceObject, Irp);
-    if (Status == STATUS_PENDING)
-    {
-        KeWaitForSingleObject(&Done, Executive, KernelMode, FALSE, NULL);
-        Status = IoStatus.Status;
-    }
+    IoSetCompletionRoutine(Irp, PopButtonCapsComplete, &Done, TRUE, TRUE, TRUE);
+    IoCallDriver(DeviceObject, Irp);
+    KeWaitForSingleObject(&Done, Executive, KernelMode, FALSE, NULL);
 
-    if (NT_SUCCESS(Status) && IoStatus.Information < sizeof(*Caps))
+    Status = Irp->IoStatus.Status;
+    if (NT_SUCCESS(Status) && Irp->IoStatus.Information < sizeof(Buffer))
         Status = STATUS_INVALID_DEVICE_REQUEST;
+    IoFreeIrp(Irp);
+
+    if (NT_SUCCESS(Status))
+        *Caps = Buffer;
 
     return Status;
 }
