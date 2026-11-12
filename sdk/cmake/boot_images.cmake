@@ -553,6 +553,9 @@ if(PREINSTALL_EXTRA_FILE_LIST)
     list(APPEND _preinstall_overlay_deps "${_preinstall_extra_file_list}")
 endif()
 
+# MadOS : pilotes locaux (image personnelle)
+include(${REACTOS_SOURCE_DIR}/sdk/cmake/mados_drivers.cmake)
+
 cmake_dependent_option(PREINSTALL_WINE_GECKO
                        "Preinstall the Wine Gecko engine that mshtml uses in the preinstalled disk image" OFF
                        "ENABLE_ROSTESTS" OFF)
