@@ -2151,12 +2151,6 @@ HKLM,"SYSTEM\CurrentControlSet\Services\storahci","Start",0x00010001,0x00000000
 HKLM,"SYSTEM\CurrentControlSet\Services\storahci","Type",0x00010001,0x00000001
 HKLM,"SYSTEM\CurrentControlSet\Services\storahci","Tag",0x00010001,0x00000005
 
-; viostor driver (StorPort VirtIO block miniport) - MadOS
-HKLM,"SYSTEM\CurrentControlSet\Services\viostor","ErrorControl",0x00010001,0x00000003
-HKLM,"SYSTEM\CurrentControlSet\Services\viostor","Group",0x00000000,"SCSI Miniport"
-HKLM,"SYSTEM\CurrentControlSet\Services\viostor","ImagePath",0x00020000,"system32\drivers\viostor.sys"
-HKLM,"SYSTEM\CurrentControlSet\Services\viostor","Start",0x00010001,0x00000000
-HKLM,"SYSTEM\CurrentControlSet\Services\viostor","Type",0x00010001,0x00000001
 ; stornvme driver (StorPort NVMe miniport)
 HKLM,"SYSTEM\CurrentControlSet\Services\stornvme","ErrorControl",0x00010001,0x00000003
 HKLM,"SYSTEM\CurrentControlSet\Services\stornvme","Group",0x00000000,"SCSI Miniport"

@@ -280,11 +280,11 @@ def locale():
 def drivers():
     print("Pilotes ajoutes")
     hive = (TREE / "boot/bootdata/hivesys.inf").read_text(encoding="utf-8", errors="replace")
-    check(hive.count('Services\\viostor","Start",0x00010001,0x00000000') == 1,
-          "hivesys.inf : service viostor (disque VirtIO) demarre au boot, une seule fois")
+    check(hive.count('Services\\vioblk","Start",0x00010001,0x00000000') == 1 and "viostor" not in hive,
+          "hivesys.inf : disque VirtIO par vioblk (LiberNT) demarre au boot, plus de viostor")
     sif = (TREE / "boot/bootdata/txtsetup.sif").read_text(encoding="utf-8", errors="replace")
-    check("PCI\\VEN_1AF4&DEV_1001 = viostor" in sif and "viostor = viostor.sys" in sif,
-          "txtsetup.sif : disque VirtIO reconnu a l'installation")
+    check("PCI\\VEN_1AF4&DEV_1001 = vioblk" in sif and "vioblk = vioblk.sys" in sif and "viostor" not in sif,
+          "txtsetup.sif : disque VirtIO reconnu a l'installation (vioblk)")
     cfg = (TREE / "sdk/cmake/config.cmake").read_text(encoding="utf-8", errors="replace")
     check('software ICDs." ${_mados_llvmpipe_default})' in cfg and 'ARCH MATCHES "^(amd64|arm64|riscv64)$"' in cfg,
           "Mesa LLVMpipe (OpenGL, Vulkan) active par defaut, sauf en i386 (WoW64)")
