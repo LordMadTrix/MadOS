@@ -73,7 +73,7 @@ HAND_MANAGED = ["bootloader/bootmgr/main.c", "bootloader/image/CMakeLists.txt",
                 # numero de version MadOS (A propos, panneau Systeme, invite de commandes)
                 "sdk/include/reactos/version.cmake", "sdk/include/reactos/buildno.h.cmake",
                 "dll/cpl/sysdm/general.c", "base/shell/cmd/wcmdmain.c",
-                # pilotes : disque VirtIO (viostor), Mesa LLVMpipe par defaut
+                # pilotes : disque VirtIO (vioblk) a l'installation, Mesa LLVMpipe par defaut
                 "drivers/storage/port/CMakeLists.txt", "boot/bootdata/txtsetup.sif",
                 "sdk/cmake/config.cmake"]
 
