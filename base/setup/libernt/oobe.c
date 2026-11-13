@@ -923,11 +923,14 @@ StoragePageProc(
                 LoadPrintfW(Text, ARRAYSIZE(Text), IDS_OOBE_STORAGE_INFO, TotalMb, FreeMb);
                 SetDlgItemTextW(hwndDlg, IDC_STORAGEINFO, Text);
             }
-            CheckRadioButton(hwndDlg, IDC_EXPANDNOW, IDC_EXPANDLATER, IDC_EXPANDNOW);
+            /* MadOS : "plus tard" par defaut. Agrandir une cle USB pendant le
+             * premier demarrage peut bloquer la machine (IOCTL_DISK_GROW_PARTITION
+             * sur un disque USB) : on ne le fait que si on le demande. */
+            CheckRadioButton(hwndDlg, IDC_EXPANDNOW, IDC_EXPANDLATER, IDC_EXPANDLATER);
             return FALSE;
 
         case SPN_SETACTIVE:
-            SetFocus(GetDlgItem(hwndDlg, IDC_EXPANDNOW));
+            SetFocus(GetDlgItem(hwndDlg, IDC_EXPANDLATER));
             return TRUE;
 
         case SPN_WIZNEXT:
