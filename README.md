@@ -33,6 +33,8 @@ Windows en 64 bits) et y ajoute sa propre expérience :
   empreinte SHA-256). Rien n'est préinstallé de force.
 - **Prêt pour les machines virtuelles** : disque VirtIO (QEMU, KVM, Proxmox),
   OpenGL et Vulkan logiciels (Mesa) installables au premier démarrage.
+- **Pilotes Windows sur un vrai PC** : Ethernet, Wi-Fi et Bluetooth avec les
+  pilotes officiels des constructeurs (voir plus bas).
 - **Plus rapide à démarrer** : le menu de démarrage ne fait plus attendre
   3 secondes ; appuyez sur une touche (F8…) pendant le démarrage pour l'ouvrir.
 - **Plus stable** : correction d'une condition de course dans le chargeur de
@@ -61,7 +63,24 @@ Téléchargez la dernière version dans
   [Rufus](https://rufus.ie) ou [balenaEtcher](https://etcher.balena.io),
   qui lisent directement le fichier compressé. **Cela efface toute la clé.**
   Sur un vrai PC, la carte graphique fonctionne en affichage de base
-  (pas de pilote Nvidia, AMD ou Intel).
+  (pas de pilote Nvidia, AMD ou Intel). Au premier démarrage, laissez
+  « Pas maintenant » sur la page qui propose d'agrandir le lecteur C:.
+
+### Utiliser les pilotes Windows de votre PC
+
+MadOS charge les **pilotes Windows officiels** des constructeurs. Testés sur
+un portable ASUS : Ethernet Realtek 2.5G, Wi-Fi Intel AX211 (Wi-Fi 6E) et
+Bluetooth Intel fonctionnent avec les pilotes de Windows.
+
+1. Sous Windows, exportez vos pilotes (invite de commandes en
+   administrateur) : `pnputil /export-driver * C:\Pilotes`
+2. Copiez sur une clé les dossiers utiles : réseau (`netwtw…`, `rt…`),
+   Bluetooth (`ibtusb…`). **Pas** ceux de Microsoft (ACPI, NVMe, USB).
+3. Dans MadOS : *Gestionnaire d'appareils*, clic droit sur l'appareil,
+   *Mettre à jour le pilote*, puis le dossier sur la clé.
+
+Ces pilotes appartiennent à leurs constructeurs : MadOS ne peut pas les
+fournir lui-même.
 
 ## Mesures (VM 4 cœurs / 4 Go)
 
@@ -115,8 +134,10 @@ and [ReactOS](https://reactos.org). **Experimental: try it in a virtual machine.
 - "Welcome to MadOS": a first-run app picker that downloads applications from
   each publisher and **verifies them before installing** (publisher signature
   or SHA-256).
-- VirtIO disk driver, software OpenGL/Vulkan (Mesa), faster boot menu, and a
-  DLL loader race fix.
+- VirtIO disk, software OpenGL/Vulkan (Mesa), faster boot menu.
+- Runs the vendors' **Windows drivers** on real PCs: tested with Realtek
+  2.5G Ethernet, Intel AX211 Wi-Fi and Intel Bluetooth (install them from
+  Device Manager, using the drivers exported from your Windows).
 
 Downloads: [Releases](../../releases) — `.vhd` (ready-made VirtualBox disk,
 EFI, 4 GB RAM), `.iso` (installer), `.img.xz` (USB stick, written with Rufus or

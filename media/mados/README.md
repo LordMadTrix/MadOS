@@ -33,6 +33,30 @@ Une autre référence peut être choisie avec la variable `MADOS_UPSTREAM`.
 
 Pour changer la couleur d'accent : `ACCENT` dans `mados_common.py`.
 
+## Image personnelle avec les pilotes de son PC
+
+L'option CMake `MADOS_DRIVERS_DIR` intègre au disque préinstallé (VHD et image
+USB) un dossier de pilotes Windows, par exemple ceux exportés depuis le
+Windows du même PC (`pnputil /export-driver * <dossier>`, en administrateur).
+Ils sont copiés dans `%SystemRoot%\MadOS\Pilotes` et installés à la première
+ouverture de session ; le résultat est dans `installation.log`, au même
+endroit.
+
+```sh
+cd output-Clang-amd64-release
+cmake -DMADOS_DRIVERS_DIR=/chemin/vers/pilotes .
+ninja liberntimg
+```
+
+- Un sous-dossier par paquet (un `.inf` et ses fichiers), **sans espace**
+  dans les noms.
+- Ne mettre que les pilotes utiles : réseau, Wi-Fi, Bluetooth. Pas les
+  pilotes de Microsoft (ACPI, NVMe, USB…), qui remplaceraient ceux de MadOS.
+- **Une telle image ne doit jamais être publiée** : les pilotes des
+  constructeurs (Intel, Realtek…) ne sont pas redistribuables.
+- Avant de compiler une version à publier, vider l'option :
+  `cmake -DMADOS_DRIVERS_DIR= .`
+
 ## Licence et attribution
 
 MadOS est basé sur LiberNT (GPL-3.0), lui-même basé sur ReactOS
