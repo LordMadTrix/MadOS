@@ -320,7 +320,7 @@ def welcome():
 
 
 def main():
-    theme(); boot(); ui(); shell(); names(); bootui(); telemetry(); wallpaper(); locale(); drivers(); appearance(); welcome()
+    theme(); boot(); ui(); shell(); names(); bootui(); wallpaper(); locale(); drivers(); appearance(); welcome()
     print(f"\n{'Tout est bon.' if not problems else str(len(problems)) + ' probleme(s).'}")
     return 1 if problems else 0
 

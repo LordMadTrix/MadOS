@@ -23,7 +23,7 @@ env:
   # Commit de LiberNT (main-nt10) sur lequel MadOS est base : le verificateur
   # compare les fichiers avec cette version. A mettre a jour apres chaque
   # rebase sur une version plus recente de LiberNT.
-  MADOS_BASE: 075e14554bd66596f796a09371f7a79d6b8d389d
+  MADOS_BASE: f7abc7f52b9fdcd0002ed0579575e6fb79f3209d
 
 jobs:
   build:
@@ -90,7 +90,7 @@ jobs:
         ./configure.sh --clang --release -a amd64 \
           -DREACTOS_TARGET_NT=0xA00 \
           -DBOOTLOADER_TIMEOUT=0 \
-          -DDIAGDATA_CHANNEL=mados \
+          \
           -DENABLE_CCACHE=1
 
     - name: Build submodules

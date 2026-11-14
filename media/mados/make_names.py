@@ -33,7 +33,7 @@ EXCLUDE = ("modules/rostests/", "media/themes/Win8/", "media/mados/", "submodule
 # Textes du code C/C++ (liste fermee) : (fichier, ancien, nouveau, nb attendu)
 C_STRINGS = [
     ("bootloader/gui/bmui.c", "startup option for LiberNT", "startup option for MadOS", 1),
-    ("bootloader/winload/main.c", '"LiberNT OS Loader"', '"MadOS OS Loader"', 1),
+    ("bootloader/winload/main.c", '"LiberNT OS Loader"', '"MadOS OS Loader"', 2),
     ("bootloader/winload/install.c", "Installing LiberNT", "Installing MadOS", 1),
     ("bootloader/winload/install.c", "Restoring the previous LiberNT", "Restoring the previous MadOS", 1),
     ("bootloader/winload/install.c", "Checking the LiberNT update", "Checking the MadOS update", 1),

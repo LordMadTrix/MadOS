@@ -24,7 +24,6 @@ import make_logos  # noqa: E402
 import make_names  # noqa: E402
 import make_shell  # noqa: E402
 import make_sounds  # noqa: E402
-import make_telemetry  # noqa: E402
 import make_welcome  # noqa: E402
 import make_theme  # noqa: E402
 import make_wallpaper  # noqa: E402
@@ -87,7 +86,6 @@ def main():
     make_sounds.main()
     make_shell.main()
     make_names.main()
-    make_telemetry.main()        # apres make_names : modifie ses fichiers
     make_locale.main()           # apres make_names : preinstall.inf, livecd.inf
     make_welcome.main()          # apres make_names : shortcuts.inf
     make_appearance.main()       # apres make_welcome : shortcuts.inf, dwmsettings.rc

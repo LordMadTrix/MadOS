@@ -17,10 +17,9 @@ Windows en 64 bits) et y ajoute sa propre expérience :
 
 - **Une identité « Braise »** : thème sombre aux accents rouge braise, fond
   d'écran, logo, son de démarrage, écran et menu de démarrage MadOS.
-- **Rien n'est envoyé sans votre accord.** LiberNT envoie à chaque démarrage
-  un rapport de diagnostic (matériel, identifiants des périphériques…).
-  Dans MadOS, c'est coupé par défaut ; vous pouvez l'activer dans le panneau
-  Système, avec un texte qui dit exactement ce qui part et où.
+- **Aucune donnée de diagnostic envoyée.** MadOS n'envoie aucun rapport sur
+  votre machine (LiberNT a retiré son service de diagnostic, que MadOS
+  coupait déjà par défaut).
 - **En français dès le premier écran**, avec le clavier AZERTY : bureau,
   menu Démarrer, applications. Une autre langue reste au choix à
   l'installation.
@@ -128,8 +127,8 @@ MadOS is a free NT operating system based on [LiberNT](https://github.com/LiberN
 and [ReactOS](https://reactos.org). **Experimental: try it in a virtual machine.**
 
 - Its own "Ember" look (dark) and a "Light" mode, switchable in *Apparence*.
-- **Nothing is sent without your consent**: LiberNT's boot-time diagnostic
-  report is off by default and can be turned on in System properties.
+- **No diagnostic data is sent** (LiberNT removed its diagnostic service,
+  which MadOS already turned off).
 - French and AZERTY by default (other languages can be picked during setup).
 - "Welcome to MadOS": a first-run app picker that downloads applications from
   each publisher and **verifies them before installing** (publisher signature

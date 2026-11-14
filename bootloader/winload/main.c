@@ -387,7 +387,7 @@ OslMain(VOID)
     if (!FwDebugEnabled && OslDebugRequested(Options))
     {
         FwDebugEnable();
-        FwDebugAnnounce("LiberNT OS Loader", FALSE);
+        FwDebugAnnounce("MadOS OS Loader", FALSE);
     }
     FwDebugScreen = OslHasDebugPort(Options, "SCREEN");
 
