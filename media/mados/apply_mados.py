@@ -26,11 +26,17 @@ import make_shell  # noqa: E402
 import make_sounds  # noqa: E402
 import make_welcome  # noqa: E402
 import make_theme  # noqa: E402
+import make_themes  # noqa: E402
 import make_wallpaper  # noqa: E402
 import verify_mados  # noqa: E402
 
 RC_TO_TOUCH = [
     "media/themes/Win8/win8.msstyles/win8.rc",
+    "media/themes/Ocean/Ocean.msstyles/win8.rc",
+    "media/themes/Foret/Foret.msstyles/win8.rc",
+    "media/themes/Amethyste/Amethyste.msstyles/win8.rc",
+    "media/themes/Ambre/Ambre.msstyles/win8.rc",
+    "base/applications/madthemes/madthemes.rc",
     "ntos/inbv/bootanim.rc",
     "base/system/userinit/userinit.rc",
     "dll/cpl/sysdm/sysdm.rc",
@@ -89,6 +95,7 @@ def main():
     make_locale.main()           # apres make_names : preinstall.inf, livecd.inf
     make_welcome.main()          # apres make_names : shortcuts.inf
     make_appearance.main()       # apres make_welcome : shortcuts.inf, dwmsettings.rc
+    make_themes.main()           # apres make_appearance : shortcuts.inf
     make_bootui.main()
     touch_rc()
     print("\nVerification :")

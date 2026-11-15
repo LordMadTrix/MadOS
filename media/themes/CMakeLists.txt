@@ -1,1 +1,5 @@
 add_subdirectory(Win8)
+add_subdirectory(Ocean)
+add_subdirectory(Foret)
+add_subdirectory(Amethyste)
+add_subdirectory(Ambre)

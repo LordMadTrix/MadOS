@@ -28,18 +28,48 @@ MUTED = (168, 162, 158)
 ACCENT_HUE = colorsys.rgb_to_hsv(*(c / 255 for c in ACCENT))[0]
 
 
+class Palette:
+    """Couleurs d'un theme MadOS. Braise est le theme par defaut ; les autres
+    (make_themes.py) reprennent les memes dessins avec leurs propres couleurs."""
+
+    def __init__(self, key, accent, accent_hot, desktop, badge, ember, glow,
+                 ribbons, sparks, halo, grey_tint):
+        self.key = key                  # nom de dossier (ASCII)
+        self.accent = accent
+        self.accent_hot = accent_hot
+        self.desktop = desktop
+        self.badge = badge              # degrade du badge : clair, milieu, sombre
+        self.ember = ember              # point lumineux du badge : halo, coeur
+        self.glow = glow                # lueur du fond d'ecran (bas droite)
+        self.ribbons = ribbons          # rubans du fond d'ecran
+        self.sparks = sparks            # etincelles du fond d'ecran
+        self.halo = halo                # halo du titre du fond d'ecran
+        self.grey_tint = grey_tint      # teinte des gris : retrait (r, g, b) x k
+        self.hue = colorsys.rgb_to_hsv(*(c / 255 for c in accent))[0]
+
+
+BRAISE = Palette("Aero", ACCENT, ACCENT_HOT, DESKTOP,
+                 badge=((251, 146, 60), (220, 38, 38), (110, 18, 18)),
+                 ember=((254, 215, 170, 150), (255, 247, 237)),
+                 glow=(150, 30, 10),
+                 ribbons=[(239, 68, 68), (249, 115, 22), (185, 28, 28), (251, 146, 60)],
+                 sparks=(255, 150, 60), halo=(200, 40, 30), grey_tint=(0, 1, 1.6))
+
+
 def font(size, bold=True):
     name = "SourceSansPro-Bold.ttf" if bold else "SourceSansPro-Regular.ttf"
     return ImageFont.truetype(str(FONTS / name), size)
 
 
 # ------------------------------------------------- transformation Braise ----
-def make_recolor(source_hue_deg, blue_range=(170, 270)):
+def make_recolor(source_hue_deg, blue_range=(170, 270), pal=BRAISE):
     """Retourne une fonction (r,g,b)->(r,g,b) :
-    accent bleu -> rouge braise, gris -> gris chaud ; le reste est conserve.
+    accent bleu -> accent du theme, gris -> gris teinte ; le reste est conserve.
     Le magenta 255,0,255 (cle de transparence) n'est jamais modifie."""
     src = source_hue_deg / 360
     lo, hi = blue_range[0] / 360, blue_range[1] / 360
+    target = pal.hue
+    tr, tg, tb = pal.grey_tint
 
     @lru_cache(maxsize=None)        # memes couleurs dans beaucoup de bitmaps
     def recolor(r, g, b):
@@ -52,7 +82,7 @@ def make_recolor(source_hue_deg, blue_range=(170, 270)):
         # barres de titre) devient du gris chaud et non du bordeaux.
         vivid = s >= 0.35 and (v >= 0.45 or s >= 0.6)
         if is_blue and (vivid or (s >= 0.18 and v > 0.6)):
-            h = (ACCENT_HUE + (h - src) * 0.12) % 1.0
+            h = (target + (h - src) * 0.12) % 1.0
             s = min(1.0, s * 1.1)
             r2, g2, b2 = colorsys.hsv_to_rgb(h, s, v)
             return round(r2 * 255), round(g2 * 255), round(b2 * 255)
@@ -62,7 +92,8 @@ def make_recolor(source_hue_deg, blue_range=(170, 270)):
             base = lum if is_blue else r
             gg = lum if is_blue else g
             bb = lum if is_blue else b
-            return base, max(0, round(gg - k)), max(0, round(bb - 1.6 * k))
+            return (max(0, round(base - tr * k)), max(0, round(gg - tg * k)),
+                    max(0, round(bb - tb * k)))
         return r, g, b
 
     return recolor
@@ -131,7 +162,7 @@ def git_original(path):
 
 
 # ----------------------------------------------------------------- badge ----
-def mark(size, glow=True):
+def mark(size, glow=True, pal=BRAISE):
     """Badge MadOS (RGBA, size x size) : carre arrondi braise, M blanc, braise."""
     S = size * 4
     pad = int(S * 0.08) if glow else 0
@@ -139,7 +170,7 @@ def mark(size, glow=True):
 
     grad = Image.linear_gradient("L").resize((inner * 2, inner * 2)).rotate(45)
     grad = grad.crop((inner // 2, inner // 2, inner // 2 + inner, inner // 2 + inner))
-    grad = ImageOps.colorize(grad, black=(251, 146, 60), mid=(220, 38, 38), white=(110, 18, 18))
+    grad = ImageOps.colorize(grad, black=pal.badge[0], mid=pal.badge[1], white=pal.badge[2])
 
     shape = Image.new("L", (inner, inner), 0)
     ImageDraw.Draw(shape).rounded_rectangle([0, 0, inner - 1, inner - 1], radius=int(inner * 0.24), fill=255)
@@ -162,9 +193,9 @@ def mark(size, glow=True):
 
     cx, cy, r = inner * 0.50, inner * 0.27, inner * 0.062
     ember = Image.new("RGBA", (inner, inner), (0, 0, 0, 0))
-    ImageDraw.Draw(ember).ellipse([cx - r * 2.4, cy - r * 2.4, cx + r * 2.4, cy + r * 2.4], fill=(254, 215, 170, 150))
+    ImageDraw.Draw(ember).ellipse([cx - r * 2.4, cy - r * 2.4, cx + r * 2.4, cy + r * 2.4], fill=pal.ember[0])
     badge = Image.alpha_composite(badge, ember.filter(ImageFilter.GaussianBlur(r * 0.9)))
-    ImageDraw.Draw(badge).ellipse([cx - r, cy - r, cx + r, cy + r], fill=(255, 247, 237, 255))
+    ImageDraw.Draw(badge).ellipse([cx - r, cy - r, cx + r, cy + r], fill=pal.ember[1] + (255,))
     badge.putalpha(ImageChops.multiply(badge.getchannel("A"), shape))
 
     canvas = Image.new("RGBA", (S, S), (0, 0, 0, 0))
@@ -172,7 +203,7 @@ def mark(size, glow=True):
         halo = Image.new("L", (S, S), 0)
         halo.paste(shape.point(lambda a: a * 0.55), (pad, pad))
         halo = halo.filter(ImageFilter.GaussianBlur(pad * 0.55))
-        layer = Image.new("RGBA", (S, S), ACCENT + (0,))
+        layer = Image.new("RGBA", (S, S), pal.accent + (0,))
         layer.putalpha(halo)
         canvas = Image.alpha_composite(canvas, layer)
     canvas.alpha_composite(badge, (pad, pad))

@@ -1,0 +1,11 @@
+# MadOS - theme For?t (genere par media/mados/make_themes.py)
+add_subdirectory(Foret.msstyles)
+
+file(GLOB _start CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/StartButton/*.png")
+foreach(_f ${_start})
+    add_cd_file(FILE "${_f}" DESTINATION reactos/Resources/Themes/Foret/StartButton FOR all)
+endforeach()
+file(GLOB _icons CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Icons/*.ico")
+foreach(_f ${_icons})
+    add_cd_file(FILE "${_f}" DESTINATION reactos/Resources/Themes/Foret/Icons FOR all)
+endforeach()

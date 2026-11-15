@@ -25,6 +25,9 @@ Windows en 64 bits) et y ajoute sa propre expérience :
   l'installation.
 - **Mode sombre « Braise » ou clair « Lumière »**, au choix dans
   *Apparence* (menu Démarrer), appliqué instantanément.
+- **Cinq thèmes** : Braise, Océan, Forêt, Améthyste et Ambre. Chacun a ses
+  couleurs, son fond d'écran, son bouton Démarrer et ses icônes du bureau ;
+  on le choisit d'un clic dans *Thèmes* (menu Démarrer).
 - **« Bienvenue dans MadOS »** : au premier démarrage, cochez les applications
   que vous voulez (Firefox, VLC, 7-Zip, Notepad++, LibreOffice, Steam, .NET).
   Elles sont téléchargées depuis le site officiel de chaque éditeur et
@@ -127,6 +130,8 @@ MadOS is a free NT operating system based on [LiberNT](https://github.com/LiberN
 and [ReactOS](https://reactos.org). **Experimental: try it in a virtual machine.**
 
 - Its own "Ember" look (dark) and a "Light" mode, switchable in *Apparence*.
+- Five themes (Ember, Ocean, Forest, Amethyst, Amber), each with its colors,
+  wallpaper, Start button and desktop icons, applied in one click from *Thèmes*.
 - **No diagnostic data is sent** (LiberNT removed its diagnostic service,
   which MadOS already turned off).
 - French and AZERTY by default (other languages can be picked during setup).

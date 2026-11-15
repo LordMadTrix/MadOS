@@ -319,8 +319,30 @@ def welcome():
     check(order and not bad, f"madapps.ini : {len(order)} applications completes {bad if bad else ''}")
 
 
+def themes():
+    print("Themes supplementaires")
+    from PIL import Image
+    win8 = len(list((TREE / "media/themes/Win8/win8.msstyles/bitmaps").rglob("*.bmp")))
+    cm = (TREE / "media/themes/CMakeLists.txt").read_text(encoding="utf-8")
+    for key in ("Ocean", "Foret", "Amethyste", "Ambre"):
+        d = TREE / "media/themes" / key
+        bmps = len(list((d / f"{key}.msstyles/bitmaps").rglob("*.bmp")))
+        check(bmps == win8 and f"add_subdirectory({key})" in cm, f"{key} : style visuel ({bmps}/{win8} bitmaps)")
+        orb = sorted(p.name for p in (d / "StartButton").glob("*.png"))
+        icons = sorted(p.name for p in (d / "Icons").glob("*.ico"))
+        check(orb == ["default.png", "hover.png", "pressed.png"] and len(icons) == 5,
+              f"{key} : bouton Demarrer et {len(icons)} icones")
+        wp = TREE / "modules/wallpapers" / f"MadOS-{key}.png"
+        check(wp.is_file() and Image.open(wp).size == (2560, 1440), f"{key} : fond d'ecran")
+    sc = (TREE / "media/inf/shortcuts.inf").read_text(encoding="utf-8-sig", errors="replace")
+    check(sc.count("madthemes.exe") == 1 and "MADTHEMES_TITLE=Thèmes" in sc
+          and (TREE / "base/applications/madthemes/madthemes.ico").is_file(),
+          "raccourci et icone de l'application Themes")
+
+
 def main():
     theme(); boot(); ui(); shell(); names(); bootui(); wallpaper(); locale(); drivers(); appearance(); welcome()
+    themes()
     print(f"\n{'Tout est bon.' if not problems else str(len(problems)) + ' probleme(s).'}")
     return 1 if problems else 0
 

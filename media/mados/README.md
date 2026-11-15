@@ -24,6 +24,7 @@ git) : on peut le relancer après avoir changé une couleur ou un dessin.
 | `make_theme.py` | Recolore le thème par défaut de LiberNT (Win8, installé comme `aero.msstyles`) |
 | `make_wallpaper.py` | Génère `modules/wallpapers/MadOS.png` (2560×1440) |
 | `make_logos.py` | Logos du démarrage (UEFI et VGA), du LiveCD, du panneau Système, du bouton Démarrer et de l'installateur |
+| `make_themes.py` | Thèmes Océan, Forêt, Améthyste et Ambre : style visuel, fond d'écran, bouton Démarrer, icônes du bureau (appliqués par l'application `madthemes`) |
 | `apply_mados.py` | Lance tout, règle le fond d'écran par défaut, force la recompilation des ressources puis lance la vérification |
 | `verify_mados.py` | Compare chaque fichier généré à l'original LiberNT et contrôle son format (46 contrôles) ; code retour 1 en cas de problème |
 
