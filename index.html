@@ -73,12 +73,25 @@
   <div class="wrap">
     <h2>Pourquoi MadOS</h2>
     <div class="grid">
-      <div class="card"><h3>Rien n'est envoyé sans vous</h3><p>Aucune donnée de diagnostic ne part par défaut. Si vous l'activez, le panneau Système dit exactement quoi et à qui.</p></div>
+      <div class="card"><h3>Rien n'est envoyé</h3><p>MadOS n'envoie aucune donnée de diagnostic sur votre machine. Il n'y a rien à désactiver.</p></div>
       <div class="card"><h3>Vos applications, vérifiées</h3><p>Cochez Firefox, VLC, LibreOffice, .NET… : MadOS les télécharge chez leur éditeur et vérifie leur signature avant de les installer.</p></div>
       <div class="card"><h3>En français</h3><p>En français dès le premier écran, avec le clavier AZERTY. Une autre langue reste au choix.</p></div>
       <div class="card"><h3>Léger</h3><p>Environ 270 Mo de mémoire au repos et 510 Mo sur le disque. Un bureau en 7 secondes après le logo.</p></div>
-      <div class="card"><h3>Braise ou Lumière</h3><p>Un thème sombre et chaleureux par défaut, ou un mode clair, au choix dans Apparence.</p></div>
-      <div class="card"><h3>Libre</h3><p>Sous licence GPL-3.0. Tout le code est public et chaque changement est décrit.</p></div>
+      <div class="card"><h3>Cinq thèmes</h3><p>Braise, Océan, Forêt, Améthyste ou Ambre : couleurs, fond d'écran, bouton Démarrer et icônes changent d’un clic.</p></div>
+      <div class="card"><h3>Les pilotes de votre PC</h3><p>MadOS charge les pilotes Windows officiels des constructeurs : Ethernet, Wi-Fi et Bluetooth fonctionnent sur un vrai portable.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Cinq thèmes</h2>
+    <p>Choisissez votre couleur dans <b>Thèmes</b>, au menu Démarrer : le thème s'applique tout de suite, sans redémarrer.</p>
+    <figure><img src="img/themes.jpg" alt="Les fonds d'écran Braise, Océan, Forêt, Améthyste et Ambre"><figcaption>Braise, Océan, Forêt, Améthyste et Ambre</figcaption></figure>
+    <div class="shots" style="margin-top:18px">
+      <figure><img src="img/themes-appli.png" alt="L'application Thèmes"><figcaption>L'application Thèmes</figcaption></figure>
+      <figure><img src="img/theme-ocean.png" alt="Le bureau avec le thème Océan"><figcaption>Thème Océan</figcaption></figure>
+      <figure><img src="img/theme-ambre.png" alt="Le bureau avec le thème Ambre"><figcaption>Thème Ambre</figcaption></figure>
     </div>
   </div>
 </section>
@@ -101,10 +114,11 @@
     <h2>Essayer MadOS</h2>
     <ol>
       <li>Installez <a href="https://www.virtualbox.org">VirtualBox</a>.</li>
-      <li>Téléchargez <b>MadOS-0.2.0-amd64.vhd</b> dans la <a href="https://github.com/LordMadTrix/MadOS/releases/latest">dernière version</a>.</li>
+      <li>Téléchargez <b>MadOS-0.3.0-amd64.vhd</b> dans la <a href="https://github.com/LordMadTrix/MadOS/releases/latest">dernière version</a>.</li>
       <li>Créez une machine « Windows 11 (64 bits) », activez <b>EFI</b>, donnez-lui 4 Go de mémoire et choisissez ce fichier comme disque dur.</li>
       <li>Démarrez : l'assistant d'installation vous accueille en français.</li>
-      <li>Sur un vrai PC : écrivez <b>MadOS-0.2.0-amd64.img.xz</b> sur une clé USB avec <a href="https://rufus.ie">Rufus</a> (cela efface la clé). Le Wi-Fi intégré n'est pas encore reconnu.</li>
+      <li>Sur un vrai PC : écrivez <b>MadOS-0.3.0-amd64.img.xz</b> sur une clé USB avec <a href="https://rufus.ie">Rufus</a> (cela efface la clé). Au premier démarrage, laissez « Pas maintenant » pour l'agrandissement du lecteur C:.</li>
+      <li>Pour le réseau, le Wi-Fi et le Bluetooth, installez les pilotes Windows de votre PC : <a href="https://github.com/LordMadTrix/MadOS#utiliser-les-pilotes-windows-de-votre-pc">voici comment</a>. La carte graphique reste en affichage de base.</li>
     </ol>
   </div>
 </section>
