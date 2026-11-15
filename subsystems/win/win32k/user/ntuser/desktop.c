@@ -336,7 +336,7 @@ IntQueryNetworkAssistanceKey(OUT PWSTR pwszText,
 #define LIBERNT_BUILD_FLAVOUR L"release"
 #endif
 
-#define LIBERNT_BUILD_HEADING L"LiberNT " LIBERNT_BUILD_FLAVOUR L" build"
+#define LIBERNT_BUILD_HEADING L"MadOS " LIBERNT_BUILD_FLAVOUR L" build"
 
 static NTSTATUS
 GetSystemVersionString(OUT PWSTR pwszzVersion,

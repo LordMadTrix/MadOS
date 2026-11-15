@@ -44,6 +44,11 @@ C_STRINGS = [
     ("boot/bootdata/hivesft.inf", '"ProductName",2,"LiberNT"', '"ProductName",2,"MadOS"', 1),
     ("bootloader/image/bcd.inf.in", '"Element",,"LiberNT Boot Manager"', '"Element",,"MadOS Boot Manager"', 1),
     ("bootloader/image/bcd.inf.in", '\\Elements\\12000004","Element",,"LiberNT"', '\\Elements\\12000004","Element",,"MadOS"', 1),
+    # Filigrane du bureau (mode sans echec, debogage) : "MadOS release build"
+    ("subsystems/win/win32k/user/ntuser/desktop.c", 'L"LiberNT " LIBERNT_BUILD_FLAVOUR', 'L"MadOS " LIBERNT_BUILD_FLAVOUR', 1),
+    # ...et cache par defaut en mode normal, comme sous Windows
+    ("boot/bootdata/hivesft.inf", 'CurrentVersion\\Windows","DisplayVersion",0x00010001,0x1',
+     'CurrentVersion\\Windows","DisplayVersion",0x00010001,0x0', 1),
 ]
 
 # Fichiers modifies A LA MAIN dans des commits MadOS : le kit n'y touche jamais
