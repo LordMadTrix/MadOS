@@ -7,25 +7,65 @@
 #include "precomp.h"
 #include <wincodec.h>
 
+/* MadOS: a visual style may ship its own Start button images, next to the
+ * .msstyles file: <style folder>\StartButton\{default,hover,pressed}.png */
+static IStream *OpenThemeStartOrb(UINT ResourceId)
+{
+    static const struct { UINT Id; PCWSTR Name; } Files[] =
+    {
+        { IDI_STARTORB, L"default.png" },
+        { IDI_STARTORB_HOVER, L"hover.png" },
+        { IDI_STARTORB_PRESSED, L"pressed.png" },
+    };
+    WCHAR Path[MAX_PATH];
+    PWSTR Slash;
+    IStream *Stream = NULL;
+
+    for (UINT i = 0; i < _countof(Files); ++i)
+    {
+        if (Files[i].Id != ResourceId)
+            continue;
+        if (FAILED(GetCurrentThemeName(Path, _countof(Path), NULL, 0, NULL, 0)))
+            return NULL;
+        Slash = wcsrchr(Path, L'\\');
+        if (!Slash)
+            return NULL;
+        *Slash = UNICODE_NULL;
+        if (FAILED(StringCchCatW(Path, _countof(Path), L"\\StartButton\\")) ||
+            FAILED(StringCchCatW(Path, _countof(Path), Files[i].Name)) ||
+            FAILED(SHCreateStreamOnFileEx(Path, STGM_READ | STGM_SHARE_DENY_WRITE,
+                                          FILE_ATTRIBUTE_NORMAL, FALSE, NULL, &Stream)))
+        {
+            return NULL;
+        }
+        return Stream;
+    }
+    return NULL;
+}
+
 HBITMAP CreateStartOrbBitmap(INT Size, UINT ResourceId)
 {
     /* Bound the destination DIB allocation. */
     if (Size <= 0 || Size > 4096)
         return NULL;
 
-    HRSRC hResource = FindResourceW(hExplorerInstance, MAKEINTRESOURCEW(ResourceId), RT_RCDATA);
-    if (!hResource)
-        return NULL;
-    HGLOBAL hData = LoadResource(hExplorerInstance, hResource);
-    const BYTE *Data = (const BYTE *)LockResource(hData);
-    DWORD DataSize = SizeofResource(hExplorerInstance, hResource);
-    if (!Data || !DataSize)
-        return NULL;
-
     CComPtr<IStream> Stream;
-    Stream.Attach(SHCreateMemStream(Data, DataSize));
+    Stream.Attach(OpenThemeStartOrb(ResourceId));
     if (!Stream)
-        return NULL;
+    {
+        HRSRC hResource = FindResourceW(hExplorerInstance, MAKEINTRESOURCEW(ResourceId), RT_RCDATA);
+        if (!hResource)
+            return NULL;
+        HGLOBAL hData = LoadResource(hExplorerInstance, hResource);
+        const BYTE *Data = (const BYTE *)LockResource(hData);
+        DWORD DataSize = SizeofResource(hExplorerInstance, hResource);
+        if (!Data || !DataSize)
+            return NULL;
+
+        Stream.Attach(SHCreateMemStream(Data, DataSize));
+        if (!Stream)
+            return NULL;
+    }
 
     CComPtr<IWICImagingFactory> Factory;
     CComPtr<IWICBitmapDecoder> Decoder;

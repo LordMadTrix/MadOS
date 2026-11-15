@@ -213,6 +213,7 @@ class CStartButton
     double m_AnimTo;
     ULONGLONG m_AnimStart;
     UINT m_AnimDuration;
+    WCHAR m_szOrbTheme[MAX_PATH]; /* MadOS: style whose Start button is loaded */
 
 public:
     CStartButton()
@@ -233,6 +234,7 @@ public:
     {
         m_Size.cx = 0;
         m_Size.cy = 0;
+        m_szOrbTheme[0] = UNICODE_NULL;
         for (UINT i = 0; i < _countof(m_OrbSource); ++i)
         {
             m_OrbSource[i] = NULL;
@@ -359,6 +361,16 @@ public:
         BOOL bModernTaskbar = ShellGetTaskbarMaterial(&crMaterial);
         BOOL bRebuildImages = (bModernTaskbar != m_bModernTaskbar || !m_ImageList);
         WCHAR szStartCaption[32];
+        WCHAR szTheme[MAX_PATH];
+
+        /* MadOS: each visual style may have its own Start button */
+        if (FAILED(GetCurrentThemeName(szTheme, _countof(szTheme), NULL, 0, NULL, 0)))
+            szTheme[0] = UNICODE_NULL;
+        if (_wcsicmp(szTheme, m_szOrbTheme) != 0)
+        {
+            StringCchCopyW(m_szOrbTheme, _countof(m_szOrbTheme), szTheme);
+            bRebuildImages = TRUE;
+        }
 
         m_bModernTaskbar = bModernTaskbar;
         m_crMaterial = crMaterial;
